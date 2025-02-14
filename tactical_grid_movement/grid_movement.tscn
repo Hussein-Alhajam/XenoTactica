@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://c2qugcq0ed7p6"]
+[gd_scene load_steps=6 format=4 uid="uid://c2qugcq0ed7p6"]
 
 [ext_resource type="TileSet" uid="uid://crfevbytpkyck" path="res://tactical_grid_movement/unit_overlay_tileset.tres" id="1_gh8gf"]
 [ext_resource type="Texture2D" uid="uid://c6dgys44aq24u" path="res://icon.svg" id="2_perp0"]
-[ext_resource type="Script" path="res://tactical_grid_movement/unit.gd" id="3_cmlpe"]
-[ext_resource type="Script" path="res://tactical_grid_movement/path.gd" id="4_eojxh"]
+[ext_resource type="Script" path="res://tactical_grid_movement/Control/unit.gd" id="3_cmlpe"]
+[ext_resource type="Script" path="res://tactical_grid_movement/Control/path.gd" id="4_eojxh"]
+[ext_resource type="Script" path="res://tactical_grid_movement/battle_transition.gd" id="5_rfa53"]
 
 [node name="Grid_Combat" type="Node2D"]
 
@@ -25,3 +26,6 @@ texture = ExtResource("2_perp0")
 
 [node name="Path" type="Node2D" parent="."]
 script = ExtResource("4_eojxh")
+
+[node name="BattleTransition" type="Node2D" parent="."]
+script = ExtResource("5_rfa53")
