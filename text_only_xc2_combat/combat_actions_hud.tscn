@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw4epi2g326rm"]
+
+[ext_resource type="Script" path="res://combat_actions_hud.gd" id="1_j0yxo"]
+
+[node name="CombatActionsHUD" type="CanvasLayer"]
+script = ExtResource("1_j0yxo")
+
+[node name="UpText" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 136.0
+offset_top = -208.0
+offset_right = 176.0
+offset_bottom = -159.0
+grow_vertical = 0
+text = "up text"
+autowrap_mode = 2
+
+[node name="RightText" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 216.0
+offset_top = -160.0
+offset_right = 256.0
+offset_bottom = -111.0
+grow_vertical = 0
+text = "right text"
+autowrap_mode = 2
+
+[node name="LeftText" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -160.0
+offset_right = 104.0
+offset_bottom = -111.0
+grow_vertical = 0
+text = "left text"
+autowrap_mode = 2
+
+[node name="DownText" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 144.0
+offset_top = -104.0
+offset_right = 184.0
+offset_bottom = -55.0
+grow_vertical = 0
+text = "down text"
+autowrap_mode = 2
+
+[node name="ActionText" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "action text"
