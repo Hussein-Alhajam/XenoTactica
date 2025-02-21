@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://vvnj7urn8vgj"]
+
+[sub_resource type="GDScript" id="GDScript_spsgd"]
+script/source = "extends Area2D
+
+func _on_body_entered(body):
+	if body.is_in_group(\"player\"):
+		get_tree().change_scene_to_file(\"res://tactical_grid_movement/grid_movement.tscn\")
+		print(\"Player encountered! Transitioning to battle scene.\")
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ukiu8"]
+radius = 50.01
+
+[node name="Battle_zone" type="Area2D" groups=["enemies"]]
+modulate = Color(1, 0.16, 0.16, 1)
+position = Vector2(-9, -25)
+scale = Vector2(5, 5)
+script = SubResource("GDScript_spsgd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_ukiu8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -13,14 +13,14 @@ tile_set = ExtResource("1_imamq")
 
 [node name="Player" parent="." instance=ExtResource("2_qck3y")]
 
-[node name="Enemy" parent="." groups=["enemies"] instance=ExtResource("4_d1yfv")]
+[node name="Enemy" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(118, 598)
 move_speed = 3.0
 
-[node name="Enemy2" parent="." groups=["enemies"] instance=ExtResource("4_d1yfv")]
+[node name="Enemy2" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(840, 205)
 
-[node name="Enemy3" parent="." groups=["enemies"] instance=ExtResource("4_d1yfv")]
+[node name="Enemy3" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(680, 525)
 move_speed = 2.5
 

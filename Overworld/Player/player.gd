@@ -29,17 +29,3 @@ func move(action):
 	raycast_2d.force_raycast_update()
 	if not raycast_2d.is_colliding():
 		position += destination
-
-func _process(_delta):
-	if raycast_2d.is_colliding():
-		var hit_object = raycast_2d.get_collider()
-		if hit_object.is_in_group("enemies"):
-			print("Enemy detected! Initiating battle...")
-			initiate_battle(hit_object)
-			
-func initiate_battle(enemy):
-	if enemy == null:
-		return
-	
-	print("Switching to battle scene...")
-	get_tree().change_scene_to_file("res://tactical_grid_movement/grid_movement.tscn")
