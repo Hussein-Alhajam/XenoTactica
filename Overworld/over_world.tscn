@@ -15,7 +15,6 @@ tile_set = ExtResource("1_imamq")
 
 [node name="Enemy" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(118, 598)
-move_speed = 3.0
 
 [node name="Enemy2" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(840, 205)

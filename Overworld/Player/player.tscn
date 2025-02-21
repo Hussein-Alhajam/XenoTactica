@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c6dgys44aq24u" path="res://icon.svg" id="2_l7157"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8h161"]
-size = Vector2(66, 66)
+size = Vector2(46, 44)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(197, 121)
@@ -19,7 +19,7 @@ texture = ExtResource("2_l7157")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_8h161")
 metadata/_edit_group_ = true
 
