@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbe6ybprf7461"]
+
+[ext_resource type="Script" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
+[ext_resource type="Texture2D" uid="uid://bhcepyvgt4btv" path="res://squirrel.png" id="2_2x8t7"]
+[ext_resource type="PackedScene" uid="uid://vvnj7urn8vgj" path="res://Overworld/Enemy/Enemy_battle_transition.tscn" id="3_d8m0o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dh6km"]
+size = Vector2(70, 62)
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+position = Vector2(224, 88)
+script = ExtResource("1_kq251")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_dh6km")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_2x8t7")
+metadata/_edit_group_ = true
+
+[node name="Area2D" parent="." instance=ExtResource("3_d8m0o")]
+position = Vector2(-1, -4)
+scale = Vector2(1.01026, 0.869959)
+metadata/_edit_group_ = true

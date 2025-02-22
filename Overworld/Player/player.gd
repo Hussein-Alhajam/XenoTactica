@@ -12,7 +12,7 @@ const inputs = {
 var grid_size = 80
 
 # Reference to the RayCast2D node
-@onready var ray_cast_2d: RayCast2D = $RayCast2D
+@onready var raycast_2d: RayCast2D = $RayCast2D
 
 # Calls the move function with the appropriate input key
 # if any input map action is triggered
@@ -25,7 +25,7 @@ func _unhandled_input(event):
 # and moves one grid if no collision is detected
 func move(action):
 	var destination = inputs[action] * grid_size
-	ray_cast_2d.target_position = destination
-	ray_cast_2d.force_raycast_update()
-	if not ray_cast_2d.is_colliding():
+	raycast_2d.target_position = destination
+	raycast_2d.force_raycast_update()
+	if not raycast_2d.is_colliding():
 		position += destination
