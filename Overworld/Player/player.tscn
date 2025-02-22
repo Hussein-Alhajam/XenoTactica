@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://ii0tl3weniuv"]
+
+[ext_resource type="Script" path="res://Overworld/Player/player.gd" id="1_ou22a"]
+[ext_resource type="Texture2D" uid="uid://c6dgys44aq24u" path="res://icon.svg" id="2_l7157"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8h161"]
+size = Vector2(46, 44)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(197, 121)
+collision_mask = 3
+script = ExtResource("1_ou22a")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_l7157")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_8h161")
+metadata/_edit_group_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(20, 0)
+collide_with_areas = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+metadata/_edit_group_ = true
