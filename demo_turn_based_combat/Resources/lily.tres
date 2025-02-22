@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Character" load_steps=4 format=3 uid="uid://04yeqcjf71k8"]
+
+[ext_resource type="Texture2D" uid="uid://dwloegvbikkhv" path="res://assets/sprites/characters_32_24_16/lily_portrait.png" id="1_py76t"]
+[ext_resource type="Script" path="res://scenes/character.gd" id="2_14rfq"]
+[ext_resource type="Texture2D" uid="uid://ckc42idvo57sv" path="res://assets/sprites/characters_32_24_16/lily_character.png" id="3_6t2do"]
+
+[resource]
+script = ExtResource("2_14rfq")
+title = "Lily"
+icon = ExtResource("1_py76t")
+texture = ExtResource("3_6t2do")
+agility = 10
