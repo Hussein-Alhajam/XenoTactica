@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhcepyvgt4btv"
-path="res://.godot/imported/squirrel.png-bf689699bc20c179a9a307d708f64eca.ctex"
+uid="uid://dwloegvbikkhv"
+path="res://.godot/imported/lily_portrait.png-14564874298f4d6669f9eb4c7feca92d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://squirrel.png"
-dest_files=["res://.godot/imported/squirrel.png-bf689699bc20c179a9a307d708f64eca.ctex"]
+source_file="res://demo_turn_based_combat_/assets/sprites/characters_32_24_16/lily_portrait.png"
+dest_files=["res://.godot/imported/lily_portrait.png-14564874298f4d6669f9eb4c7feca92d.ctex"]
 
 [params]
 

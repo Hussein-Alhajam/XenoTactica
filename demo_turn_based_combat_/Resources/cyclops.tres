@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Character" load_steps=3 format=3 uid="uid://bvxs1xxvh8xti"]
+
+[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="1_jwj1v"]
+[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/character.gd" id="2_5qyr8"]
+
+[resource]
+script = ExtResource("2_5qyr8")
+title = "Cyclops"
+icon = ExtResource("1_jwj1v")
+texture = ExtResource("1_jwj1v")
+agility = 11

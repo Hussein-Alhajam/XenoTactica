@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dbe6ybprf7461"]
 
 [ext_resource type="Script" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
-[ext_resource type="Texture2D" uid="uid://bhcepyvgt4btv" path="res://squirrel.png" id="2_2x8t7"]
+[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="2_vvl23"]
 [ext_resource type="PackedScene" uid="uid://vvnj7urn8vgj" path="res://Overworld/Enemy/Enemy_battle_transition.tscn" id="3_d8m0o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh6km"]
@@ -19,11 +19,11 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, 1)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_2x8t7")
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_vvl23")
 metadata/_edit_group_ = true
 
 [node name="Area2D" parent="." instance=ExtResource("3_d8m0o")]
 position = Vector2(-1, -4)
-scale = Vector2(1.01026, 0.869959)
+scale = Vector2(0.69026, 0.628855)
 metadata/_edit_group_ = true
