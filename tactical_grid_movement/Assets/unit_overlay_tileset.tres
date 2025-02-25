@@ -1,0 +1,19 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://4muceb4mfwnt"]
+
+[ext_resource type="Texture2D" uid="uid://cpis7jqetn6vx" path="res://tactical_grid_movement/Assets/0_tileset_unit_overlay.png" id="1_jb1qg"]
+[ext_resource type="Texture2D" uid="uid://c43gds2gsxyb2" path="res://tactical_grid_movement/Assets/1_tileset_unit_overlay.png" id="2_d4u8y"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bf1i4"]
+texture = ExtResource("1_jb1qg")
+texture_region_size = Vector2i(80, 80)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ps8mp"]
+texture = ExtResource("2_d4u8y")
+texture_region_size = Vector2i(80, 80)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(80, 80)
+sources/0 = SubResource("TileSetAtlasSource_bf1i4")
+sources/1 = SubResource("TileSetAtlasSource_ps8mp")

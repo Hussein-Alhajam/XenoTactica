@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=18 format=3 uid="uid://crfevbytpkyck"]
 
-[ext_resource type="Texture2D" uid="uid://ba7mru7wopcot" path="res://tactical_grid_movement/grasslands.png" id="1_86ii2"]
+[ext_resource type="Texture2D" uid="uid://ba7mru7wopcot" path="res://tactical_grid_movement/grasslands.png" id="1_3cvhy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_is567"]
 vertices = PackedVector2Array(40, 40, -40, 40, -40, -40, 40, -40)
@@ -93,7 +93,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-40, -40, 40, -40, 40, 
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tambf"]
-texture = ExtResource("1_86ii2")
+texture = ExtResource("1_3cvhy")
 texture_region_size = Vector2i(80, 80)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-40, -40, 40, -40, 40, 40, -40, 40)
@@ -165,4 +165,6 @@ physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
 custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
+custom_data_layer_1/name = "movement_cost"
+custom_data_layer_1/type = 28
 sources/0 = SubResource("TileSetAtlasSource_tambf")
