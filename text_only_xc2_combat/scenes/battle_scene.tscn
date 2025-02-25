@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://ihoxyonkqulg"]
+
+[ext_resource type="Script" path="res://scenes/battle_scene.gd" id="1_726qr"]
+[ext_resource type="Script" path="res://scenes/character_sprite.gd" id="2_svm4j"]
+[ext_resource type="Resource" uid="uid://d0oo4odfkdvjo" path="res://resources/char_mythra.tres" id="3_hy4hq"]
+
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group")]
+script = ExtResource("1_726qr")
+player_group = NodePath("Players")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="UpText" type="Label" parent="HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = -232.0
+offset_right = 232.0
+offset_bottom = -209.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "up
+"
+
+[node name="LeftText" type="Label" parent="HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -144.0
+offset_right = 104.0
+offset_bottom = -121.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "left
+"
+
+[node name="DownText" type="Label" parent="HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = -40.0
+offset_right = 235.0
+offset_bottom = -17.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "down
+"
+
+[node name="RightText" type="Label" parent="HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_top = -144.0
+offset_right = 360.0
+offset_bottom = -121.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "right
+"
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Player" type="Sprite2D" parent="Players"]
+script = ExtResource("2_svm4j")
+character = ExtResource("3_hy4hq")
+
+[node name="ActionLog" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 620.0
+offset_top = 337.5
+offset_right = 660.0
+offset_bottom = 382.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "log"

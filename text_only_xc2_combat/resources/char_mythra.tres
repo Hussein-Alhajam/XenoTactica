@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Character" load_steps=11 format=3 uid="uid://d0oo4odfkdvjo"]
+
+[ext_resource type="Script" path="res://scenes/combat_art.gd" id="1_ldmt1"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/art_anchor_shot.tres" id="2_843mc"]
+[ext_resource type="Resource" uid="uid://r1slhvpjfjef" path="res://resources/art_double_spinning_edge.tres" id="3_1qogh"]
+[ext_resource type="Resource" uid="uid://dsksdhjhbvv6e" path="res://resources/art_sword_bash.tres" id="4_mxl2j"]
+[ext_resource type="Script" path="res://scenes/character.gd" id="5_rt60c"]
+[ext_resource type="Script" path="res://scenes/combat_special.gd" id="6_0w4j6"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/special_chroma_dust.tres" id="7_0isuh"]
+[ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://resources/special_photon_edge.tres" id="8_360pm"]
+[ext_resource type="Resource" uid="uid://brfo106f3jjja" path="res://resources/special_lightning_buster.tres" id="9_d8y72"]
+[ext_resource type="Resource" uid="uid://bdjn5uhfxapf2" path="res://resources/special_sacred_arrow.tres" id="10_7swf6"]
+
+[resource]
+script = ExtResource("5_rt60c")
+title = "Mythra"
+strength = 20
+ether = 20
+defense = 10
+resistance = 10
+agility = 20
+element = "light"
+arts_list = Array[ExtResource("1_ldmt1")]([ExtResource("2_843mc"), ExtResource("3_1qogh"), ExtResource("4_mxl2j")])
+specials_list = Array[ExtResource("6_0w4j6")]([ExtResource("7_0isuh"), ExtResource("8_360pm"), ExtResource("9_d8y72"), ExtResource("10_7swf6")])
