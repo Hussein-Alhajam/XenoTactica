@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5drtxc4umhug"]
+[gd_scene load_steps=13 format=3 uid="uid://b5drtxc4umhug"]
 
 [ext_resource type="Script" path="res://scenes/battle_scene.gd" id="1_k7x86"]
 [ext_resource type="Script" path="res://scenes/character_sprite.gd" id="1_vbn1p"]
 [ext_resource type="Script" path="res://scenes/attack_button.gd" id="2_brajv"]
-[ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://Resources/lily.tres" id="2_ddumk"]
+[ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://Resources/knight.tres" id="2_ddumk"]
 [ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://scenes/enemy_button.tscn" id="2_q2h2f"]
-[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://Resources/willy.tres" id="3_1xfr0"]
-[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://Resources/rob.tres" id="4_74e8g"]
+[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://Resources/wizard.tres" id="3_1xfr0"]
+[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://Resources/rogue.tres" id="4_74e8g"]
 [ext_resource type="Script" path="res://scenes/haste_button.gd" id="4_id56c"]
 [ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://Resources/gorgon.tres" id="6_wea8f"]
 [ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://Resources/cyclops.tres" id="7_6ucfx"]
 [ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://Resources/kraken.tres" id="8_qg17s"]
+[ext_resource type="Texture2D" uid="uid://ciy2ns5d37j11" path="res://assets/sprites/grasslands.png" id="12_eqob7"]
 
 [node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline", "combat_options")]
 script = ExtResource("1_k7x86")
@@ -19,6 +20,11 @@ enemy_group = NodePath("Enemies")
 timeline = NodePath("UI/Timeline")
 combat_options = NodePath("UI/CombatOptions")
 enemy_button = ExtResource("2_q2h2f")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(801.5, 448.5)
+scale = Vector2(2.85179, 2.79688)
+texture = ExtResource("12_eqob7")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -137,19 +143,19 @@ grow_vertical = 2
 
 [node name="Player" type="Sprite2D" parent="Players"]
 position = Vector2(1281, 283)
-scale = Vector2(5, 5)
+scale = Vector2(3, 3)
 script = ExtResource("1_vbn1p")
 character = ExtResource("2_ddumk")
 
 [node name="Player2" type="Sprite2D" parent="Players"]
 position = Vector2(1100, 484)
-scale = Vector2(5, 5)
+scale = Vector2(3, 3)
 script = ExtResource("1_vbn1p")
 character = ExtResource("3_1xfr0")
 
 [node name="Player3" type="Sprite2D" parent="Players"]
 position = Vector2(1283, 721)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(3, 3)
 script = ExtResource("1_vbn1p")
 character = ExtResource("4_74e8g")
 
@@ -157,19 +163,19 @@ character = ExtResource("4_74e8g")
 
 [node name="Enemy" type="Sprite2D" parent="Enemies"]
 position = Vector2(326, 275)
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 script = ExtResource("1_vbn1p")
 character = ExtResource("6_wea8f")
 
 [node name="Enemy2" type="Sprite2D" parent="Enemies"]
 position = Vector2(535, 486)
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 script = ExtResource("1_vbn1p")
 character = ExtResource("7_6ucfx")
 
 [node name="Enemy3" type="Sprite2D" parent="Enemies"]
 position = Vector2(329, 746)
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 script = ExtResource("1_vbn1p")
 character = ExtResource("8_qg17s")
 

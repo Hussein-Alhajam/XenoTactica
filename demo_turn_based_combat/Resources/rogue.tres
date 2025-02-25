@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Character" load_steps=4 format=3 uid="uid://cekiqrspd7cac"]
 
-[ext_resource type="Texture2D" uid="uid://df4i2tbwdossa" path="res://assets/sprites/characters_32_24_16/squirrel.png" id="1_h333b"]
+[ext_resource type="Texture2D" uid="uid://dp136ntapoxt3" path="res://assets/sprites/extracted/rogue.png" id="1_y1cj3"]
 [ext_resource type="Script" path="res://scenes/character.gd" id="2_7nnhs"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="3_w22ad"]
 
 [resource]
 script = ExtResource("2_7nnhs")
-title = "Rob"
-icon = ExtResource("1_h333b")
-texture = ExtResource("1_h333b")
+title = "Rogue"
+icon = ExtResource("1_y1cj3")
+texture = ExtResource("1_y1cj3")
 agility = 29
 vfx_node = ExtResource("3_w22ad")
