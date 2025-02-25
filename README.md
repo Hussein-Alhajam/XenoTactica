@@ -1,5 +1,5 @@
 # XenoTactica 
-## A tactical, turn-based game with Xenoblade inspired combat
+A tactical, turn-based game with Xenoblade inspired combat
 
 ## Explore a 2D World
 <description>
@@ -9,7 +9,9 @@
   
 ## Xenoblade Chronicles 2 Inspired Combat Mechanics
 <description>
+  
 ### Arts
 <description>
+  
 ### Speicals
 <description>
