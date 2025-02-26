@@ -1,19 +1,17 @@
-[gd_scene load_steps=15 format=4 uid="uid://b5drtxc4umhug"]
+[gd_scene load_steps=13 format=4 uid="uid://b5drtxc4umhug"]
 
-[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/battle_scene.gd" id="1_k7x86"]
-[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/character_sprite.gd" id="1_vbn1p"]
-[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/attack_button.gd" id="2_brajv"]
-[ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://demo_turn_based_combat_/Resources/lily.tres" id="2_ddumk"]
-[ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://demo_turn_based_combat_/scenes/enemy_button.tscn" id="2_q2h2f"]
-[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://demo_turn_based_combat_/Resources/willy.tres" id="3_1xfr0"]
-[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://demo_turn_based_combat_/Resources/rob.tres" id="4_74e8g"]
-[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/haste_button.gd" id="4_id56c"]
-[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/flee_button.gd" id="5_ugt3d"]
-[ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://demo_turn_based_combat_/Resources/gorgon.tres" id="6_wea8f"]
-[ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://demo_turn_based_combat_/Resources/cyclops.tres" id="7_6ucfx"]
-[ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://demo_turn_based_combat_/Resources/kraken.tres" id="8_qg17s"]
-[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/battle_transition.gd" id="13_ga280"]
-[ext_resource type="TileSet" uid="uid://crfevbytpkyck" path="res://tactical_grid_movement/map_tileset.tres" id="14_tipxm"]
+[ext_resource type="Script" path="res://scenes/battle_scene.gd" id="1_k7x86"]
+[ext_resource type="Script" path="res://scenes/character_sprite.gd" id="1_vbn1p"]
+[ext_resource type="Script" path="res://scenes/attack_button.gd" id="2_brajv"]
+[ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://Resources/knight.tres" id="2_ddumk"]
+[ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://scenes/enemy_button.tscn" id="2_q2h2f"]
+[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://Resources/wizard.tres" id="3_1xfr0"]
+[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://Resources/rogue.tres" id="4_74e8g"]
+[ext_resource type="Script" path="res://scenes/haste_button.gd" id="4_id56c"]
+[ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://Resources/gorgon.tres" id="6_wea8f"]
+[ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://Resources/cyclops.tres" id="7_6ucfx"]
+[ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://Resources/kraken.tres" id="8_qg17s"]
+[ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://Resources/map_tileset.tres" id="14_tipxm"]
 
 [node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline", "combat_options")]
 script = ExtResource("1_k7x86")
@@ -125,7 +123,6 @@ script = ExtResource("4_id56c")
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Flee"
-script = ExtResource("5_ugt3d")
 
 [node name="EnemySelection" type="VBoxContainer" parent="UI"]
 unique_name_in_owner = true
@@ -160,7 +157,7 @@ character = ExtResource("3_1xfr0")
 
 [node name="Player3" type="Sprite2D" parent="Players"]
 position = Vector2(1283, 721)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(5, 5)
 script = ExtResource("1_vbn1p")
 character = ExtResource("4_74e8g")
 
@@ -187,7 +184,6 @@ script = ExtResource("1_vbn1p")
 character = ExtResource("8_qg17s")
 
 [node name="Battle_transition" type="Node2D" parent="."]
-script = ExtResource("13_ga280")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 show_behind_parent = true
