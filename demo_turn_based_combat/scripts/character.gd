@@ -10,6 +10,7 @@ class_name Character
 @export var vfx_node: PackedScene = preload("res://scenes/vfx.tscn")
 
 @export_group("Stats")
+@export var health: int
 @export var strength: int 	# the 'general' damage that the character does ,
 								# affects (phys) attacks, arts, special
 @export var ether: int 	# basically strength but for 'magic, 
@@ -26,7 +27,7 @@ class_name Character
 		# note: log in gdscript is natural logarithm (ln), i.e., ln(e) = 1
 		speed = 200.0 / (log(agility) + 2) - 25 
 		queue_reset()
-@export var element: String
+@export var element: String # fire/water/earth/wind/ice/electric/light/dark
 
 @export_group("Abilities")
 @export var arts_list: Array[CombatArt]

@@ -1,11 +1,25 @@
-[gd_resource type="Resource" script_class="Character" load_steps=3 format=3 uid="uid://c4uy71mwhxin"]
+[gd_resource type="Resource" script_class="Character" load_steps=8 format=3 uid="uid://c4uy71mwhxin"]
 
 [ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://assets/sprites/kraken_sprite.png" id="1_j0r5h"]
+[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_kc3hp"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_nusp4"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/art_anchor_shot.tres" id="2_s5nes"]
+[ext_resource type="Script" path="res://scripts/combat_special.gd" id="5_7aykm"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/special_chroma_dust.tres" id="6_oax0f"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_b68j4"]
 
 [resource]
 script = ExtResource("2_nusp4")
 title = "Kraken"
 icon = ExtResource("1_j0r5h")
 texture = ExtResource("1_j0r5h")
+vfx_node = ExtResource("7_b68j4")
+health = 90
+strength = 15
+ether = 15
+defense = 15
+resistance = 15
 agility = 23
+element = "water"
+arts_list = Array[ExtResource("1_kc3hp")]([ExtResource("2_s5nes"), ExtResource("2_s5nes"), ExtResource("2_s5nes")])
+specials_list = Array[ExtResource("5_7aykm")]([ExtResource("6_oax0f"), ExtResource("6_oax0f"), ExtResource("6_oax0f"), ExtResource("6_oax0f")])

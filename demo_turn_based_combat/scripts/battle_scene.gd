@@ -37,21 +37,21 @@ func _ready():
 
 	next_attack()
 
-func _process_NOT(delta: float) -> void:
+func _process(delta: float) -> void:
 	if not is_arts_selected:
 		# update the action selection
-		$HUD/UpText.text = "Items"
-		$HUD/LeftText.text = "Special " + str(sorted_array[0].special_charge)
-		$HUD/DownText.text = "Arts"
-		$HUD/RightText.text = "Attack"
+		$UI/UpContainer/UpText.text = "Items"
+		#$UI/LeftContainer/LeftText.text = "Special " + str(sorted_array[0].special_charge)
+		$UI/DownContainer/DownText.text = "Arts"
+		$UI/RightContainer/RightText.text = "Attack"
 		
-		if Input.is_action_just_pressed("attack"):
-			$ActionLog.text = "Used Attack \nArts Charged by 1"
+		if Input.is_action_just_pressed("auto_attack"):
+			$UI/ActionLog.text = "Used Attack \nArts Charged by 1"
 			# if using the priority queue for turn order,
 			# and assuming controls are only available when current turn is a player,
 			# (i.e., if we are in controls, first element in queue is a player)
 			# make that player character charge their arts
-			sorted_array[0].charge_arts(1)
+			#sorted_array[0].charge_arts(1)
 			# do attack, next turn
 			
 		if Input.is_action_just_pressed("special"):
@@ -59,18 +59,18 @@ func _process_NOT(delta: float) -> void:
 			# do speical, next turn
 			
 		if Input.is_action_just_pressed("items_selection"):
-			$ActionLog.text = "entered items selection \n (not implemented)"
+			$UI/ActionLog.text = "entered items selection \n (not implemented)"
 		if Input.is_action_just_pressed("arts_selection"):
-			#$ActionLog.text = "entered arts selection"
+			#$UI/ActionLog.text = "entered arts selection"
 			is_arts_selected = true
 
 	else:
 		# update the action selection
 		# temp 'hard code-y' text updates
-		$HUD/UpText.text = str(sorted_array[0].arts_list[1].art_name) + " " + str(sorted_array[0].arts_list[1].current_charge) + "/" + str(sorted_array[0].arts_list[1].max_charge)
-		$HUD/LeftText.text = str(sorted_array[0].arts_list[0].art_name) + " " + str(sorted_array[0].arts_list[0].current_charge) + "/" + str(sorted_array[0].arts_list[0].max_charge)
-		$HUD/DownText.text = "Exit Arts"
-		$HUD/RightText.text = str(sorted_array[0].arts_list[2].art_name) + " " + str(sorted_array[0].arts_list[2].current_charge) + "/" + str(sorted_array[0].arts_list[2].max_charge)
+		#$UI/UpContainer/UpText.text = str(sorted_array[0].arts_list[1].art_name) + " " + str(sorted_array[0].arts_list[1].current_charge) + "/" + str(sorted_array[0].arts_list[1].max_charge)
+		#$UI/LeftContainer/LeftText.text = str(sorted_array[0].arts_list[0].art_name) + " " + str(sorted_array[0].arts_list[0].current_charge) + "/" + str(sorted_array[0].arts_list[0].max_charge)
+		$UI/DownContainer/DownText.text = "Exit Arts"
+		#$UI/RightContainer/RightText.text = str(sorted_array[0].arts_list[2].art_name) + " " + str(sorted_array[0].arts_list[2].current_charge) + "/" + str(sorted_array[0].arts_list[2].max_charge)
 
 		if Input.is_action_just_pressed("left_art"):
 			sorted_array[0].use_art(0)
@@ -89,8 +89,8 @@ func _process_NOT(delta: float) -> void:
 			is_arts_selected = false
 
 
-#func update_action_log(message: String):
-	#$ActionLog.text = message
+func update_action_log(message: String):
+	$UI/ActionLog.text = message
 
 
 func sort_combined_queue():

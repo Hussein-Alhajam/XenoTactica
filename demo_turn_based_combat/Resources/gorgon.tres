@@ -1,11 +1,25 @@
-[gd_resource type="Resource" script_class="Character" load_steps=3 format=3 uid="uid://7ih7gc3t84wx"]
+[gd_resource type="Resource" script_class="Character" load_steps=8 format=3 uid="uid://7ih7gc3t84wx"]
 
 [ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://assets/sprites/gorgon_sprite.png" id="1_0x4qp"]
+[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_j0o6k"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/art_anchor_shot.tres" id="2_kovv0"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_naynh"]
+[ext_resource type="Script" path="res://scripts/combat_special.gd" id="5_3flk4"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/special_chroma_dust.tres" id="6_a7hpk"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_nwcq8"]
 
 [resource]
 script = ExtResource("2_naynh")
 title = "Gorgon"
 icon = ExtResource("1_0x4qp")
 texture = ExtResource("1_0x4qp")
+vfx_node = ExtResource("7_nwcq8")
+health = 80
+strength = 10
+ether = 20
+defense = 10
+resistance = 15
 agility = 18
+element = "water"
+arts_list = Array[ExtResource("1_j0o6k")]([ExtResource("2_kovv0"), ExtResource("2_kovv0"), ExtResource("2_kovv0")])
+specials_list = Array[ExtResource("5_3flk4")]([ExtResource("6_a7hpk"), ExtResource("6_a7hpk"), ExtResource("6_a7hpk"), ExtResource("6_a7hpk")])
