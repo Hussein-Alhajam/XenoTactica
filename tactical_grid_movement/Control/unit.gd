@@ -1,75 +1,100 @@
-extends Node2D
-@onready var tile_map = $"../TileMapLayer"
+## Represents a unit on the game board.
+## The board manages its position inside the game grid.
+## The unit itself holds stats and a visual representation that moves smoothly in the game world.
+@tool
+class_name Unit
+extends Path2D
 
-var astar_grid: AStarGrid2D
-var current_id_path:Array[Vector2i]
-var current_point_path: PackedVector2Array
-var target_position: Vector2
-var is_moving: bool
+## Emitted when the unit reached the end of a path along which it was walking.
+signal walk_finished
 
-func _ready():
-	astar_grid = AStarGrid2D.new()
-	astar_grid.region=tile_map.get_used_rect()
-	astar_grid.cell_size = Vector2(80,80)
-	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	astar_grid.update()
-	
-	for x in tile_map.get_used_rect().size.x:
-		for y in tile_map.get_used_rect().size.y:
-			var tile_position = Vector2i(
-				x,
-				y
-			)
-			
-			var tile_data = tile_map.get_cell_tile_data(tile_position)
-			
-			if tile_data == null or tile_data.get_custom_data("walkable")== false:
-				astar_grid.set_point_solid(tile_position)
+## Shared resource of type Grid, used to calculate map coordinates.
+@export var grid: Resource
+## Designate current unit as enemy
+@export var is_enemy: bool
+## Designate the current unit in a "wait" state
+@export var is_wait := false
+## Distance to which the unit can walk in cells.
+@export var move_range := 6
+## The unit's move speed when it's moving along a path.
+@export var move_speed := 600.0
+## The distance the unit can attack from their current position
+@export var attack_range := 0
 
+## Texture representing the unit.
+@export var skin: Texture:
+	set(value):
+		skin = value
+		if not _sprite:
+			# This will resume execution after this node's _ready()
+			await ready
+		_sprite.texture = value
+## Offset to apply to the `skin` sprite in pixels.
+@export var skin_offset := Vector2.ZERO:
+	set(value):
+		skin_offset = value
+		if not _sprite:
+			await ready
+		_sprite.position = value
 
-
-func _input(event):
-	if event.is_action_pressed("move") == false:
-		return
-	
-	var id_path
-	
-	if is_moving:
-		id_path = astar_grid.get_id_path(
-		tile_map.local_to_map(target_position),
-		tile_map.local_to_map(get_global_mouse_position())
-	)
-	else:
-		id_path = astar_grid.get_id_path(
-			tile_map.local_to_map(global_position),
-			tile_map.local_to_map(get_global_mouse_position())
-	).slice(1)
-	
-	if id_path.is_empty()== false:
-		current_id_path = id_path
-		
-		current_point_path=astar_grid.get_point_path(
-			tile_map.local_to_map(target_position),
-			tile_map.local_to_map(get_global_mouse_position())
-		)
-		
-		for i in current_point_path.size():
-			current_point_path[i] = current_point_path[i] + Vector2(40, 40)
-
-func _physics_process(delta):
-	if current_id_path.is_empty():
-		return
-		
-	if is_moving == false:
-		target_position = tile_map.map_to_local(current_id_path.front())
-		is_moving = true
-		
-	global_position=global_position.move_toward(target_position, 3)
-	
-	if global_position == target_position:
-		current_id_path.pop_front()
-		
-		if current_id_path.is_empty() == false:
-			target_position=tile_map.map_to_local(current_id_path.front())
+## Coordinates of the current cell the cursor moved to.
+var cell := Vector2.ZERO:
+	set(value):
+		# When changing the cell's value, we don't want to allow coordinates outside
+		#	the grid, so we clamp them
+		cell = grid.grid_clamp(value)
+## Toggles the "selected" animation on the unit.
+var is_selected := false:
+	set(value):
+		is_selected = value
+		if is_selected:
+			_anim_player.play("selected")
 		else:
-			is_moving = false
+			_anim_player.play("idle")
+
+var _is_walking := false:
+	set(value):
+		_is_walking = value
+		set_process(_is_walking)
+
+@onready var _sprite: Sprite2D = $PathFollow2D/Sprite
+@onready var _anim_player: AnimationPlayer = $AnimationPlayer
+@onready var _path_follow: PathFollow2D = $PathFollow2D
+
+
+func _ready() -> void:
+	set_process(false)
+	_path_follow.rotates = false
+	
+	cell = grid.calculate_grid_coordinates(position)
+	position = grid.calculate_map_position(cell)
+	
+	# We create the curve resource here because creating it in the editor prevents us from
+	# moving the unit.
+	if not Engine.is_editor_hint():
+		curve = Curve2D.new()
+
+
+func _process(delta: float) -> void:
+	_path_follow.progress += move_speed * delta
+	
+	if _path_follow.progress_ratio >= 1.0:
+		_is_walking = false
+		# Setting this value to 0.0 causes a Zero Length Interval error
+		_path_follow.progress = 0.00001
+		position = grid.calculate_map_position(cell)
+		curve.clear_points()
+		emit_signal("walk_finished")
+
+
+## Starts walking along the `path`.
+## `path` is an array of grid coordinates that the function converts to map coordinates.
+func walk_along(path: PackedVector2Array) -> void:
+	if path.is_empty():
+		return
+	
+	curve.add_point(Vector2.ZERO)
+	for point in path:
+		curve.add_point(grid.calculate_map_position(point) - position)
+	cell = path[-1]
+	_is_walking = true

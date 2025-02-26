@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://ypkn2d7y1vfl"]
 
-[ext_resource type="TileSet" uid="uid://crfevbytpkyck" path="res://tactical_grid_movement/unit_overlay_tileset.tres" id="1_imamq"]
+[ext_resource type="TileSet" uid="uid://crfevbytpkyck" path="res://tactical_grid_movement/map_tileset.tres" id="1_imamq"]
 [ext_resource type="PackedScene" uid="uid://ii0tl3weniuv" path="res://Overworld/Player/player.tscn" id="2_qck3y"]
 [ext_resource type="PackedScene" uid="uid://dbe6ybprf7461" path="res://Overworld/Enemy/enemy.tscn" id="4_d1yfv"]
 [ext_resource type="Script" path="res://Overworld/Transitions/battle_transition.gd" id="5_d33ih"]
@@ -19,10 +19,15 @@ position = Vector2(118, 598)
 
 [node name="Enemy2" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(840, 205)
+move_speed = 3.5
 
 [node name="Enemy3" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(680, 525)
-move_speed = 2.5
+move_speed = 4.0
+
+[node name="Enemy4" parent="." instance=ExtResource("4_d1yfv")]
+position = Vector2(1360, 1050)
+move_speed = 5.0
 
 [node name="Battle_transition" type="Node2D" parent="."]
 script = ExtResource("5_d33ih")
