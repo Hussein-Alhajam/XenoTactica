@@ -1,11 +1,3 @@
-[gd_resource type="Resource" script_class="Character" load_steps=3 format=3 uid="uid://c4uy71mwhxin"]
-
-[ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://demo_turn_based_combat_/assets/sprites/kraken_sprite.png" id="1_j0r5h"]
-[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/character.gd" id="2_nusp4"]
+[gd_resource type="Resource" format=3 uid="uid://c4uy71mwhxin"]
 
 [resource]
-script = ExtResource("2_nusp4")
-title = "Kraken"
-icon = ExtResource("1_j0r5h")
-texture = ExtResource("1_j0r5h")
-agility = 23

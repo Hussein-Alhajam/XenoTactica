@@ -1,13 +1,30 @@
-[gd_resource type="Resource" script_class="Character" load_steps=4 format=3 uid="uid://04yeqcjf71k8"]
+[gd_resource type="Resource" script_class="Character" load_steps=13 format=3 uid="uid://04yeqcjf71k8"]
 
 [ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://demo_turn_based_combat_/assets/sprites/extracted/knight.png" id="1_bwbme"]
-[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/character.gd" id="2_14rfq"]
+[ext_resource type="Script" path="res://demo_turn_based_combat_/scripts/combat_art.gd" id="1_gmagr"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://demo_turn_based_combat_/Resources/art_anchor_shot.tres" id="2_3oidg"]
+[ext_resource type="Script" path="res://demo_turn_based_combat_/scripts/character.gd" id="2_14rfq"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://demo_turn_based_combat_/scenes/vfx.tscn" id="3_6740q"]
+[ext_resource type="Resource" uid="uid://r1slhvpjfjef" path="res://demo_turn_based_combat_/Resources/art_double_spinning_edge.tres" id="3_kuv7c"]
+[ext_resource type="Script" path="res://demo_turn_based_combat_/scripts/combat_special.gd" id="4_ang46"]
+[ext_resource type="Resource" uid="uid://dsksdhjhbvv6e" path="res://demo_turn_based_combat_/Resources/art_sword_bash.tres" id="4_yb46x"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://demo_turn_based_combat_/Resources/special_chroma_dust.tres" id="8_gprjh"]
+[ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://demo_turn_based_combat_/Resources/special_photon_edge.tres" id="9_es76j"]
+[ext_resource type="Resource" uid="uid://brfo106f3jjja" path="res://demo_turn_based_combat_/Resources/special_lightning_buster.tres" id="10_v3dbp"]
+[ext_resource type="Resource" uid="uid://bdjn5uhfxapf2" path="res://demo_turn_based_combat_/Resources/special_sacred_arrow.tres" id="11_5noe4"]
 
 [resource]
 script = ExtResource("2_14rfq")
 title = "Knight"
 icon = ExtResource("1_bwbme")
 texture = ExtResource("1_bwbme")
-agility = 10
 vfx_node = ExtResource("3_6740q")
+health = 100
+strength = 30
+ether = 5
+defense = 30
+resistance = 15
+agility = 14
+element = "ice"
+arts_list = Array[ExtResource("1_gmagr")]([ExtResource("2_3oidg"), ExtResource("3_kuv7c"), ExtResource("4_yb46x")])
+specials_list = Array[ExtResource("4_ang46")]([ExtResource("8_gprjh"), ExtResource("9_es76j"), ExtResource("10_v3dbp"), ExtResource("11_5noe4")])
