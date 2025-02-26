@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Character" load_steps=4 format=3 uid="uid://nvgog6nm6iwk"]
 
 [ext_resource type="Texture2D" uid="uid://wcu7d45wawc7" path="res://assets/sprites/extracted/wizard.png" id="1_2bg7t"]
-[ext_resource type="Script" path="res://scenes/character.gd" id="2_2svqr"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="2_2svqr"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="3_tvvfv"]
 
 [resource]

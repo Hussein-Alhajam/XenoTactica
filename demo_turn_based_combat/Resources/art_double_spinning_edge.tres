@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://r1slhvpjfjef"]
+
+[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_07a8k"]
+
+[resource]
+script = ExtResource("1_07a8k")
+art_name = "Double Spinning Edge"
+power = 1.75
+num_hits = 2
+hit_ratio = Array[float]([0.5, 0.5])
+position_effect = "side"
+aoe = 1
+attribute = "physical"
+reaction = Array[String]([])
+current_charge = 0
+max_charge = 5

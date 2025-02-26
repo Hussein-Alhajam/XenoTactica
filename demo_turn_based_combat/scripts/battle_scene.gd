@@ -10,8 +10,13 @@ var sorted_array = [] # used for sorting the turn order (?)
 var players: Array[Character] # used to hold the player resource
 var enemies: Array[Character] # used to hold the enemy resource
 
+var is_arts_selected: bool = false # should make into FSM
+
 
 func _ready():
+	# add this node as a global reference
+	Global.battle_scene = self
+	
 	# loop through and append all the player resources
 	for player in player_group.get_children():
 		players.append(player.character)
@@ -31,6 +36,62 @@ func _ready():
 	EventBus.next_attack.connect(next_attack)
 
 	next_attack()
+
+func _process_NOT(delta: float) -> void:
+	if not is_arts_selected:
+		# update the action selection
+		$HUD/UpText.text = "Items"
+		$HUD/LeftText.text = "Special " + str(sorted_array[0].special_charge)
+		$HUD/DownText.text = "Arts"
+		$HUD/RightText.text = "Attack"
+		
+		if Input.is_action_just_pressed("attack"):
+			$ActionLog.text = "Used Attack \nArts Charged by 1"
+			# if using the priority queue for turn order,
+			# and assuming controls are only available when current turn is a player,
+			# (i.e., if we are in controls, first element in queue is a player)
+			# make that player character charge their arts
+			sorted_array[0].charge_arts(1)
+			# do attack, next turn
+			
+		if Input.is_action_just_pressed("special"):
+			sorted_array[0].use_special()
+			# do speical, next turn
+			
+		if Input.is_action_just_pressed("items_selection"):
+			$ActionLog.text = "entered items selection \n (not implemented)"
+		if Input.is_action_just_pressed("arts_selection"):
+			#$ActionLog.text = "entered arts selection"
+			is_arts_selected = true
+
+	else:
+		# update the action selection
+		# temp 'hard code-y' text updates
+		$HUD/UpText.text = str(sorted_array[0].arts_list[1].art_name) + " " + str(sorted_array[0].arts_list[1].current_charge) + "/" + str(sorted_array[0].arts_list[1].max_charge)
+		$HUD/LeftText.text = str(sorted_array[0].arts_list[0].art_name) + " " + str(sorted_array[0].arts_list[0].current_charge) + "/" + str(sorted_array[0].arts_list[0].max_charge)
+		$HUD/DownText.text = "Exit Arts"
+		$HUD/RightText.text = str(sorted_array[0].arts_list[2].art_name) + " " + str(sorted_array[0].arts_list[2].current_charge) + "/" + str(sorted_array[0].arts_list[2].max_charge)
+
+		if Input.is_action_just_pressed("left_art"):
+			sorted_array[0].use_art(0)
+			# next turn
+
+		if Input.is_action_just_pressed("up_art"):
+			sorted_array[0].use_art(1)
+			# next turn
+
+		if Input.is_action_just_pressed("right_art"):
+			sorted_array[0].use_art(2)
+			# next turn
+
+		if Input.is_action_just_pressed("arts_back"):
+			#$ActionLog.text = "exited arts selection"
+			is_arts_selected = false
+
+
+#func update_action_log(message: String):
+	#$ActionLog.text = message
+
 
 func sort_combined_queue():
 	var player_array = []

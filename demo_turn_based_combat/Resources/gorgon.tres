@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Character" load_steps=3 format=3 uid="uid://7ih7gc3t84wx"]
 
 [ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://assets/sprites/gorgon_sprite.png" id="1_0x4qp"]
-[ext_resource type="Script" path="res://scenes/character.gd" id="2_naynh"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="2_naynh"]
 
 [resource]
 script = ExtResource("2_naynh")

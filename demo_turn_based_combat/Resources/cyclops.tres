@@ -1,11 +1,22 @@
-[gd_resource type="Resource" script_class="Character" load_steps=3 format=3 uid="uid://bvxs1xxvh8xti"]
+[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://bvxs1xxvh8xti"]
 
+[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_geesb"]
 [ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://assets/sprites/cyclops_sprite.png" id="1_jwj1v"]
-[ext_resource type="Script" path="res://scenes/character.gd" id="2_5qyr8"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="2_5qyr8"]
+[ext_resource type="Script" path="res://scripts/combat_special.gd" id="4_ud74x"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="5_rvbkw"]
 
 [resource]
 script = ExtResource("2_5qyr8")
 title = "Cyclops"
 icon = ExtResource("1_jwj1v")
 texture = ExtResource("1_jwj1v")
+vfx_node = ExtResource("5_rvbkw")
+strength = 0
+ether = 0
+defense = 0
+resistance = 0
 agility = 11
+element = ""
+arts_list = Array[ExtResource("1_geesb")]([])
+specials_list = Array[ExtResource("4_ud74x")]([])

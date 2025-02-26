@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://cio5r7hrf00u8"]
+
+[ext_resource type="Script" path="res://scripts/combat_special.gd" id="1_y2orm"]
+
+[resource]
+script = ExtResource("1_y2orm")
+special_name = "Photon Edge"
+power = 2.25
+num_hits = 6
+hit_ratio = Array[float]([0.125, 0.125, 0.125, 0.125, 0.125, 0.125])
+attribute = "physical"
+aoe = 3
+heal_ratio = 0.0
+affect_team = false
