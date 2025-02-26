@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://b5drtxc4umhug"]
+[gd_scene load_steps=15 format=4 uid="uid://cc5hn5aulatdh"]
 
 [ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/battle_scene.gd" id="1_k7x86"]
 [ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/character_sprite.gd" id="1_vbn1p"]
