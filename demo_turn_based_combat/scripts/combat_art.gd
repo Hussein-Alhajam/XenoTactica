@@ -55,6 +55,6 @@ func use_art():
 	if is_charged(): # duplicated in character.gd, not sure which is better to get rid of 
 		reset_charge()
 		#print(art_name + " art used")
-		battle_scene.update_action_log(art_name + " art used")
+		Global.battle_scene.update_action_log(art_name + " art used")
 	else:
-		battle_scene.update_action_log(art_name + " is not charged")
+		Global.battle_scene.update_action_log(art_name + " is not charged")

@@ -24,5 +24,5 @@ var battle_scene: Node2D
 
 func use_special(): # pass enemy: Node or something?
 	#print(special_name + " special used")
-	battle_scene.update_action_log(special_name + " special used")
+	Global.battle_scene.update_action_log(special_name + " special used")
 	# calculate and do damage to enemy
