@@ -51,4 +51,3 @@ texture = ExtResource("3_nj0xy")
 script = ExtResource("5_08bxc")
 
 [node name="Cursor" parent="." instance=ExtResource("10_6fqir")]
-ui_cooldown = null
