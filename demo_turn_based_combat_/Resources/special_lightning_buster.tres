@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://brfo106f3jjja"]
+
+[ext_resource type="Script" path="res://demo_turn_based_combat_/scripts/combat_special.gd" id="1_2rhp7"]
+
+[resource]
+script = ExtResource("1_2rhp7")
+special_name = "Lightning Buster"
+power = 3.0
+num_hits = 4
+hit_ratio = Array[float]([0.25, 0.25, 0.25, 0.25])
+attribute = "physical"
+aoe = 2
+heal_ratio = 0.0
+affect_team = false
