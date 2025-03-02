@@ -25,3 +25,14 @@ Referred to as Blade Combos in XC2, this is a system tied in with the Spcials me
 
 ##### Special Combo effects, Orbs, and Chain Attacks
 This section talks about future mechanics that may be implemented. If you have played the Xenoblade games (and specifically XC2), you would know about Chain Attacks, Elemental Orbs, and the Blade Combo effects. Their explanation will be skipped because they won't be implemented yet, but these are all mechanics that are theoretically possible and would add more depth to the combat. The only mechanic here that may be implemented in the current iteration of XenoTactica would be the Special Combo effects. These would an unique effect for each element and would be applied when a Speical with that element is used to advance the Special Combo, with the strength of the effects varying depending on the combo stage. For example, the ice element could give a 10%/20%/30% reduction for stage 1/2/3 of the combo, respectively, to the opponents Art charge rate, slowing down how often they use their Arts. Only one element's effect will be active depending on what the combo is on; for example, with a stage 1 fire combo, using a ice Special that advances it to a stage 2 ice combo would overwrite the fire's damage over time, and apply the ice's slow Art charge. 
+
+## Future Plans 
+- Story / lore
+- More areas to explore (goes along with story)
+- More enemies 
+- Swappable party and more characters that join you so party has members to swap
+- Customizable character equipment (equip different weapons, arts, accessories, etc. to characters)
+- Chain Attacks (mentioned above)
+- 
+## Unimplemented Features
+*list anything we weren't able to implement*
