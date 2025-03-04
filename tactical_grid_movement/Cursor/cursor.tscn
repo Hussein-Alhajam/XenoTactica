@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://duwf4j00s1oky"]
 
-[ext_resource type="Script" path="res://tactical_grid_movement/Cursor/cursor.gd" id="1_2vg41"]
+[ext_resource type="Script" uid="uid://bn83qreqtsyah" path="res://tactical_grid_movement/Cursor/cursor.gd" id="1_2vg41"]
 [ext_resource type="Texture2D" uid="uid://bh5fibew7gbnj" path="res://tactical_grid_movement/Cursor/menu_selection_arrow.png" id="1_o047r"]
 
 [node name="Cursor" type="Node2D"]

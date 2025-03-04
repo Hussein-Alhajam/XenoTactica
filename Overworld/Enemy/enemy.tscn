@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dbe6ybprf7461"]
 
-[ext_resource type="Script" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
+[ext_resource type="Script" uid="uid://ce4rp23jh71d" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
 [ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="2_vvl23"]
 [ext_resource type="PackedScene" uid="uid://vvnj7urn8vgj" path="res://Overworld/Enemy/Enemy_battle_transition.tscn" id="3_d8m0o"]
 

@@ -21,6 +21,7 @@ func draw(cell_start: Vector2, cell_end: Vector2) -> void:
 	set_cells_terrain_connect(current_path, 0, 0)
 
 
+
 ## Stops drawing, clearing the drawn path and the `_pathfinder`.
 func stop() -> void:
 	_pathfinder = null
