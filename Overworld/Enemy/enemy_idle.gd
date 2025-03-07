@@ -2,11 +2,11 @@ extends State
 class_name Enemy_Idle
 
 @export var enemy: CharacterBody2D
-@export var move_speed := 45.0
+@export var move_speed := 55.0
 @onready var  tile_map = $"../Map"
 @onready var detection_zone: Area2D = $"../../detection_zone"  # Reference to the detection zone
 
-var player: CharacterBody2D
+@onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 var move_direction: Vector2
 var wander_time: float
 var astar_grid: AStarGrid2D
@@ -64,7 +64,6 @@ func calculate_random_grid_move():
 	is_moving = true
 
 func enter():
-	player = get_tree().get_first_node_in_group("player")
 	if player == null:
 		print("ERROR: Player not found!")
 		return
@@ -74,7 +73,6 @@ func enter():
 
 func exit():
 	print("Exiting IDLE state")
-	wander_time = 0  # Reset wander time when leaving the state
 
 func Update(delta: float):
 	if wander_time > 0:
@@ -89,10 +87,9 @@ func Physics_Update(delta: float):
 
 	# Move in grid-aligned directions
 	enemy.velocity = move_direction * move_speed
-	enemy.move_and_slide()
 	if enemy.is_on_ceiling() or enemy.is_on_floor() or enemy.is_on_wall():
 		randomize_wander()
-		
+		enemy.move_and_slide()
 func _on_detection_zone_body_entered(body):
 	if body.is_in_group("player"):
 		print("Player detected! Switching to CHASE state.")

@@ -6,7 +6,7 @@ class_name Enemy_Attack
 @export var attack_speed := 3000.0  # Speed of movement during attack
 @onready var tile_map = $"../Map"
 
-var player: CharacterBody2D
+@onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 var is_attacking: bool = false
 var attack_tween: Tween
 
@@ -17,8 +17,6 @@ func enter():
 	if tree == null:
 		print("❌ ERROR: SceneTree is NULL!")
 		return
-
-	player = tree.get_first_node_in_group("player")
 
 	if player == null:
 		print("⚠️ WARNING: Player not found in ATTACK state! Avoiding crash, returning to CHASE.")
@@ -50,7 +48,7 @@ func force_move_to_player():
 	var target_position = tile_map.map_to_local(player_grid_pos)
 
 	attack_tween = get_tree().create_tween()
-	attack_tween.tween_property(enemy, "global_position", target_position, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	attack_tween.tween_property(enemy, "global_position", target_position, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	attack_tween.tween_callback(Callable(self, "on_attack_finished"))
 
 func on_attack_finished():

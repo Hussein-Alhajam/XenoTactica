@@ -5,14 +5,13 @@ class_name Enemy_Chase
 @export var move_speed := 150.0
 @onready var tile_map = $"../Map"
 
-var player: CharacterBody2D
+@onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 var astar_grid: AStarGrid2D
 var path: Array = []
 var target_position: Vector2
 var is_moving: bool = false
 
 func enter():
-	player = get_tree().get_first_node_in_group("player")
 	if player == null:
 		print("ERROR: Player not found in CHASE state!")
 		return
@@ -68,7 +67,6 @@ func Physics_Update(delta: float):
 		var direction = (target_position - enemy.global_position).normalized()
 		enemy.velocity = direction * move_speed
 		enemy.move_and_slide()
-
 		if enemy.global_position.distance_to(target_position) < 25:
 			update_path()  # Get next tile in path
 

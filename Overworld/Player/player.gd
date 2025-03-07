@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+#@export var speed = 400
+# Reference to the RayCast2D node
+@onready var raycast_2d: RayCast2D = $RayCast2D
+# Stores the grid size, which is 80 (same as one tile)
+var grid_size = 80
 # A dictionary that maps input map actions to direction vectors
 const inputs = {
 	"move_right": Vector2.RIGHT,
@@ -7,13 +12,6 @@ const inputs = {
 	"move_down": Vector2.DOWN,
 	"move_up": Vector2.UP
 }
-
-# Stores the grid size, which is 80 (same as one tile)
-var grid_size = 80
-
-# Reference to the RayCast2D node
-@onready var raycast_2d: RayCast2D = $RayCast2D
-
 # Calls the move function with the appropriate input key
 # if any input map action is triggered
 func _unhandled_input(event):
@@ -41,9 +39,6 @@ func save_and_transition(next_scene: String):
 	else:
 		get_tree().change_scene_to_file(next_scene)
 		
-#extends CharacterBody2D
-
-#@export var speed = 400
 
 #func get_input():
 #	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")

@@ -36,7 +36,7 @@ collision_mask = 2
 
 [node name="detection_zone" parent="." groups=["enemy"] instance=ExtResource("3_d8m0o")]
 position = Vector2(-1, -4)
-scale = Vector2(5.19215, 3.52286)
+scale = Vector2(6.42119, 2.92286)
 metadata/_edit_group_ = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -61,6 +61,7 @@ metadata/_custom_type_script = "uid://dfsb0smqvyean"
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_anksf")
 enemy = NodePath("../..")
+attack_speed = 300.0
 metadata/_custom_type_script = "uid://bpqgfpif05wjs"
 
 [connection signal="body_entered" from="battle_transition" to="StateMachine/Attack" method="_on_battle_transition_body_entered"]
