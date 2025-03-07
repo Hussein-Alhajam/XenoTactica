@@ -8,7 +8,7 @@ const inputs = {
 	"move_up": Vector2.UP
 }
 
-# Stores the grid size, which is 16 (same as one tile)
+# Stores the grid size, which is 80 (same as one tile)
 var grid_size = 80
 
 # Reference to the RayCast2D node
@@ -29,3 +29,14 @@ func move(action):
 	raycast_2d.force_raycast_update()
 	if not raycast_2d.is_colliding():
 		position += destination
+
+func save_and_transition(next_scene: String):
+	GameState.save_player_state(global_position, get_tree().current_scene.scene_file_path)
+	print("🔹 Player state saved. Transitioning to:", next_scene)
+	
+	# Call Overworld's transition function if it exists
+	var overworld = get_tree().get_first_node_in_group("overworld")
+	if overworld:
+		overworld.transition_to_scene(next_scene)
+	else:
+		get_tree().change_scene_to_file(next_scene)
