@@ -1,9 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://cw4epi2g326rm"]
 
-[ext_resource type="Script" path="res://combat_actions_hud.gd" id="1_j0yxo"]
+[sub_resource type="Resource" id="Resource_f8fi3"]
+metadata/__load_path__ = "res://combat_actions_hud.gd"
 
 [node name="CombatActionsHUD" type="CanvasLayer"]
-script = ExtResource("1_j0yxo")
+script = SubResource("Resource_f8fi3")
 
 [node name="UpText" type="Label" parent="."]
 anchors_preset = 2
