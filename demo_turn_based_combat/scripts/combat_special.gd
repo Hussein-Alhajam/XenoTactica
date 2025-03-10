@@ -20,9 +20,12 @@ class_name CombatSpecial
 #@export var sound_effect: 
 
 var battle_scene: Node2D
+var character_damage: int
 
 
 func use_special(): # pass enemy: Node or something?
 	#print(special_name + " special used")
 	Global.battle_scene.update_action_log(special_name + " special used")
-	# calculate and do damage to enemy
+	# calculate damage
+	var damage = character_damage * power
+	return damage

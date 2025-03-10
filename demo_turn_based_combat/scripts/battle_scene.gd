@@ -117,6 +117,7 @@ func sort_combined_queue():
 	# used gdscript's built in 'sort_custom' function for lists
 	# and pass it our custom sort defined below
 	sorted_array.sort_custom(sort_by_time)
+	#print(sorted_array)
 
 
 func sort_by_time(a, b):
@@ -155,18 +156,22 @@ func pop_out():
 func attack():
 	# call the attack() function defined in character.gd
 	sorted_array[0]["character"].attack(get_tree())
+	
+	#players.pick_random().get_attacked() # randomly select a player to be attacked
 
 
 func next_attack():
 	# if the first element is Player, return (don't want to auto attack)
 	if sorted_array[0]["character"] in players:
 		return
+
 	# otherwise, it's enemy attack (have them 'auto' attack)
 	# in a way, attack and getting attacked are 'separate'
 	# e.g., enemy does animation for attack, but doesn't actually 'hit'
 	# then code randomly selects a player to be attacked
 	# side note: enemy does animation, then player get attacked
 		# but in enemy_button.gd, enemy get attacked, then player char does animation
+	# maybe call enemy_attack function to separate things better
 	attack()
 	pop_out()
 	players.pick_random().get_attacked() # randomly select a player to be attacked

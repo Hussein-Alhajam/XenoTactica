@@ -45,6 +45,14 @@ var special_charge: int = 0
 var battle_scene: Node2D # used to store reference of main battle_scene Scene
 
 
+func _ready():
+	# pass the character's damage to the art
+	for art in arts_list:
+		art.character_damage = max(strength, ether) 
+	for special in specials_list:
+		special.character_damage = max(strength, ether)
+
+
 func queue_reset():
 	queue.clear()
 	# add Arithmetic Progression of 4 terms
@@ -93,13 +101,14 @@ func set_status(status_type: String):
 	# (so that first will always go next and not be 'replaced')
 	# game balance thing
 	print(queue)
-	for i in range(3): # not sure how this works (why use 4 in queue_reset()?)
+	for i in range(3):
 		queue.pop_back()
 	print(queue)
 	# append the new 'order'
 	for i in range(3):
 		queue.append(queue[-1] + speed * status)
 	print(queue)
+	print("character.set_status called")
 
 
 func get_attacked(type = ""):
@@ -122,9 +131,12 @@ func attack(tree):
 	# shift the character 'forward' then back
 	await tween_movement(-shift, tree)
 	await tween_movement(shift, tree)
+	
+	# calculate damage of attack
+	var damage = max(strength, ether) # temp: use higher of strength or ether
 
 	# emit the 'next_attack' signal from 'EventBus'
-	EventBus.next_attack.emit()
+	EventBus.next_attack.emit()	# pass the damage value
 
 
 func charge_arts(num):
@@ -135,8 +147,12 @@ func charge_arts(num):
 func use_art(num):
 	if arts_list[num].is_charged(): # should find better way to check...
 		charge_arts(1)
-		arts_list[num].use_art() #... maybe could have this return bool?
+		
+		var damage = arts_list[num].use_art() 
+		print("art did " + str(damage) + " damage")
 		charge_special(1)
+		
+		EventBus.next_attack.emit() # pass the damage value
 
 
 func is_max_special_charged(): # not needed?
@@ -155,7 +171,8 @@ func reset_special_charge():
 
 func use_special():
 	if special_charge > 0:
-		specials_list[special_charge - 1].use_special()
+		var damage = specials_list[special_charge - 1].use_special()
+		print("special did " + str(damage) + " damage")
 		reset_special_charge()
 	else: 
 		Global.battle_scene.update_action_log("Special has no charge")

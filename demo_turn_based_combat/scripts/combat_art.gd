@@ -2,6 +2,8 @@ extends Resource
 
 class_name CombatArt
 
+# signals
+# export variables
 @export var art_name: String
 @export var power: float # scales the str/eth of char; affects damage / healing of art
 @export var num_hits: int # number of hits of the art
@@ -24,7 +26,11 @@ class_name CombatArt
 @export var current_charge: int 
 @export var max_charge: int
 
+# public variables
 var battle_scene: Node2D
+var character_damage: int
+
+# private variables
 
 
 func is_charged():
@@ -54,7 +60,18 @@ func reset_charge():
 func use_art():
 	if is_charged(): # duplicated in character.gd, not sure which is better to get rid of 
 		reset_charge()
-		#print(art_name + " art used")
 		Global.battle_scene.update_action_log(art_name + " art used")
+		
+		# calculate damage
+		# could use list for multi hits?
+		#var damage_hits = []
+		#var damage = 0
+		#for i in range(num_hits):
+			#damage = character_damage * power * hit_ratio[i]
+			#damage_hits.append(damage)
+
+		var damage = character_damage * power 
+		return damage
+
 	else:
 		Global.battle_scene.update_action_log(art_name + " is not charged")
