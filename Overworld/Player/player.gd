@@ -17,7 +17,7 @@ const inputs = {
 func _unhandled_input(event):
 	for action in inputs.keys():
 		if event.is_action_pressed(action):
-			move_and_slide(action)
+			move(action)
 
 # Updates the direction of the RayCast2D according to the input key
 # and moves one grid if no collision is detected
