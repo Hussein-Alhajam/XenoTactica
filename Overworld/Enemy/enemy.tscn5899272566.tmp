@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbe6ybprf7461"]
+
+[ext_resource type="Script" uid="uid://ce4rp23jh71d" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
+[ext_resource type="Script" uid="uid://dqnaoigdp4v72" path="res://Overworld/Enemy/state_machine.gd" id="3_aqlo4"]
+[ext_resource type="PackedScene" uid="uid://vvnj7urn8vgj" path="res://Overworld/Enemy/Enemy_battle_transition.tscn" id="3_d8m0o"]
+[ext_resource type="Script" uid="uid://bdnid4se5o5g6" path="res://Overworld/Enemy/enemy_idle.gd" id="5_0koic"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dh6km"]
+size = Vector2(70, 62)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8q01u"]
+load_path = "res://.godot/imported/cyclops_sprite.png-1805becf3c178a391d63e9a69991f737.ctex"
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+position = Vector2(224, 88)
+script = ExtResource("1_kq251")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_dh6km")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(1.25, 1.25)
+texture = SubResource("CompressedTexture2D_8q01u")
+metadata/_edit_group_ = true
+
+[node name="Area2D" parent="." instance=ExtResource("3_d8m0o")]
+position = Vector2(-1, -4)
+scale = Vector2(2.52583, 2.03489)
+metadata/_edit_group_ = true
+
+[node name="State_Machine" type="Node" parent="."]
+script = ExtResource("3_aqlo4")
+
+[node name="Enemy_idle" type="Node" parent="State_Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_0koic")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://bdnid4se5o5g6"

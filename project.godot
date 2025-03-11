@@ -12,12 +12,13 @@ config_version=5
 
 config/name="Interactive_Media"
 run/main_scene="res://Overworld/over_world.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 EventBus="*res://demo_turn_based_combat_/scenes/event_bus.gd"
+GameState="*res://Overworld/Transitions/GameState.gd"
 
 [display]
 
@@ -25,6 +26,10 @@ window/size/viewport_width=1600
 window/size/viewport_height=900
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
+
+[global_group]
+
+player=""
 
 [input]
 

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Character" load_steps=4 format=3 uid="uid://cekiqrspd7cac"]
 
 [ext_resource type="Texture2D" uid="uid://df4i2tbwdossa" path="res://demo_turn_based_combat_/assets/sprites/characters_32_24_16/squirrel.png" id="1_h333b"]
-[ext_resource type="Script" path="res://demo_turn_based_combat_/scenes/character.gd" id="2_7nnhs"]
+[ext_resource type="Script" uid="uid://qy6mbh5a71ax" path="res://demo_turn_based_combat_/scenes/character.gd" id="2_7nnhs"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://demo_turn_based_combat_/scenes/vfx.tscn" id="3_w22ad"]
 
 [resource]

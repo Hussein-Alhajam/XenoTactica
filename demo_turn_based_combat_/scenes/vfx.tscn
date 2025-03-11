@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnwnyrknhus1p"]
 
-[ext_resource type="Texture2D" uid="uid://ch4v6jxcojsxo" path="res://assets/sprites/ATTACK FREE/PunchImp1.png" id="1_dtwu2"]
-[ext_resource type="AudioStream" uid="uid://bp6yvxjtbqkx3" path="res://assets/SFX/hit-rock.mp3" id="2_32oux"]
-[ext_resource type="Texture2D" uid="uid://wiottnlaefoj" path="res://assets/sprites/ATTACK FREE/vSlash1.png" id="3_3ajhj"]
+[ext_resource type="Texture2D" uid="uid://ch4v6jxcojsxo" path="res://demo_turn_based_combat_/assets/sprites/ATTACK FREE/PunchImp1.png" id="1_dtwu2"]
+[ext_resource type="AudioStream" uid="uid://bp6yvxjtbqkx3" path="res://demo_turn_based_combat_/assets/SFX/hit-rock.mp3" id="2_32oux"]
+[ext_resource type="Texture2D" uid="uid://wiottnlaefoj" path="res://demo_turn_based_combat_/assets/sprites/ATTACK FREE/vSlash1.png" id="3_3ajhj"]
 
 [sub_resource type="Animation" id="Animation_8xkpf"]
 length = 0.001
@@ -263,9 +263,9 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ggx01"]
 _data = {
-"RESET": SubResource("Animation_8xkpf"),
-"haste": SubResource("Animation_ljrt3"),
-"slash": SubResource("Animation_shaeo")
+&"RESET": SubResource("Animation_8xkpf"),
+&"haste": SubResource("Animation_ljrt3"),
+&"slash": SubResource("Animation_shaeo")
 }
 
 [node name="VFX" type="Sprite2D"]

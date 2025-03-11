@@ -1,17 +1,17 @@
 [gd_scene load_steps=14 format=4 uid="uid://c2qugcq0ed7p6"]
 
 [ext_resource type="TileSet" uid="uid://crfevbytpkyck" path="res://tactical_grid_movement/map_tileset.tres" id="1_aax0c"]
-[ext_resource type="Script" path="res://tactical_grid_movement/game_board.gd" id="1_tf50n"]
+[ext_resource type="Script" uid="uid://t815i6rwjynm" path="res://tactical_grid_movement/game_board.gd" id="1_tf50n"]
 [ext_resource type="Resource" uid="uid://p6102e41klh6" path="res://tactical_grid_movement/Resources/Grid.tres" id="2_eroow"]
-[ext_resource type="Script" path="res://tactical_grid_movement/Control/unit.gd" id="2_w5l42"]
+[ext_resource type="Script" uid="uid://b2aqytgciue" path="res://tactical_grid_movement/Control/unit.gd" id="2_w5l42"]
 [ext_resource type="Texture2D" uid="uid://c6dgys44aq24u" path="res://icon.svg" id="3_nj0xy"]
-[ext_resource type="Script" path="res://tactical_grid_movement/Resources/TileMap.gd" id="3_q0mp5"]
-[ext_resource type="Script" path="res://tactical_grid_movement/Transitions/battle_transition.gd" id="5_08bxc"]
+[ext_resource type="Script" uid="uid://dsfuh6kseq6y6" path="res://tactical_grid_movement/Resources/TileMap.gd" id="3_q0mp5"]
+[ext_resource type="Script" uid="uid://bunl77xay4wcu" path="res://tactical_grid_movement/Transitions/battle_transition.gd" id="5_08bxc"]
 [ext_resource type="TileSet" uid="uid://4muceb4mfwnt" path="res://tactical_grid_movement/Assets/unit_overlay_tileset.tres" id="6_h6k6h"]
-[ext_resource type="Script" path="res://tactical_grid_movement/unit_overlay.gd" id="6_heltt"]
+[ext_resource type="Script" uid="uid://dqpq4pavpye7a" path="res://tactical_grid_movement/unit_overlay.gd" id="6_heltt"]
 [ext_resource type="TileSet" uid="uid://b8pjr32wil5ds" path="res://tactical_grid_movement/Assets/unit_path_tileset.tres" id="7_dk3h3"]
-[ext_resource type="Script" path="res://tactical_grid_movement/unit_path.gd" id="7_nay7v"]
-[ext_resource type="PackedScene" uid="uid://duwf4j00s1oky" path="res://tactical_grid_movement/Cursor/cursor.tscn" id="10_6fqir"]
+[ext_resource type="Script" uid="uid://ds8sckrh554op" path="res://tactical_grid_movement/unit_path.gd" id="7_nay7v"]
+[ext_resource type="Script" uid="uid://dxkxnlv50dtfd" path="res://tactical_grid_movement/Cursor/cursor.gd" id="12_kv1ro"]
 
 [sub_resource type="Curve2D" id="Curve2D_er43x"]
 
@@ -50,4 +50,6 @@ texture = ExtResource("3_nj0xy")
 [node name="BattleTransition" type="Node2D" parent="."]
 script = ExtResource("5_08bxc")
 
-[node name="Cursor" parent="." instance=ExtResource("10_6fqir")]
+[node name="Cursor" type="Node2D" parent="."]
+script = ExtResource("12_kv1ro")
+metadata/_custom_type_script = "uid://dxkxnlv50dtfd"
