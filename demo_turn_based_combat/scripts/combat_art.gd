@@ -28,7 +28,7 @@ class_name CombatArt
 
 # public variables
 var battle_scene: Node2D
-var character_damage: int
+#var character_damage: int
 
 # private variables
 
@@ -62,15 +62,15 @@ func use_art():
 		reset_charge()
 		Global.battle_scene.update_action_log(art_name + " art used")
 		
-		# calculate damage
+		# calculate damage - raw damage of art
 		# could use list for multi hits?
 		#var damage_hits = []
 		#var damage = 0
 		#for i in range(num_hits):
-			#damage = character_damage * power * hit_ratio[i]
+			#damage = power * hit_ratio[i]
 			#damage_hits.append(damage)
 
-		var damage = character_damage * power 
+		var damage = power # + buffs, etc.
 		return damage
 
 	else:

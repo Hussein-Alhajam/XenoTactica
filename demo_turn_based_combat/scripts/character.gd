@@ -45,14 +45,6 @@ var special_charge: int = 0
 var battle_scene: Node2D # used to store reference of main battle_scene Scene
 
 
-func _ready():
-	# pass the character's damage to the art
-	for art in arts_list:
-		art.character_damage = max(strength, ether) 
-	for special in specials_list:
-		special.character_damage = max(strength, ether)
-
-
 func queue_reset():
 	queue.clear()
 	# add Arithmetic Progression of 4 terms
@@ -121,17 +113,19 @@ func get_attacked(type = ""):
 # and have oppenent 'react' to dmg ? this allows every other 'attack' 
 # action to just call this to apply the dmg (reduce duplicate code)
 func attack(tree):
+	# simple 'animation' for attacking
 	var shift = Vector2(100, 0)
 	# reverse the direction character moves if on left side
 	# i.e., if character is on left side of screen, move right
 	# vice versa for other side
 	if node.position.x < node.get_viewport_rect().size.x / 2:
 		shift = -shift
-
 	# shift the character 'forward' then back
 	await tween_movement(-shift, tree)
 	await tween_movement(shift, tree)
 	
+	# mechanic updates (damage, charge arts, accuracy, etc.)
+	charge_arts(1)
 	# calculate damage of attack
 	var damage = max(strength, ether) # temp: use higher of strength or ether
 
@@ -148,7 +142,9 @@ func use_art(num):
 	if arts_list[num].is_charged(): # should find better way to check...
 		charge_arts(1)
 		
+		# calculate damage
 		var damage = arts_list[num].use_art() 
+		damage = damage * max(strength, ether)
 		print("art did " + str(damage) + " damage")
 		charge_special(1)
 		
@@ -171,8 +167,12 @@ func reset_special_charge():
 
 func use_special():
 	if special_charge > 0:
+		# calculate damage
 		var damage = specials_list[special_charge - 1].use_special()
+		damage = damage * max(strength, ether)
 		print("special did " + str(damage) + " damage")
 		reset_special_charge()
+		
+		return damage
 	else: 
 		Global.battle_scene.update_action_log("Special has no charge")

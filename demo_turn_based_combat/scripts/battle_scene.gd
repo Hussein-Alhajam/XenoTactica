@@ -29,6 +29,7 @@ func _ready():
 		%EnemySelection.add_child(button)
 
 	sort_and_display() 
+	
 	# connect the signal 'next_attack' from 'EventBus'
 	# to the function next_attack() from below
 	# whenever attack() is called in character.gd,
@@ -49,18 +50,25 @@ func _process(delta: float) -> void:
 			$UI/RightContainer/RightText.text = "Attack"
 			
 			if Input.is_action_just_pressed("auto_attack"):
+				# print some display, then call attack
 				$UI/ActionLog.text = "Used Attack \nArts Charged by 1"
 				# if using the priority queue for turn order,
 				# and assuming controls are only available when current turn is a player,
 				# (i.e., if we are in controls, first element in queue is a player)
 				# make that player character charge their arts
-				sorted_array[0]["character"].charge_arts(1)
-				# print some display, then call attack
+				attack()
+				pop_out()
+				# want to pass damage taken to character's get_attacked()
+				enemies.pick_random().get_attacked() # temp select enemy at random
+				
 				
 			if Input.is_action_just_pressed("special"):
-				sorted_array[0]["character"].use_special()
-				# print some display, then call attack
-				
+				var damage = sorted_array[0]["character"].use_special()
+				# temp just copying from attack
+				attack()
+				pop_out()
+				enemies.pick_random().get_attacked() # temp select enemy at random
+
 			if Input.is_action_just_pressed("items_selection"):
 				$UI/ActionLog.text = "entered items selection \n (not implemented)"
 			if Input.is_action_just_pressed("arts_selection"):
@@ -161,7 +169,7 @@ func attack():
 
 
 func next_attack():
-	# if the first element is Player, return (don't want to auto attack)
+	# if the first element is Player, return (don't want to random attack)
 	if sorted_array[0]["character"] in players:
 		return
 
