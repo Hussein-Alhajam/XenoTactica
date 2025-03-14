@@ -23,7 +23,11 @@ func highlight_tiles(unit_tile: Vector2i, move_range: int):
 			if abs(x) + abs(y) > move_range:
 				continue
 			# 🔹 Ensure the tile is inside the grid and not an obstacle
+<<<<<<< Updated upstream
 			if not pathfinder.is_tile_walkable(check_tile):
+=======
+			if not GridManager.is_tile_walkable(check_tile):
+>>>>>>> Stashed changes
 				continue
 			walkable_tiles.append(check_tile)
 	for tile in walkable_tiles:
