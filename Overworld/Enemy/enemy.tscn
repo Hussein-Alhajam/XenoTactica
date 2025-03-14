@@ -25,5 +25,9 @@ metadata/_edit_group_ = true
 
 [node name="Area2D" parent="." instance=ExtResource("3_d8m0o")]
 position = Vector2(-1, -4)
+<<<<<<< Updated upstream
 scale = Vector2(0.69026, 0.628855)
+=======
+scale = Vector2(2.54119, 1.68286)
+>>>>>>> Stashed changes
 metadata/_edit_group_ = true

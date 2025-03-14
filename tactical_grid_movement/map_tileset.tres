@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=18 format=3 uid="uid://crfevbytpkyck"]
+[gd_resource type="TileSet" load_steps=20 format=3 uid="uid://crfevbytpkyck"]
 
 [ext_resource type="Texture2D" uid="uid://ba7mru7wopcot" path="res://tactical_grid_movement/grasslands.png" id="1_3cvhy"]
+[ext_resource type="Texture2D" uid="uid://cpis7jqetn6vx" path="res://tactical_grid_movement/Assets/0_tileset_unit_overlay.png" id="2_hl5hb"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_is567"]
 vertices = PackedVector2Array(40, 40, -40, 40, -40, -40, 40, -40)
@@ -159,6 +160,11 @@ texture_region_size = Vector2i(80, 80)
 5:3/0 = 0
 5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-40, -40, 40, -40, 40, 40, -40, 40)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pxfeh"]
+texture = ExtResource("2_hl5hb")
+texture_region_size = Vector2i(80, 80)
+0:0/0 = 0
+
 [resource]
 tile_size = Vector2i(80, 80)
 physics_layer_0/collision_layer = 1
@@ -168,3 +174,4 @@ custom_data_layer_0/type = 1
 custom_data_layer_1/name = "movement_cost"
 custom_data_layer_1/type = 28
 sources/0 = SubResource("TileSetAtlasSource_tambf")
+sources/1 = SubResource("TileSetAtlasSource_pxfeh")
