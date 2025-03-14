@@ -27,10 +27,6 @@ window/size/viewport_height=900
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 
-[global_group]
-
-player=""
-
 [input]
 
 move={
