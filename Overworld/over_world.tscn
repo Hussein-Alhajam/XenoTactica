@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=4 uid="uid://ypkn2d7y1vfl"]
+[gd_scene load_steps=8 format=4 uid="uid://ypkn2d7y1vfl"]
 
-[ext_resource type="TileSet" uid="uid://crfevbytpkyck" path="res://tactical_grid_movement/map_tileset.tres" id="1_imamq"]
+[ext_resource type="TileSet" path="res://tactical_grid_movement/map_tileset.tres" id="1_imamq"]
 [ext_resource type="PackedScene" uid="uid://ii0tl3weniuv" path="res://Overworld/Player/player.tscn" id="2_qck3y"]
 [ext_resource type="PackedScene" uid="uid://dbe6ybprf7461" path="res://Overworld/Enemy/enemy.tscn" id="4_d1yfv"]
 [ext_resource type="Script" uid="uid://4mbciwt5pw3w" path="res://Overworld/Transitions/battle_transition.gd" id="5_d33ih"]
+[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="5_fdjd7"]
+[ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/assets/sprites/gorgon_sprite.png" id="6_ediwe"]
+[ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://demo_turn_based_combat_/assets/sprites/kraken_sprite.png" id="7_2kutk"]
 
 [node name="OverWorld" type="Node2D"]
 
@@ -15,20 +18,38 @@ tile_set = ExtResource("1_imamq")
 [node name="Player" parent="." instance=ExtResource("2_qck3y")]
 position = Vector2(201, 114)
 
-[node name="Enemy" parent="." instance=ExtResource("4_d1yfv")]
-position = Vector2(118, 598)
-
-[node name="Enemy2" parent="." instance=ExtResource("4_d1yfv")]
-position = Vector2(840, 205)
-move_speed = 3.5
-
-[node name="Enemy3" parent="." instance=ExtResource("4_d1yfv")]
-position = Vector2(680, 525)
-move_speed = 4.0
-
-[node name="Enemy4" parent="." instance=ExtResource("4_d1yfv")]
-position = Vector2(1360, 1050)
-move_speed = 5.0
-
 [node name="Battle_transition" type="Node2D" parent="."]
 script = ExtResource("5_d33ih")
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2(-165, -78)
+
+[node name="Enemy5" parent="Enemies" instance=ExtResource("4_d1yfv")]
+position = Vector2(1005, 283)
+move_speed = 3.5
+
+[node name="Enemy2" type="Sprite2D" parent="Enemies/Enemy5"]
+position = Vector2(-238, 229.567)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_fdjd7")
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource("4_d1yfv")]
+position = Vector2(283, 676)
+
+[node name="Enemy" type="Sprite2D" parent="Enemies/Enemy4"]
+position = Vector2(85, -315.38)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_ediwe")
+
+[node name="Enemy6" parent="Enemies" instance=ExtResource("4_d1yfv")]
+position = Vector2(1525, 1128)
+move_speed = 5.0
+
+[node name="Enemy3" type="Sprite2D" parent="Enemies/Enemy6"]
+position = Vector2(-935, -451.331)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_2kutk")
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("4_d1yfv")]
+position = Vector2(845, 603)
+move_speed = 4.0

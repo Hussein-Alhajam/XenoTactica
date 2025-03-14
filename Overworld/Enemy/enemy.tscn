@@ -1,33 +1,68 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbe6ybprf7461"]
+[gd_scene load_steps=9 format=3 uid="uid://dbe6ybprf7461"]
 
 [ext_resource type="Script" uid="uid://ce4rp23jh71d" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
-[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="2_vvl23"]
-[ext_resource type="PackedScene" uid="uid://dbe6ybprf7461" path="res://Overworld/Enemy/enemy.tscn" id="3_d8m0o"]
+[ext_resource type="PackedScene" uid="uid://contxrld56mlo" path="res://Overworld/Enemy/battle_transition.tscn" id="3_6qser"]
+[ext_resource type="Script" uid="uid://dqnaoigdp4v72" path="res://Overworld/Enemy/state_machine.gd" id="3_aqlo4"]
+[ext_resource type="PackedScene" path="res://Overworld/Enemy/detection_zone.tscn" id="3_d8m0o"]
+[ext_resource type="Script" uid="uid://bdnid4se5o5g6" path="res://Overworld/Enemy/enemy_idle.gd" id="5_0koic"]
+[ext_resource type="Script" uid="uid://dfsb0smqvyean" path="res://Overworld/Enemy/enemy_chase.gd" id="5_3cc1d"]
+[ext_resource type="Script" uid="uid://bpqgfpif05wjs" path="res://Overworld/Enemy/enemy_attack.gd" id="5_anksf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh6km"]
-size = Vector2(70, 62)
+size = Vector2(40, 40)
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
-position = Vector2(224, 88)
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(228, 89)
 script = ExtResource("1_kq251")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 1)
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_dh6km")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, 1)
 scale = Vector2(1.25, 1.25)
-texture = ExtResource("2_vvl23")
 metadata/_edit_group_ = true
 
-[node name="Area2D" parent="." instance=ExtResource("3_d8m0o")]
+[node name="battle_transition" parent="." instance=ExtResource("3_6qser")]
+position = Vector2(-4, -1)
+scale = Vector2(1.64, 1.56)
+collision_layer = 2
+collision_mask = 2
+
+[node name="detection_zone" parent="." groups=["enemy"] instance=ExtResource("3_d8m0o")]
 position = Vector2(-1, -4)
-<<<<<<< Updated upstream
-scale = Vector2(0.69026, 0.628855)
-=======
-scale = Vector2(2.54119, 1.68286)
->>>>>>> Stashed changes
+scale = Vector2(6.42119, 2.92286)
 metadata/_edit_group_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(4, -1)
+target_position = Vector2(44, 0)
+metadata/_edit_group_ = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_aqlo4")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_0koic")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://bdnid4se5o5g6"
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_3cc1d")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://dfsb0smqvyean"
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_anksf")
+enemy = NodePath("../..")
+attack_speed = 300.0
+metadata/_custom_type_script = "uid://bpqgfpif05wjs"
+
+[connection signal="body_entered" from="battle_transition" to="StateMachine/Attack" method="_on_battle_transition_body_entered"]
+[connection signal="body_entered" from="detection_zone" to="StateMachine/Idle" method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="detection_zone" to="StateMachine/Idle" method="_on_detection_zone_body_exited"]
+[connection signal="body_exited" from="detection_zone" to="StateMachine/Chase" method="_on_detection_zone_body_exited"]
