@@ -6,14 +6,14 @@
 [ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/art_anchor_shot.tres" id="2_s5nes"]
 [ext_resource type="Script" path="res://scripts/combat_special.gd" id="5_7aykm"]
 [ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/special_chroma_dust.tres" id="6_oax0f"]
-[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_b68j4"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_kngfi"]
 
 [resource]
 script = ExtResource("2_nusp4")
 title = "Kraken"
 icon = ExtResource("1_j0r5h")
 texture = ExtResource("1_j0r5h")
-vfx_node = ExtResource("7_b68j4")
+vfx_node = ExtResource("7_kngfi")
 health = 90
 strength = 15
 ether = 15

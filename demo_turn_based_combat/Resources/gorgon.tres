@@ -6,14 +6,14 @@
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_naynh"]
 [ext_resource type="Script" path="res://scripts/combat_special.gd" id="5_3flk4"]
 [ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/special_chroma_dust.tres" id="6_a7hpk"]
-[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_nwcq8"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_cude1"]
 
 [resource]
 script = ExtResource("2_naynh")
 title = "Gorgon"
 icon = ExtResource("1_0x4qp")
 texture = ExtResource("1_0x4qp")
-vfx_node = ExtResource("7_nwcq8")
+vfx_node = ExtResource("7_cude1")
 health = 80
 strength = 10
 ether = 20

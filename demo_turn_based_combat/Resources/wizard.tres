@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_f3e04"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_2svqr"]
 [ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/art_anchor_shot.tres" id="2_svirf"]
-[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="3_tvvfv"]
 [ext_resource type="Resource" uid="uid://r1slhvpjfjef" path="res://resources/art_double_spinning_edge.tres" id="3_ube30"]
 [ext_resource type="Resource" uid="uid://dsksdhjhbvv6e" path="res://resources/art_sword_bash.tres" id="4_c5e1s"]
 [ext_resource type="Script" path="res://scripts/combat_special.gd" id="7_35w2o"]
@@ -12,13 +11,14 @@
 [ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://resources/special_photon_edge.tres" id="9_f1sec"]
 [ext_resource type="Resource" uid="uid://brfo106f3jjja" path="res://resources/special_lightning_buster.tres" id="10_6dvck"]
 [ext_resource type="Resource" uid="uid://bdjn5uhfxapf2" path="res://resources/special_sacred_arrow.tres" id="11_8wau2"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="12_rn1jk"]
 
 [resource]
 script = ExtResource("2_2svqr")
 title = "Wizard"
 icon = ExtResource("1_2bg7t")
 texture = ExtResource("1_2bg7t")
-vfx_node = ExtResource("3_tvvfv")
+vfx_node = ExtResource("12_rn1jk")
 health = 80
 strength = 5
 ether = 30
