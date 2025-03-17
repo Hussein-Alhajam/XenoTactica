@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://ypkn2d7y1vfl"]
 
-[ext_resource type="TileSet" uid="uid://crfevbytpkyck" path="res://tactical_grid_movement/map_tileset.tres" id="1_imamq"]
+[ext_resource type="TileSet" path="res://tactical_grid_movement/map_tileset.tres" id="1_imamq"]
 [ext_resource type="Script" uid="uid://c37iwmk2ywjs4" path="res://Overworld/overworld.gd" id="1_pql16"]
 [ext_resource type="PackedScene" uid="uid://ii0tl3weniuv" path="res://Overworld/Player/player.tscn" id="2_qck3y"]
 [ext_resource type="PackedScene" uid="uid://dbe6ybprf7461" path="res://Overworld/Enemy/enemy.tscn" id="4_d1yfv"]
