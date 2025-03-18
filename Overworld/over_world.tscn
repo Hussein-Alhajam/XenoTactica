@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=4 uid="uid://ypkn2d7y1vfl"]
+[gd_scene load_steps=8 format=4 uid="uid://ypkn2d7y1vfl"]
 
 [ext_resource type="Script" uid="uid://c37iwmk2ywjs4" path="res://Overworld/overworld.gd" id="1_pql16"]
 [ext_resource type="TileSet" uid="uid://crfevbytpkyck" path="res://Overworld/map_tileset.tres" id="2_pql16"]
 [ext_resource type="PackedScene" uid="uid://ii0tl3weniuv" path="res://Overworld/Player/player.tscn" id="2_qck3y"]
 [ext_resource type="PackedScene" uid="uid://dbe6ybprf7461" path="res://Overworld/Enemy/enemy.tscn" id="4_d1yfv"]
 [ext_resource type="Script" uid="uid://4mbciwt5pw3w" path="res://Overworld/Transitions/battle_transition.gd" id="5_d33ih"]
+[ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/assets/sprites/gorgon_sprite.png" id="5_fdjd7"]
+[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="6_ediwe"]
 
 [node name="OverWorld" type="Node2D"]
 script = ExtResource("1_pql16")
@@ -20,17 +22,29 @@ position = Vector2(201, 114)
 [node name="Enemy" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(105, 598)
 
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("5_fdjd7")
+
 [node name="Enemy2" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(826, 207)
 move_speed = 45.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy2"]
+texture = ExtResource("6_ediwe")
 
 [node name="Enemy3" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(904, 523)
 move_speed = 200.0
 
+[node name="Sprite2D" type="Sprite2D" parent="Enemy3"]
+texture = ExtResource("6_ediwe")
+
 [node name="Enemy4" parent="." instance=ExtResource("4_d1yfv")]
 position = Vector2(1144, 995)
 move_speed = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy4"]
+texture = ExtResource("5_fdjd7")
 
 [node name="Battle_transition" type="Node2D" parent="."]
 script = ExtResource("5_d33ih")

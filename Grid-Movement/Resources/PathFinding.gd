@@ -2,9 +2,9 @@ extends Node
 class_name PathFinding
 
 @export var grid_manager: GridManager
-@export var path_visualizer: Line2D
 var astar_grid: AStarGrid2D
 var tile_size: int = 80
+var static_obstacles = []
 
 func setup_astar(tile_map: TileMapLayer):
 	if tile_map == null:
@@ -25,6 +25,7 @@ func setup_astar(tile_map: TileMapLayer):
 			var tile_data = tile_map.get_cell_tile_data(tile_position) # Layer 0 by default
 			if tile_data == null or tile_data.get_custom_data("walkable") == false:
 				astar_grid.set_point_solid(tile_position)
+				static_obstacles.append(tile_position)
 
 func is_in_bounds(tile: Vector2i) -> bool:
 	return astar_grid and astar_grid.region.has_point(tile)
@@ -45,16 +46,12 @@ func find_path(start_tile: Vector2i, target_tile: Vector2i) -> Array:
 	var path = astar_grid.get_id_path(start_tile, target_tile)
 	return path if path.size() > 1 else []
 
-func draw_path(path: Array, tile_map: TileMapLayer):
-	if path_visualizer == null:
-		print("⚠️ No PathVisualizer assigned.")
-		return
-	path_visualizer.clear_points()
-
-	for tile in path:
-		var pos = tile_map.map_to_local(tile) + Vector2(tile_size / 2, tile_size / 2)
-		path_visualizer.add_point(pos)
-
-func clear_path():
-	if path_visualizer:
-		path_visualizer.clear_points()
+func update_obstacles(occupied_tiles: Array):
+	for x in range(astar_grid.region.size.x):
+		for y in range(astar_grid.region.size.y):
+			var tile_position = Vector2i(x + astar_grid.region.position.x, y + astar_grid.region.position.y)
+			astar_grid.set_point_solid(tile_position, false)  # Make it walkable
+	for tile in static_obstacles:
+		astar_grid.set_point_solid(tile, true)
+	for tile in occupied_tiles:
+		astar_grid.set_point_solid(tile, true)

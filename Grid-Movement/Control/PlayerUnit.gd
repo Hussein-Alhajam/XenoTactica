@@ -54,6 +54,11 @@ func select_unit():
 	selected = true
 	currently_selected_unit = self
 	grid_manager.clear_highlight()
+	var occupied_tiles = []
+	for unit in get_tree().get_nodes_in_group("player_units"):
+		if unit != self:
+			var pos = grid_manager.tile_map.local_to_map(unit.global_position)
+			occupied_tiles.append(pos)
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
 	grid_manager.highlight_tiles(unit_tile, move_range)
 	print("✅ Unit selected. Showing movement range.")
@@ -76,6 +81,23 @@ func cancel_attack_selection():
 func move_to_tile(target_tile: Vector2i):
 	if not selected or is_moving:
 		return
+	var occupied_tiles = []
+	for unit in get_tree().get_nodes_in_group("player_units"):
+		if unit != self:
+			var unit_pos = grid_manager.tile_map.local_to_map(unit.global_position)
+			if unit_pos == target_tile:
+				print("❌ Tile occupied by another unit! Cannot move there.")
+				return
+			occupied_tiles.append(unit_pos)
+	for enemy in get_tree().get_nodes_in_group("enemy_units"):
+		var enemy_pos = grid_manager.tile_map.local_to_map(enemy.global_position)
+		if enemy_pos == target_tile:
+			print("❌ Tile occupied by ENEMY! Cannot move there.")
+			return
+		occupied_tiles.append(enemy_pos)
+	# ✅ Mark these tiles as obstacles in pathfinder
+	pathfinder.update_obstacles(occupied_tiles)
+	
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
 	var path = pathfinder.find_path(unit_tile, target_tile)
 	if path.size() <= 1 or path.size() > move_range + 1:
@@ -98,6 +120,13 @@ func follow_path(path: Array):
 	is_moving = false
 	selected = false
 	print("✅ Reached:", path[-1])
+	
+	var occupied_tiles = []
+	for unit in get_tree().get_nodes_in_group("player_units"):
+		var unit_pos = grid_manager.tile_map.local_to_map(unit.global_position)
+		occupied_tiles.append(unit_pos)
+	pathfinder.update_obstacles(occupied_tiles)
+	
 	# After move, show attack range
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
 	grid_manager.highlight_attack_tiles(unit_tile, attack_range)
