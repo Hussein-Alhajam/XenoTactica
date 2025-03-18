@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbe6ybprf7461"]
+[gd_scene load_steps=9 format=3 uid="uid://dbe6ybprf7461"]
 
 [ext_resource type="Script" uid="uid://ce4rp23jh71d" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
-[ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/assets/sprites/gorgon_sprite.png" id="2_anksf"]
-[ext_resource type="PackedScene" uid="uid://dxrxbvr1edhtt" path="res://Overworld/Enemy/battle_transition.tscn" id="3_6qser"]
+[ext_resource type="PackedScene" uid="uid://contxrld56mlo" path="res://Overworld/Enemy/battle_transition.tscn" id="3_6qser"]
 [ext_resource type="Script" uid="uid://dqnaoigdp4v72" path="res://Overworld/Enemy/state_machine.gd" id="3_aqlo4"]
-[ext_resource type="PackedScene" uid="uid://vvnj7urn8vgj" path="res://Overworld/Enemy/detection_zone.tscn" id="3_d8m0o"]
+[ext_resource type="PackedScene" path="res://Overworld/Enemy/detection_zone.tscn" id="3_d8m0o"]
 [ext_resource type="Script" uid="uid://bdnid4se5o5g6" path="res://Overworld/Enemy/enemy_idle.gd" id="5_0koic"]
 [ext_resource type="Script" uid="uid://dfsb0smqvyean" path="res://Overworld/Enemy/enemy_chase.gd" id="5_3cc1d"]
 [ext_resource type="Script" uid="uid://bpqgfpif05wjs" path="res://Overworld/Enemy/enemy_attack.gd" id="5_anksf"]
@@ -22,12 +21,6 @@ position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_dh6km")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, 1)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("2_anksf")
-metadata/_edit_group_ = true
-
 [node name="battle_transition" parent="." instance=ExtResource("3_6qser")]
 position = Vector2(-4, -1)
 scale = Vector2(1.64, 1.56)
@@ -36,7 +29,7 @@ collision_mask = 2
 
 [node name="detection_zone" parent="." groups=["enemy"] instance=ExtResource("3_d8m0o")]
 position = Vector2(-1, -4)
-scale = Vector2(6.42119, 2.92286)
+scale = Vector2(4.42119, 2.92286)
 metadata/_edit_group_ = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
