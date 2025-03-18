@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://6v4setyxwb17"]
+
+[ext_resource type="Script" path="res://scripts/combat_special.gd" id="1_qswqc"]
+
+[resource]
+script = ExtResource("1_qswqc")
+special_name = "Prominence Revolt"
+power = 3.0
+num_hits = 1
+hit_ratio = Array[float]([])
+attribute = "ether"
+aoe = 1
+heal_ratio = 0.0
+affect_team = false

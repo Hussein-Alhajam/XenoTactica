@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_geesb"]
 [ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://assets/sprites/cyclops_sprite.png" id="1_jwj1v"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_5qyr8"]
-[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/art_anchor_shot.tres" id="2_g8du4"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/arts/art_anchor_shot.tres" id="2_fnue1"]
 [ext_resource type="Script" path="res://scripts/combat_special.gd" id="4_ud74x"]
-[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/special_chroma_dust.tres" id="6_s80l2"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/specials/special1_chroma_dust.tres" id="6_s80l2"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_j8cum"]
 
 [resource]
@@ -21,5 +21,5 @@ defense = 20
 resistance = 10
 agility = 11
 element = "earth"
-arts_list = Array[ExtResource("1_geesb")]([ExtResource("2_g8du4"), ExtResource("2_g8du4"), ExtResource("2_g8du4")])
+arts_list = Array[ExtResource("1_geesb")]([ExtResource("2_fnue1"), ExtResource("2_fnue1"), ExtResource("2_fnue1")])
 specials_list = Array[ExtResource("4_ud74x")]([ExtResource("6_s80l2"), ExtResource("6_s80l2"), ExtResource("6_s80l2"), ExtResource("6_s80l2")])

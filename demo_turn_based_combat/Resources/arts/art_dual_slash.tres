@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://dohlchbe4hm2q"]
+
+[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_cwfh6"]
+
+[resource]
+script = ExtResource("1_cwfh6")
+art_name = "Dual Slash"
+power = 2.0
+num_hits = 2
+hit_ratio = Array[float]([0.5, 0.5])
+aoe = 1
+attribute = "physical"
+max_charge = 6
+position_effect = ""
+bonus_effect = Array[String](["evasion"])
+reaction_effect = Array[String]([])

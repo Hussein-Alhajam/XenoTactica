@@ -128,6 +128,9 @@ func get_attacked(type = "", damage = 0):
 	print(title + ": " + str(health) + "hp")
 	# need some way of letting game know if this character dies
 	# try: send signal with character reference,
+	
+	if health < 0:
+		node.kill_character()
 
 
 # simply use this function to 'deal' dmg, animate char, 
@@ -180,6 +183,8 @@ func use_art(num):
 		return damage
 
 		#EventBus.next_turn.emit() # pass the damage value
+	else: 
+		return null
 
 
 func is_max_special_charged(): # not needed?
@@ -206,7 +211,7 @@ func use_special():
 		
 		return damage
 	else: 
-		Global.battle_scene.update_action_log("Special has no charge")
+		return null
 
 
 func get_art_name(num):

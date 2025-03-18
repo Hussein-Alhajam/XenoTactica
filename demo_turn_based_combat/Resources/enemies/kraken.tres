@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://assets/sprites/kraken_sprite.png" id="1_j0r5h"]
 [ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_kc3hp"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/arts/art_anchor_shot.tres" id="2_d8tjp"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2_nusp4"]
-[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/art_anchor_shot.tres" id="2_s5nes"]
 [ext_resource type="Script" path="res://scripts/combat_special.gd" id="5_7aykm"]
-[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/special_chroma_dust.tres" id="6_oax0f"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/specials/special1_chroma_dust.tres" id="6_oax0f"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_kngfi"]
 
 [resource]
@@ -21,5 +21,5 @@ defense = 15
 resistance = 15
 agility = 23
 element = "water"
-arts_list = Array[ExtResource("1_kc3hp")]([ExtResource("2_s5nes"), ExtResource("2_s5nes"), ExtResource("2_s5nes")])
+arts_list = Array[ExtResource("1_kc3hp")]([ExtResource("2_d8tjp"), ExtResource("2_d8tjp"), ExtResource("2_d8tjp")])
 specials_list = Array[ExtResource("5_7aykm")]([ExtResource("6_oax0f"), ExtResource("6_oax0f"), ExtResource("6_oax0f"), ExtResource("6_oax0f")])

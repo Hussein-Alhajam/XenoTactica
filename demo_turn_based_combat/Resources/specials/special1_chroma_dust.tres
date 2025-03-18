@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://eppyg1f4iu7w"]
 
-[ext_resource type="Script" path="res://scripts/combat_special.gd" id="1_uk201"]
+[ext_resource type="Script" path="res://scripts/combat_special.gd" id="1_sdmul"]
 
 [resource]
-script = ExtResource("1_uk201")
+script = ExtResource("1_sdmul")
 special_name = "Chroma Dust"
 power = 1.75
 num_hits = 4

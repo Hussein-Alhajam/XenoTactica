@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Character" load_steps=13 format=3 uid="uid://04yeqcjf71k8"]
+
+[ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://assets/sprites/extracted/knight.png" id="1_bwbme"]
+[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_gmagr"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/arts/art_anchor_shot.tres" id="2_3rnu6"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="2_14rfq"]
+[ext_resource type="Resource" uid="uid://r1slhvpjfjef" path="res://resources/arts/art_double_spinning_edge.tres" id="3_k1n2b"]
+[ext_resource type="Script" path="res://scripts/combat_special.gd" id="4_ang46"]
+[ext_resource type="Resource" uid="uid://dsksdhjhbvv6e" path="res://resources/arts/art_sword_bash.tres" id="4_kmck4"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/specials/special1_chroma_dust.tres" id="8_gprjh"]
+[ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://resources/specials/special2_photon_edge.tres" id="9_es76j"]
+[ext_resource type="Resource" uid="uid://brfo106f3jjja" path="res://resources/specials/special3_lightning_buster.tres" id="10_v3dbp"]
+[ext_resource type="Resource" uid="uid://bdjn5uhfxapf2" path="res://resources/specials/special4_sacred_arrow.tres" id="11_5noe4"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="12_jrof2"]
+
+[resource]
+script = ExtResource("2_14rfq")
+title = "Knight"
+icon = ExtResource("1_bwbme")
+texture = ExtResource("1_bwbme")
+vfx_node = ExtResource("12_jrof2")
+health = 100
+strength = 30
+ether = 5
+defense = 30
+resistance = 15
+agility = 14
+element = "ice"
+arts_list = Array[ExtResource("1_gmagr")]([ExtResource("2_3rnu6"), ExtResource("3_k1n2b"), ExtResource("4_kmck4")])
+specials_list = Array[ExtResource("4_ang46")]([ExtResource("8_gprjh"), ExtResource("9_es76j"), ExtResource("10_v3dbp"), ExtResource("11_5noe4")])

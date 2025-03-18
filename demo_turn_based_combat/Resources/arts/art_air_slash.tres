@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://p4x7id2bcyf8"]
+
+[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_88jel"]
+
+[resource]
+script = ExtResource("1_88jel")
+art_name = "Air Slash"
+power = 2.6
+num_hits = 4
+hit_ratio = Array[float]([0.3, 0.1, 0.1, 0.5])
+aoe = 1
+attribute = "physical"
+max_charge = 6
+position_effect = ""
+bonus_effect = Array[String]([])
+reaction_effect = Array[String](["break"])

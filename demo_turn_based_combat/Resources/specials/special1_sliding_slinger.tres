@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://bngv2y4m3gqxe"]
+
+[ext_resource type="Script" path="res://scripts/combat_special.gd" id="1_davvv"]
+
+[resource]
+script = ExtResource("1_davvv")
+special_name = "Sliding Slinger"
+power = 3.0
+num_hits = 4
+hit_ratio = Array[float]([0.25, 0.25, 0.25, 0.25])
+attribute = "ether"
+aoe = 1
+heal_ratio = 0.0
+affect_team = false

@@ -5,6 +5,7 @@ extends Node2D
 
 # enums
 enum TurnState { NEUTRAL, ATTACKED, MOVED, SKIPPED }
+enum ActiveHud { COMBAT_OPTIONS, ARTS_SELECTION, SETTINGS_OPTIONS, TITLE_MENU }
 
 # constants
 # static variables
@@ -277,17 +278,25 @@ func use_character_art(art_num: int):
 	# use: calls the use_art() function for the 
 		# first (current turn) character in the queue
 	var damage = sorted_array[0]["character"].use_art(art_num)
-	deal_damage(damage)
-	
-	enemies.pick_random().get_attacked("", damage) # temp select enemy at random
+	if damage:
+		deal_damage(damage)
+		enemies.pick_random().get_attacked("", damage) # temp select enemy at random
+		is_arts_selected = false
+	else:
+		update_action_log("Art is not charged")
+		return
 
 
 func use_character_special():
 	# use: calls the use_special() function for the
 		# first (current turn) character in the queue 
 	var damage = sorted_array[0]["character"].use_special()
-	deal_damage(damage)
-	enemies.pick_random().get_attacked("", damage) # temp select enemy at random
+	if damage:
+		deal_damage(damage)
+		enemies.pick_random().get_attacked("", damage) # temp select enemy at random
+	else:
+		update_action_log("Special has no charge")
+		return
 
 
 func set_status(status_type: String):

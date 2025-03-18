@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://dhkv6l7y6dlqo"]
+
+[ext_resource type="Script" path="res://scripts/combat_special.gd" id="1_1jqm3"]
+
+[resource]
+script = ExtResource("1_1jqm3")
+special_name = "Frost Banish"
+power = 4.0
+num_hits = 4
+hit_ratio = Array[float]([0.3, 0.1, 0.1, 0.5])
+attribute = "physical"
+aoe = 1
+heal_ratio = 0.0
+affect_team = false

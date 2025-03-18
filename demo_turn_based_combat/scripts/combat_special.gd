@@ -9,9 +9,9 @@ class_name CombatSpecial
 @export var num_hits: int # number of hits of the art
 @export var hit_ratio: Array[float] # the % of 'damage' the i hit does
 @export var attribute: String # physical/ether 
+@export var aoe: int # nu"res://resources/arts/"m representing range of attack's effect (same as in art)
 
 @export_group("Effects")
-@export var aoe: int # num representing range of attack's effect (same as in art)
 @export var heal_ratio: float # if special heals, ratio of damage that it heals
 @export var affect_team: bool # if any effects affect the team or just self
 
