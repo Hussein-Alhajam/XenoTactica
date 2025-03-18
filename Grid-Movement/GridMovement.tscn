@@ -40,7 +40,7 @@ position = Vector2(252, 22.2855)
 
 [node name="Player" type="CharacterBody2D" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["players"]]
 visibility_layer = 4
-position = Vector2(1163, 245.14)
+position = Vector2(1070, 428.715)
 scale = Vector2(2, 2)
 script = ExtResource("5_nsv4m")
 pathfinder = NodePath("../../PathFinding")
@@ -48,19 +48,19 @@ grid_manager = NodePath("../../GridManager")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Players/Player"]
-position = Vector2(-7, 52.2872)
+position = Vector2(1, 0.500015)
 shape = SubResource("CapsuleShape2D_xu7ay")
 
 [node name="Sprite2D" type="Sprite2D" parent="Players/Player"]
-position = Vector2(-17, 41.7872)
+position = Vector2(-9, -8.49998)
 texture = ExtResource("6_4qc5x")
 flip_h = true
 
 [node name="Area2D" type="Area2D" parent="Players/Player"]
-position = Vector2(-6.5, 56.2872)
+position = Vector2(1, 5.50002)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Players/Player/Area2D"]
-position = Vector2(-1, -5.5)
+position = Vector2(0, -5.5)
 shape = SubResource("CapsuleShape2D_xu7ay")
 
 [node name="Player2" type="CharacterBody2D" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["players"]]
@@ -90,7 +90,7 @@ shape = SubResource("CapsuleShape2D_1ke5d")
 
 [node name="Player3" type="CharacterBody2D" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["players"]]
 visibility_layer = 4
-position = Vector2(661, 597)
+position = Vector2(894, 577.714)
 scale = Vector2(2, 2)
 script = ExtResource("5_nsv4m")
 pathfinder = NodePath("../../PathFinding")
