@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dyso1d2sl5dn6"]
+[gd_scene load_steps=16 format=4 uid="uid://dyso1d2sl5dn6"]
 
 [ext_resource type="Script" uid="uid://0ca101ytw440" path="res://Grid-Movement/Resources/GridManager.gd" id="1_m1wtr"]
 [ext_resource type="Script" uid="uid://xiaj8nfs36b" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="3_6ylrr"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/assets/sprites/gorgon_sprite.png" id="9_tdhi0"]
 [ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="10_nsv4m"]
 [ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://demo_turn_based_combat_/assets/sprites/kraken_sprite.png" id="11_4qc5x"]
+[ext_resource type="Script" uid="uid://cx4ld0prlcfdj" path="res://Grid-Movement/Transitions/BattleTransition.gd" id="12_nsv4m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xu7ay"]
 
@@ -132,6 +133,9 @@ texture = ExtResource("10_nsv4m")
 position = Vector2(443, 761)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("11_4qc5x")
+
+[node name="BattleTransition" type="Node2D" parent="."]
+script = ExtResource("12_nsv4m")
 
 [connection signal="input_event" from="Players/Player/Area2D" to="Players/Player" method="_on_area_2d_input_event"]
 [connection signal="input_event" from="Players/Player2/Area2D" to="Players/Player2" method="_on_area_2d_input_event"]
