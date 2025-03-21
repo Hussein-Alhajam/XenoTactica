@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Interactive_Media"
-run/main_scene="uid://dlel4enfi61n0"
-config/features=PackedStringArray("4.4", "Forward Plus")
+run/main_scene="res://StartScreen/StartMenu.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
