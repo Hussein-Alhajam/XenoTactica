@@ -1,0 +1,111 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlel4enfi61n0"]
+
+[ext_resource type="Script" uid="uid://rvfdm32bl3s1" path="res://StartScreen/Menu.gd" id="1_w847x"]
+[ext_resource type="Texture2D" uid="uid://bpfl8815m1cya" path="res://StartScreen/Assets/24.png" id="1_xejcj"]
+[ext_resource type="FontFile" uid="uid://dvnph6jytvkss" path="res://StartScreen/Assets/pokemonemerald.ttf" id="2_w847x"]
+[ext_resource type="Texture2D" uid="uid://ccppngpqntvqe" path="res://StartScreen/Assets/Button_52x14.png" id="3_x4r01"]
+[ext_resource type="Texture2D" uid="uid://gsbegj3isy4j" path="res://StartScreen/Assets/Sprites/UI_Flat_Banner03a.png" id="4_xejcj"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchor_right = 0.995
+anchor_bottom = 1.243
+offset_right = 7.99988
+offset_bottom = -218.7
+script = ExtResource("1_w847x")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1600.0
+offset_bottom = 900.0
+texture = ExtResource("1_xejcj")
+expand_mode = 5
+
+[node name="Start" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.503
+anchor_top = 0.641
+anchor_right = 0.503
+anchor_bottom = 0.641
+offset_left = -152.788
+offset_top = -41.6381
+offset_right = 89.212
+offset_bottom = 26.3619
+theme_override_fonts/font = ExtResource("2_w847x")
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "Start
+"
+icon = ExtResource("3_x4r01")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Load" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 200.0
+offset_right = 94.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_w847x")
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "Load
+"
+icon = ExtResource("3_x4r01")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Quit" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.899
+anchor_right = 0.5
+anchor_bottom = 0.899
+offset_left = -148.0
+offset_top = -59.1
+offset_right = 94.0
+offset_bottom = 8.89996
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_w847x")
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "Quit
+"
+icon = ExtResource("3_x4r01")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Banner" type="TextureRect" parent="CanvasLayer"]
+offset_left = 125.0
+offset_top = 3.0
+offset_right = 1399.0
+offset_bottom = 234.0
+texture = ExtResource("4_xejcj")
+expand_mode = 3
+stretch_mode = 6
+flip_v = true
+
+[node name="Title" type="Label" parent="CanvasLayer"]
+offset_left = 130.0
+offset_right = 1392.0
+offset_bottom = 235.0
+theme_override_colors/font_color = Color(0.262745, 0, 0.992157, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.262745, 0, 0.992157, 1)
+theme_override_fonts/font = ExtResource("2_w847x")
+theme_override_font_sizes/font_size = 150
+text = "XenoTactica"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
