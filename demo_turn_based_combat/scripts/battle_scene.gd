@@ -19,8 +19,8 @@ enum ActiveHud { COMBAT_OPTIONS, ARTS_SELECTION, SETTINGS_OPTIONS, TITLE_MENU }
 
 # public variables
 var sorted_array = [] # used for sorting the turn order (?)
-var players: Array[Character] # used to hold the player resource
-var enemies: Array[Character] # used to hold the enemy resource
+var players: Array[CharacterSprite] # used to hold the player resource
+var enemies: Array[CharacterSprite] # used to hold the enemy resource
 
 var is_arts_selected: bool = false # should make into FSM
 
@@ -44,12 +44,12 @@ func _ready():
 	
 	# loop through and append all the player resources
 	for player in player_group.get_children():
-		player.character.init()
-		players.append(player.character)
+		#player.character.init()
+		players.append(player)
 
 	for enemy in enemy_group.get_children():
-		enemy.character.init()
-		enemies.append(enemy.character)
+		#enemy.character.init()
+		enemies.append(enemy)
 		
 		var button = enemy_button.instantiate()
 		button.character = enemy.character
@@ -322,3 +322,13 @@ func select_enemy():
 	# tutorial I followed just showed these two ways
 	%EnemySelection.show()
 	%EnemySelection.get_child(0).grab_focus()
+
+
+func kill_character(character: CharacterSprite):
+	if character in players:
+		players.erase(character)
+		print(players)
+	if character in enemies:
+		enemies.erase(character)
+		print(enemies)
+	sort_and_display()
