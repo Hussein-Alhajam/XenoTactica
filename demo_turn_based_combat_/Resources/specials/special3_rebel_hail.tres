@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://yd8yp0ht6gvm"]
+
+[ext_resource type="Script" uid="uid://buw1fhwo8b3si" path="res://demo_turn_based_combat_/scripts/combat_special.gd" id="1_7qkho"]
+
+[resource]
+script = ExtResource("1_7qkho")
+special_name = "Rebel Hail"
+power = 4.5
+num_hits = 2
+hit_ratio = Array[float]([0.5, 0.5])
+attribute = "ether"
+aoe = 2
+heal_ratio = 0.0
+affect_team = false

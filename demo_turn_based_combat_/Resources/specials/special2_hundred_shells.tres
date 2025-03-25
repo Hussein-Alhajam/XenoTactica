@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://x5wlvf8iw1q"]
+
+[ext_resource type="Script" uid="uid://buw1fhwo8b3si" path="res://demo_turn_based_combat_/scripts/combat_special.gd" id="1_t4vk5"]
+
+[resource]
+script = ExtResource("1_t4vk5")
+special_name = "Hundred Shells"
+power = 4.0
+num_hits = 14
+hit_ratio = Array[float]([])
+attribute = "ether"
+aoe = 2
+heal_ratio = 0.0
+affect_team = false

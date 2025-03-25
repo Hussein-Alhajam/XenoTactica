@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://bm7tsgmg4t0bx"]
+
+[ext_resource type="Script" uid="uid://buw1fhwo8b3si" path="res://demo_turn_based_combat_/scripts/combat_special.gd" id="1_avgsx"]
+
+[resource]
+script = ExtResource("1_avgsx")
+special_name = "Full Metal Jaguar"
+power = 6.0
+num_hits = 11
+hit_ratio = Array[float]([])
+attribute = "ether"
+aoe = 1
+heal_ratio = 0.0
+affect_team = false

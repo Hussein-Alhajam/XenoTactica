@@ -13,5 +13,5 @@ func _on_pressed() -> void:
 	# owner is BattleScene as this will be a child of
 	# EnemySelection in BattleScene (EnemySelection will actually
 	# have multiple of this as children)
-	get_parent().owner.attack() 
-	get_parent().owner.pop_out()
+	get_parent().owner.deal_damage(1) 
+	#get_parent().owner.pop_out()

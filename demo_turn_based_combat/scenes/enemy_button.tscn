@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cm3x6yjwg0wql"]
 
-[ext_resource type="Script" path="res://scripts/enemy_button.gd" id="1_cupf7"]
+[ext_resource type="Script" uid="uid://bfkoyb8xraurm" path="res://scripts/enemy_button.gd" id="1_cupf7"]
 
 [node name="EnemyButton" type="Button"]
 offset_right = 8.0

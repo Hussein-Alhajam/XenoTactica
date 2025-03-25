@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://f4d2emkwp5qp"]
+
+[ext_resource type="Script" uid="uid://buw1fhwo8b3si" path="res://demo_turn_based_combat_/scripts/combat_special.gd" id="1_wlmw1"]
+
+[resource]
+script = ExtResource("1_wlmw1")
+special_name = "Violent Streak"
+power = 5.0
+num_hits = 16
+hit_ratio = Array[float]([])
+attribute = "ether"
+aoe = 2
+heal_ratio = 0.0
+affect_team = false

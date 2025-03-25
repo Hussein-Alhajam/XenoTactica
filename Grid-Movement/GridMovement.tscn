@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=4 uid="uid://dyso1d2sl5dn6"]
 
-[ext_resource type="Script" path="res://Grid-Movement/Resources/GridManager.gd" id="1_m1wtr"]
-[ext_resource type="Script" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="3_6ylrr"]
-[ext_resource type="Script" path="res://Grid-Movement/Resources/PathFinding.gd" id="4_tdhi0"]
-[ext_resource type="Script" path="res://Grid-Movement/Control/PlayerUnit.gd" id="5_nsv4m"]
+[ext_resource type="Script" uid="uid://0ca101ytw440" path="res://Grid-Movement/Resources/GridManager.gd" id="1_m1wtr"]
+[ext_resource type="Script" uid="uid://xiaj8nfs36b" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="3_6ylrr"]
+[ext_resource type="Script" uid="uid://bxjx0pdydv5qe" path="res://Grid-Movement/Resources/PathFinding.gd" id="4_tdhi0"]
+[ext_resource type="Script" uid="uid://cwpeev6tiyddp" path="res://Grid-Movement/Control/PlayerUnit.gd" id="5_nsv4m"]
 [ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://demo_turn_based_combat_/assets/sprites/extracted/knight.png" id="6_4qc5x"]
 [ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://demo_turn_based_combat_/Resources/map_tileset.tres" id="7_146pi"]
 [ext_resource type="Texture2D" uid="uid://wcu7d45wawc7" path="res://demo_turn_based_combat_/assets/sprites/extracted/wizard.png" id="7_imcac"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/assets/sprites/gorgon_sprite.png" id="9_tdhi0"]
 [ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="10_nsv4m"]
 [ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://demo_turn_based_combat_/assets/sprites/kraken_sprite.png" id="11_4qc5x"]
-[ext_resource type="Script" path="res://Grid-Movement/Transitions/BattleTransition.gd" id="12_nsv4m"]
+[ext_resource type="Script" uid="uid://cx4ld0prlcfdj" path="res://Grid-Movement/Transitions/BattleTransition.gd" id="12_nsv4m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xu7ay"]
 

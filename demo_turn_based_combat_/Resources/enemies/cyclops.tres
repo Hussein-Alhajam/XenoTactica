@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Character" load_steps=8 format=3 uid="uid://bvxs1xxvh8xti"]
+
+[ext_resource type="Script" uid="uid://bn5crr0duimys" path="res://demo_turn_based_combat_/scripts/combat_art.gd" id="1_geesb"]
+[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="1_jwj1v"]
+[ext_resource type="Script" uid="uid://biyjju5pa3lgl" path="res://demo_turn_based_combat_/scripts/character.gd" id="2_5qyr8"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://demo_turn_based_combat_/Resources/arts/art_anchor_shot.tres" id="2_fnue1"]
+[ext_resource type="Script" uid="uid://buw1fhwo8b3si" path="res://demo_turn_based_combat_/scripts/combat_special.gd" id="4_ud74x"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://demo_turn_based_combat_/Resources/specials/special1_chroma_dust.tres" id="6_s80l2"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://demo_turn_based_combat_/scenes/vfx.tscn" id="7_j8cum"]
+
+[resource]
+script = ExtResource("2_5qyr8")
+title = "Cyclops"
+icon = ExtResource("1_jwj1v")
+texture = ExtResource("1_jwj1v")
+vfx_node = ExtResource("7_j8cum")
+health = 100
+strength = 20
+ether = 5
+defense = 20
+resistance = 10
+agility = 11
+element = "earth"
+arts_list = Array[ExtResource("1_geesb")]([ExtResource("2_fnue1"), ExtResource("2_fnue1"), ExtResource("2_fnue1")])
+specials_list = Array[ExtResource("4_ud74x")]([ExtResource("6_s80l2"), ExtResource("6_s80l2"), ExtResource("6_s80l2"), ExtResource("6_s80l2")])

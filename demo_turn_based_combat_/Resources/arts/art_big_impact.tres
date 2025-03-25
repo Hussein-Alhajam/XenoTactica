@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://cinqnyvh2wrcl"]
+
+[ext_resource type="Script" uid="uid://bn5crr0duimys" path="res://demo_turn_based_combat_/scripts/combat_art.gd" id="1_qb41l"]
+
+[resource]
+script = ExtResource("1_qb41l")
+art_name = "Big Impact"
+power = 2.0
+num_hits = 1
+hit_ratio = Array[float]([])
+aoe = 2
+attribute = "physical"
+max_charge = 4
+position_effect = ""
+bonus_effect = Array[String]([])
+reaction_effect = Array[String]([])

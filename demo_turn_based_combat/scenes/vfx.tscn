@@ -263,9 +263,9 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ggx01"]
 _data = {
-"RESET": SubResource("Animation_8xkpf"),
-"haste": SubResource("Animation_ljrt3"),
-"slash": SubResource("Animation_shaeo")
+&"RESET": SubResource("Animation_8xkpf"),
+&"haste": SubResource("Animation_ljrt3"),
+&"slash": SubResource("Animation_shaeo")
 }
 
 [node name="VFX" type="Sprite2D"]

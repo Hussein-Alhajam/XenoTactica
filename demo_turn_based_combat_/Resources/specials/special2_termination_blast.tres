@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://c3o5xehvaecjx"]
+
+[ext_resource type="Script" uid="uid://buw1fhwo8b3si" path="res://demo_turn_based_combat_/scripts/combat_special.gd" id="1_cpsln"]
+
+[resource]
+script = ExtResource("1_cpsln")
+special_name = "Termination Blast"
+power = 3.5
+num_hits = 6
+hit_ratio = Array[float]([])
+attribute = "ether"
+aoe = 2
+heal_ratio = 0.0
+affect_team = false
