@@ -275,7 +275,7 @@ hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ggx01")
+&"": SubResource("AnimationLibrary_ggx01")
 }
 autoplay = "slash"
 

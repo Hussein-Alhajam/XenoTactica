@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cc5hn5aulatdh"]
+[gd_scene load_steps=20 format=4 uid="uid://cc5hn5aulatdh"]
 
 [ext_resource type="Script" uid="uid://bc13gvaja1f21" path="res://demo_turn_based_combat_/scripts/Battling-Scene.gd" id="1_c21e3"]
 [ext_resource type="Script" uid="uid://cop3jcoh3rbui" path="res://demo_turn_based_combat_/scripts/attack_button.gd" id="2_brajv"]
@@ -9,17 +9,10 @@
 [ext_resource type="Script" uid="uid://dg3v8fv1vgk6n" path="res://demo_turn_based_combat_/scripts/flee_button.gd" id="5_0bm3q"]
 [ext_resource type="Script" uid="uid://bxjx0pdydv5qe" path="res://Grid-Movement/Resources/PathFinding.gd" id="5_imvtc"]
 [ext_resource type="Script" uid="uid://bk7o462jleamv" path="res://demo_turn_based_combat_/scripts/combat_option_list.gd" id="6_paiac"]
-[ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://demo_turn_based_combat_/Resources/enemies/gorgon.tres" id="6_wea8f"]
-[ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://demo_turn_based_combat_/Resources/enemies/cyclops.tres" id="7_6ucfx"]
-[ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://demo_turn_based_combat_/Resources/enemies/kraken.tres" id="8_qg17s"]
 [ext_resource type="PackedScene" uid="uid://cexk00ops265y" path="res://Grid-Movement/Control/Knight.tscn" id="10_imvtc"]
 [ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://demo_turn_based_combat_/Resources/map_tileset.tres" id="12_hp3cp"]
 [ext_resource type="PackedScene" uid="uid://b8my6uh6yy42g" path="res://Grid-Movement/Control/Wizard.tscn" id="12_imvtc"]
 [ext_resource type="PackedScene" uid="uid://6v1caaexo5ls" path="res://Grid-Movement/Control/Rogue.tscn" id="13_80kvl"]
-[ext_resource type="Script" uid="uid://bneaei84ocs66" path="res://Grid-Movement/Control/EnemyUnit.gd" id="14_fwk0q"]
-[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="16_g6t2v"]
-[ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/assets/sprites/gorgon_sprite.png" id="18_icd8g"]
-[ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://demo_turn_based_combat_/assets/sprites/kraken_sprite.png" id="20_crx2k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkmgs"]
 bg_color = Color(8.85606e-06, 0.279961, 0.7771, 1)
@@ -38,13 +31,9 @@ bg_color = Color(0.24548, 0.467054, 0.202911, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sryic"]
 bg_color = Color(0, 0, 0, 0.513726)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g6t2v"]
-
-[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline", "combat_options")]
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("timeline", "combat_options")]
 scale = Vector2(1, 0.98719)
 script = ExtResource("1_c21e3")
-player_group = NodePath("Players")
-enemy_group = NodePath("Enemies")
 timeline = NodePath("UI/Timeline")
 combat_options = NodePath("UI/CombatOptions")
 enemy_button = ExtResource("2_q2h2f")
@@ -350,59 +339,43 @@ position = Vector2(252, 22.2855)
 
 [node name="Player" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") instance=ExtResource("10_imvtc")]
 position = Vector2(1144, 187.401)
+scale = Vector2(2, 2)
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../Gridmanager")
+
+[node name="Sprite2D" parent="Players/Player" index="1"]
+script = null
 
 [node name="Player2" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") instance=ExtResource("12_imvtc")]
 position = Vector2(1148, 663.499)
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../Gridmanager")
 
+[node name="Sprite2D" parent="Players/Player2" index="1"]
+script = null
+
 [node name="Player3" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") instance=ExtResource("13_80kvl")]
 position = Vector2(992, 426.463)
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../Gridmanager")
 
+[node name="Sprite2D" parent="Players/Player3" index="1"]
+script = null
+
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(-165, -78)
 
-[node name="Enemy" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
-position = Vector2(372, 365.685)
-script = ExtResource("14_fwk0q")
-character = ExtResource("7_6ucfx")
+[node name="Enemy" type="Sprite2D" parent="Enemies" groups=["enemy_units"]]
+position = Vector2(-6.10352e-05, 0)
+scale = Vector2(1, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy"]
-texture = ExtResource("16_g6t2v")
-flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy"]
-shape = SubResource("CapsuleShape2D_g6t2v")
-
-[node name="Enemy2" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
+[node name="Enemy2" type="Sprite2D" parent="Enemies" groups=["enemy_units"]]
 position = Vector2(767, 512.567)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("14_fwk0q")
-character = ExtResource("6_wea8f")
 
-[node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy2"]
-texture = ExtResource("18_icd8g")
-flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy2"]
-shape = SubResource("CapsuleShape2D_g6t2v")
-
-[node name="Enemy3" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
+[node name="Enemy3" type="Sprite2D" parent="Enemies" groups=["enemy_units"]]
 position = Vector2(590, 676.669)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("14_fwk0q")
-character = ExtResource("8_qg17s")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy3"]
-texture = ExtResource("20_crx2k")
-flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy3"]
-shape = SubResource("CapsuleShape2D_g6t2v")
 
 [connection signal="pressed" from="UI/CombatOptions/AttackButton" to="UI/CombatOptions/AttackButton" method="_on_pressed"]
 [connection signal="pressed" from="UI/CombatOptions/HasteButton" to="UI/CombatOptions/HasteButton" method="_on_pressed"]

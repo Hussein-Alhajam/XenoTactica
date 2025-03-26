@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8my6uh6yy42g"]
+
+[ext_resource type="Script" uid="uid://ddp0i3vvoir7a" path="res://Grid-Movement/Control/PlayerUnitBattle.gd" id="1_55hc3"]
+[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://demo_turn_based_combat_/Resources/players/wizard.tres" id="2_7vq0a"]
+[ext_resource type="Texture2D" uid="uid://wcu7d45wawc7" path="res://demo_turn_based_combat_/assets/sprites/extracted/wizard.png" id="2_55hc3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ke5d"]
+
+[node name="Player2" type="CharacterBody2D" groups=["player_units"]]
+visibility_layer = 4
+scale = Vector2(2, 2)
+script = ExtResource("1_55hc3")
+character = ExtResource("2_7vq0a")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.000244141)
+shape = SubResource("CapsuleShape2D_1ke5d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -7.5)
+texture = ExtResource("2_55hc3")
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -0.000244141)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_1ke5d")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

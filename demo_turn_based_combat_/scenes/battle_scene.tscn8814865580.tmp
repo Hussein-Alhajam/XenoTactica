@@ -1,6 +1,7 @@
 [gd_scene load_steps=28 format=4 uid="uid://cc5hn5aulatdh"]
 
-[ext_resource type="Script" uid="uid://bc13gvaja1f21" path="res://demo_turn_based_combat_/scripts/Battling-Scene.gd" id="1_c21e3"]
+[ext_resource type="Script" uid="uid://q0vspagtdfli" path="res://demo_turn_based_combat_/scripts/battle_scene.gd" id="1_k7x86"]
+[ext_resource type="Script" uid="uid://cm6ckpj83f6y1" path="res://demo_turn_based_combat_/scripts/character_sprite.gd" id="1_vbn1p"]
 [ext_resource type="Script" uid="uid://cop3jcoh3rbui" path="res://demo_turn_based_combat_/scripts/attack_button.gd" id="2_brajv"]
 [ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://demo_turn_based_combat_/scenes/enemy_button.tscn" id="2_q2h2f"]
 [ext_resource type="Script" uid="uid://0ca101ytw440" path="res://Grid-Movement/Resources/GridManager.gd" id="4_c21e3"]
@@ -16,7 +17,6 @@
 [ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://demo_turn_based_combat_/Resources/map_tileset.tres" id="12_hp3cp"]
 [ext_resource type="PackedScene" uid="uid://b8my6uh6yy42g" path="res://Grid-Movement/Control/Wizard.tscn" id="12_imvtc"]
 [ext_resource type="PackedScene" uid="uid://6v1caaexo5ls" path="res://Grid-Movement/Control/Rogue.tscn" id="13_80kvl"]
-[ext_resource type="Script" uid="uid://bneaei84ocs66" path="res://Grid-Movement/Control/EnemyUnit.gd" id="14_fwk0q"]
 [ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="16_g6t2v"]
 [ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/assets/sprites/gorgon_sprite.png" id="18_icd8g"]
 [ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://demo_turn_based_combat_/assets/sprites/kraken_sprite.png" id="20_crx2k"]
@@ -38,13 +38,11 @@ bg_color = Color(0.24548, 0.467054, 0.202911, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sryic"]
 bg_color = Color(0, 0, 0, 0.513726)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g6t2v"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_f87od"]
 
-[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline", "combat_options")]
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("timeline", "combat_options")]
 scale = Vector2(1, 0.98719)
-script = ExtResource("1_c21e3")
-player_group = NodePath("Players")
-enemy_group = NodePath("Enemies")
+script = ExtResource("1_k7x86")
 timeline = NodePath("UI/Timeline")
 combat_options = NodePath("UI/CombatOptions")
 enemy_button = ExtResource("2_q2h2f")
@@ -350,6 +348,7 @@ position = Vector2(252, 22.2855)
 
 [node name="Player" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") instance=ExtResource("10_imvtc")]
 position = Vector2(1144, 187.401)
+scale = Vector2(2, 2)
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../Gridmanager")
 
@@ -366,48 +365,51 @@ grid_manager = NodePath("../../Gridmanager")
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(-165, -78)
 
-[node name="Enemy" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
-position = Vector2(372, 365.685)
-script = ExtResource("14_fwk0q")
+[node name="Enemy" type="CharacterBody2D" parent="Enemies"]
+position = Vector2(339, 357.581)
+scale = Vector2(1, 1)
+script = ExtResource("1_vbn1p")
 character = ExtResource("7_6ucfx")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy"]
+position = Vector2(2.00012, 1.01309)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("16_g6t2v")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy"]
-shape = SubResource("CapsuleShape2D_g6t2v")
+shape = SubResource("CircleShape2D_f87od")
 
-[node name="Enemy2" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
+[node name="Enemy2" type="CharacterBody2D" parent="Enemies"]
 position = Vector2(767, 512.567)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("14_fwk0q")
+script = ExtResource("1_vbn1p")
 character = ExtResource("6_wea8f")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy2"]
+position = Vector2(3.05176e-05, 0)
+scale = Vector2(1, 1)
 texture = ExtResource("18_icd8g")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy2"]
-shape = SubResource("CapsuleShape2D_g6t2v")
+shape = SubResource("CircleShape2D_f87od")
 
-[node name="Enemy3" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
+[node name="Enemy3" type="CharacterBody2D" parent="Enemies"]
 position = Vector2(590, 676.669)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("14_fwk0q")
+script = ExtResource("1_vbn1p")
 character = ExtResource("8_qg17s")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy3"]
+position = Vector2(-2.66663, -5.40254)
+scale = Vector2(1, 1)
 texture = ExtResource("20_crx2k")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy3"]
-shape = SubResource("CapsuleShape2D_g6t2v")
+shape = SubResource("CircleShape2D_f87od")
 
 [connection signal="pressed" from="UI/CombatOptions/AttackButton" to="UI/CombatOptions/AttackButton" method="_on_pressed"]
 [connection signal="pressed" from="UI/CombatOptions/HasteButton" to="UI/CombatOptions/HasteButton" method="_on_pressed"]
 [connection signal="pressed" from="UI/CombatOptions/FleeButton" to="UI/CombatOptions/FleeButton" method="_on_pressed"]
-
-[editable path="Players/Player"]
-[editable path="Players/Player2"]
-[editable path="Players/Player3"]

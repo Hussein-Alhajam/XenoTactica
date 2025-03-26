@@ -19,8 +19,8 @@ enum ActiveHud { COMBAT_OPTIONS, ARTS_SELECTION, SETTINGS_OPTIONS, TITLE_MENU }
 
 # public variables
 var sorted_array = [] # used for sorting the turn order (?)
-var players: Array[CharacterSprite] # used to hold the player resource
-var enemies: Array[CharacterSprite] # used to hold the enemy resource
+var players: Array[CharacterBody2D] # used to hold the player resource
+var enemies: Array[CharacterBody2D] # used to hold the enemy resource
 
 var is_arts_selected: bool = false # should make into FSM
 
@@ -234,7 +234,7 @@ func next_turn():
 	# e.g., char does animation for attack, but doesn't actually 
 	# 'hit', then player/enemy selects a char to be attacked
 	
-	give_enemy_turn()
+	#give_enemy_turn()
 
 
 # functions to do with attacking / turn actions

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Character" load_steps=13 format=3 uid="uid://cekiqrspd7cac"]
+[gd_resource type="Resource" script_class="Character" load_steps=12 format=3 uid="uid://cekiqrspd7cac"]
 
 [ext_resource type="Script" uid="uid://bn5crr0duimys" path="res://demo_turn_based_combat_/scripts/combat_art.gd" id="1_xvdkp"]
 [ext_resource type="Texture2D" uid="uid://dp136ntapoxt3" path="res://demo_turn_based_combat_/assets/sprites/extracted/rogue.png" id="1_y1cj3"]
@@ -11,14 +11,12 @@
 [ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://demo_turn_based_combat_/Resources/specials/special2_photon_edge.tres" id="9_nrt3b"]
 [ext_resource type="Resource" uid="uid://brfo106f3jjja" path="res://demo_turn_based_combat_/Resources/specials/special3_lightning_buster.tres" id="10_ymhl0"]
 [ext_resource type="Resource" uid="uid://bdjn5uhfxapf2" path="res://demo_turn_based_combat_/Resources/specials/special4_sacred_arrow.tres" id="11_8xkjy"]
-[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://demo_turn_based_combat_/scenes/vfx.tscn" id="12_pksxv"]
 
 [resource]
 script = ExtResource("2_7nnhs")
 title = "Rogue"
 icon = ExtResource("1_y1cj3")
 texture = ExtResource("1_y1cj3")
-vfx_node = ExtResource("12_pksxv")
 health = 90
 strength = 20
 ether = 10

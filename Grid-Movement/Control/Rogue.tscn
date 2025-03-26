@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://6v1caaexo5ls"]
+
+[ext_resource type="Script" uid="uid://ddp0i3vvoir7a" path="res://Grid-Movement/Control/PlayerUnitBattle.gd" id="1_m25ki"]
+[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://demo_turn_based_combat_/Resources/players/rogue.tres" id="2_8hic2"]
+[ext_resource type="Texture2D" uid="uid://dp136ntapoxt3" path="res://demo_turn_based_combat_/assets/sprites/extracted/rogue.png" id="2_m25ki"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_53fq6"]
+
+[node name="Player3" type="CharacterBody2D" groups=["player_units"]]
+visibility_layer = 4
+scale = Vector2(2, 2)
+script = ExtResource("1_m25ki")
+character = ExtResource("2_8hic2")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_53fq6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6.5, -9)
+texture = ExtResource("2_m25ki")
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -3.33786e-06)
+shape = SubResource("CapsuleShape2D_53fq6")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
