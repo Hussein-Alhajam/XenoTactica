@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name PlayerUnitBattle
 
+var vfx_node: PackedScene = preload("res://demo_turn_based_combat_/scenes/vfx.tscn")
 @export var character: Character  # Your custom Character resource
 @export var pathfinder: PathFinding
 @export var grid_manager: GridManager
@@ -38,8 +39,6 @@ var selected = false
 var is_moving = false
 var is_attacking = false
 static var currently_selected_unit: PlayerUnitBattle = null
-
-var vfx_node: PackedScene = preload("res://demo_turn_based_combat_/scenes/vfx.tscn")
 
 func _ready():
 	if character:
@@ -167,7 +166,7 @@ func pop_out():
 	queue.append(queue[-1] + speed * status)
 
 func get_attacked(type = "", damage = 0):
-	add_vfx(type)
+	add_vfx("slash")
 	health -= damage
 	print(character_name + ": " + str(health) + "hp")
 	if health < 0:
@@ -237,9 +236,4 @@ func add_vfx(type = ""):
 	var vfx = vfx_node.instantiate()
 	add_child(vfx)
 	if type != "":
-		var anim_player = vfx.get_node_or_null("AnimationPlayer")
-		if anim_player:
-			anim_player.play(type)
-	var audio = vfx.get_node_or_null("AudioStreamPlayer")
-	if audio:
-		audio.play()
+		vfx.find_child("AnimationPlayer").play(type)

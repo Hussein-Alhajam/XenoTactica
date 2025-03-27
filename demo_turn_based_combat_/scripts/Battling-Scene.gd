@@ -89,11 +89,26 @@ func update_action_log(message: String):
 
 func sort_combined_queue():
 	var combined = []
-	for unit in get_tree().get_nodes_in_group("player_units") + get_tree().get_nodes_in_group("enemy_units"):
-		for i in unit.queue:
-			combined.append({ "character": unit, "time": i })
+
+	print("📦 Collecting player units:")
+	for player in get_tree().get_nodes_in_group("player_units"):
+		print("   -", player.name, "Queue:", player.queue)
+		for time in player.queue:
+			combined.append({ "character": player, "time": time })
+
+	print("📦 Collecting enemy units:")
+	for enemy in get_tree().get_nodes_in_group("enemy_units"):
+		print("   -", enemy.name, "Queue:", enemy.queue)
+		for time in enemy.queue:
+			combined.append({ "character": enemy, "time": time })
+
 	sorted_array = combined
 	sorted_array.sort_custom(sort_by_time)
+
+	print("🧩 Sorted turn order:")
+	for entry in sorted_array:
+		print("   •", entry["character"].name, "| time:", entry["time"])
+
 
 func sort_by_time(a, b):
 	return a["time"] < b["time"]
@@ -102,7 +117,7 @@ func update_timeline():
 	var index = 0
 	for slot in timeline.get_children():
 		if index < sorted_array.size():
-			slot.find_child("TextureRect").texture = sorted_array[index]["character"].icon
+			slot.find_child("TextureRect").texture = sorted_array[index]["character"].character.icon
 			index += 1
 
 func sort_and_display():
