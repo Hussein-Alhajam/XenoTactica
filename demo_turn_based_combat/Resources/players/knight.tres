@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Character" load_steps=13 format=3 uid="uid://04yeqcjf71k8"]
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://04yeqcjf71k8"]
 
 [ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://assets/sprites/extracted/knight.png" id="1_bwbme"]
-[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_gmagr"]
+[ext_resource type="Script" path="res://scripts/resources/combat_art.gd" id="1_gmagr"]
 [ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/arts/art_anchor_shot.tres" id="2_3rnu6"]
-[ext_resource type="Script" path="res://scripts/character.gd" id="2_14rfq"]
+[ext_resource type="Script" path="res://scripts/resources/character_stats.gd" id="2_14rfq"]
 [ext_resource type="Resource" uid="uid://r1slhvpjfjef" path="res://resources/arts/art_double_spinning_edge.tres" id="3_k1n2b"]
-[ext_resource type="Script" path="res://scripts/combat_special.gd" id="4_ang46"]
+[ext_resource type="Script" path="res://scripts/resources/combat_special.gd" id="4_ang46"]
 [ext_resource type="Resource" uid="uid://dsksdhjhbvv6e" path="res://resources/arts/art_sword_bash.tres" id="4_kmck4"]
 [ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/specials/special1_chroma_dust.tres" id="8_gprjh"]
 [ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://resources/specials/special2_photon_edge.tres" id="9_es76j"]
@@ -15,11 +15,11 @@
 
 [resource]
 script = ExtResource("2_14rfq")
-title = "Knight"
+character_name = "Knight"
 icon = ExtResource("1_bwbme")
 texture = ExtResource("1_bwbme")
 vfx_node = ExtResource("12_jrof2")
-health = 100
+health = 500
 strength = 30
 ether = 5
 defense = 30

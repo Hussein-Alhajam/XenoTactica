@@ -5,7 +5,7 @@ extends Node2D
 
 # enums
 enum TurnState { NEUTRAL, ATTACKED, MOVED, SKIPPED }
-enum ActiveHud { COMBAT_OPTIONS, ARTS_SELECTION, SETTINGS_OPTIONS, TITLE_MENU }
+enum ActiveHud { COMBAT, SETTINGS_OPTIONS, TITLE_MENU }
 
 # constants
 # static variables
@@ -14,17 +14,19 @@ enum ActiveHud { COMBAT_OPTIONS, ARTS_SELECTION, SETTINGS_OPTIONS, TITLE_MENU }
 @export var player_group: Node2D # hold the 'Players' node
 @export var enemy_group: Node2D # hold the 'Enemies' node
 @export var timeline: HBoxContainer # hold the "Timeline' node
+
 @export var combat_options: VBoxContainer # hold the 'CombatOptions' node
 @export var enemy_button: PackedScene # variable to hold "EnemyButton'
 
 # public variables
 var sorted_array = [] # used for sorting the turn order (?)
-var players: Array[CharacterSprite] # used to hold the player resource
-var enemies: Array[CharacterSprite] # used to hold the enemy resource
+var players: Array[Character] # used to hold Player 'scene' nodes
+var enemies: Array[Character] # used to hold Enemy 'scene' nodes
 
 var is_arts_selected: bool = false # should make into FSM
 
 var turn_state = TurnState.NEUTRAL
+var active_hud = ActiveHud.COMBAT
 
 # temp variable for the temp controls UI
 var ui_controls := {}
@@ -51,9 +53,9 @@ func _ready():
 		#enemy.character.init()
 		enemies.append(enemy)
 		
-		var button = enemy_button.instantiate()
-		button.character = enemy.character
-		%EnemySelection.add_child(button)
+		#var button = enemy_button.instantiate()
+		#button.character = enemy.character
+		#%EnemySelection.add_child(button)
 
 	sort_and_display() 
 	
@@ -173,7 +175,6 @@ func sort_combined_queue():
 	# used gdscript's built in 'sort_custom' function for lists
 	# and pass it our custom sort defined below
 	sorted_array.sort_custom(sort_by_time)
-	#print(sorted_array)
 
 
 func sort_by_time(a, b):
@@ -324,7 +325,7 @@ func select_enemy():
 	%EnemySelection.get_child(0).grab_focus()
 
 
-func kill_character(character: CharacterSprite):
+func kill_character(character: Character):
 	if character in players:
 		players.erase(character)
 		print(players)

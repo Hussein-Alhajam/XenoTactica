@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cguk7p8fnv2ra"]
+
+[ext_resource type="Script" path="res://scripts/character/character.gd" id="1_p5lt1"]
+[ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://assets/sprites/extracted/knight.png" id="2_5ttit"]
+[ext_resource type="PackedScene" uid="uid://dis4k61okmel3" path="res://scenes/health_bar.tscn" id="3_bnxmb"]
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_p5lt1")
+
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_5ttit")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_bnxmb")]
+offset_left = -33.0
+offset_top = 40.0
+offset_right = 34.0
+offset_bottom = 47.0
+
+[node name="DamageNumberOrigin" type="Node2D" parent="."]
+position = Vector2(0, -32)

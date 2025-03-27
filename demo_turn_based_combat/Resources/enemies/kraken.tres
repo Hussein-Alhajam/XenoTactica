@@ -1,20 +1,20 @@
-[gd_resource type="Resource" script_class="Character" load_steps=8 format=3 uid="uid://c4uy71mwhxin"]
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=8 format=3 uid="uid://c4uy71mwhxin"]
 
 [ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://assets/sprites/kraken_sprite.png" id="1_j0r5h"]
-[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_kc3hp"]
+[ext_resource type="Script" path="res://scripts/resources/combat_art.gd" id="1_kc3hp"]
 [ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/arts/art_anchor_shot.tres" id="2_d8tjp"]
-[ext_resource type="Script" path="res://scripts/character.gd" id="2_nusp4"]
-[ext_resource type="Script" path="res://scripts/combat_special.gd" id="5_7aykm"]
+[ext_resource type="Script" path="res://scripts/resources/character_stats.gd" id="2_nusp4"]
+[ext_resource type="Script" path="res://scripts/resources/combat_special.gd" id="5_7aykm"]
 [ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/specials/special1_chroma_dust.tres" id="6_oax0f"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_kngfi"]
 
 [resource]
 script = ExtResource("2_nusp4")
-title = "Kraken"
+character_name = "Kraken"
 icon = ExtResource("1_j0r5h")
 texture = ExtResource("1_j0r5h")
 vfx_node = ExtResource("7_kngfi")
-health = 90
+health = 350
 strength = 15
 ether = 15
 defense = 15

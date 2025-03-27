@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://p4x7id2bcyf8"]
 
-[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_88jel"]
+[ext_resource type="Script" path="res://scripts/resources/combat_art.gd" id="1_88jel"]
 
 [resource]
 script = ExtResource("1_88jel")

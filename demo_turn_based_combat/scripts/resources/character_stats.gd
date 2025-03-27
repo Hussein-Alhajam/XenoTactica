@@ -1,9 +1,9 @@
 extends Resource
 
-class_name Character # name this CharacterStats?
+class_name CharacterStats # name this CharacterStats?
 
 # export variables
-@export var title: String # name of character (name is taken by gdscript)
+@export var character_name: String # name of character (name is taken by gdscript)
 @export_group("Textures and Sound")
 @export var icon: Texture2D # sprite used for the character's portrait
 @export var texture: Texture2D # sprite used for the character
@@ -48,18 +48,18 @@ var special_charge: int = 0
 var battle_scene: Node2D # used to store reference of main battle_scene Scene
 
 
-func init():
-	#print(title + " initialized")
-	# Ensure each character gets a unique copy of the arts
-	var new_arts_list: Array[CombatArt] = []
-	for art in arts_list:
-		new_arts_list.append(art.duplicate(true))  # Deep copy
-	arts_list = new_arts_list
-	# same for specials
-	var new_specials_list: Array[CombatSpecial] = []
-	for special in specials_list:
-		new_specials_list.append(special.duplicate(true))
-	specials_list = new_specials_list
+#func init():
+	##print(title + " initialized")
+	## Ensure each character gets a unique copy of the arts
+	#var new_arts_list: Array[CombatArt] = []
+	#for art in arts_list:
+		#new_arts_list.append(art.duplicate(true))  # Deep copy
+	#arts_list = new_arts_list
+	## same for specials
+	#var new_specials_list: Array[CombatSpecial] = []
+	#for special in specials_list:
+		#new_specials_list.append(special.duplicate(true))
+	#specials_list = new_specials_list
 
 
 func queue_reset():

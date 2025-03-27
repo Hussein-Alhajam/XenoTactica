@@ -1,20 +1,20 @@
-[gd_resource type="Resource" script_class="Character" load_steps=8 format=3 uid="uid://7ih7gc3t84wx"]
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=8 format=3 uid="uid://7ih7gc3t84wx"]
 
 [ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://assets/sprites/gorgon_sprite.png" id="1_0x4qp"]
-[ext_resource type="Script" path="res://scripts/combat_art.gd" id="1_j0o6k"]
+[ext_resource type="Script" path="res://scripts/resources/combat_art.gd" id="1_j0o6k"]
 [ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://resources/arts/art_anchor_shot.tres" id="2_epfg1"]
-[ext_resource type="Script" path="res://scripts/character.gd" id="2_naynh"]
-[ext_resource type="Script" path="res://scripts/combat_special.gd" id="5_3flk4"]
+[ext_resource type="Script" path="res://scripts/resources/character_stats.gd" id="2_naynh"]
+[ext_resource type="Script" path="res://scripts/resources/combat_special.gd" id="5_3flk4"]
 [ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://resources/specials/special1_chroma_dust.tres" id="6_a7hpk"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://scenes/vfx.tscn" id="7_cude1"]
 
 [resource]
 script = ExtResource("2_naynh")
-title = "Gorgon"
+character_name = "Gorgon"
 icon = ExtResource("1_0x4qp")
 texture = ExtResource("1_0x4qp")
 vfx_node = ExtResource("7_cude1")
-health = 80
+health = 300
 strength = 10
 ether = 20
 defense = 10

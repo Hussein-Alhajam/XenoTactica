@@ -1,3 +1,4 @@
+# redundant class from tutorial
 extends Button
 
 # variable to hold a Character
