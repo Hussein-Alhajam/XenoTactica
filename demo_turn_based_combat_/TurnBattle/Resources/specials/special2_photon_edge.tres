@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://cio5r7hrf00u8"]
+
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/combat_special.gd" id="1_s4qai"]
+
+[resource]
+script = ExtResource("1_s4qai")
+special_name = "Photon Edge"
+power = 2.25
+num_hits = 6
+hit_ratio = Array[float]([0.125, 0.125, 0.125, 0.125, 0.125, 0.125])
+attribute = "ether"
+aoe = 3
+heal_ratio = 0.0
+affect_team = false

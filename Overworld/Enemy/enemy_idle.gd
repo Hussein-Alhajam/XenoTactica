@@ -4,7 +4,7 @@ class_name Enemy_Idle
 @export var enemy: CharacterBody2D
 @export var move_speed := 55.0
 @onready var  tile_map = $"../Map"
-@onready var detection_zone: Area2D = $"../../detection_zone"  # Reference to the detection zone
+@onready var detection_zone: Area2D = $"../../detection_zone"
 
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 var move_direction: Vector2

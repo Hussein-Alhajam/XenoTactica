@@ -1,0 +1,3 @@
+[gd_resource type="Resource" script_class="Character" load_steps=13 format=3 uid="uid://nvgog6nm6iwk"]
+
+[ext_resource type="Texture2D" uid="uid://wcu7d45wawc7" path="res://assets/sprites/extracted/wizard.png" id="1_2bg7t"]

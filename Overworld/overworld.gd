@@ -5,7 +5,7 @@ func _ready():
 	if saved_position != Vector2.ZERO:
 		restore_player_position(saved_position)
 	else:
-		print("🔹 No saved position found. Using default spawn.")
+		print("No saved position found. Using default spawn.")
 
 func restore_player_position(position: Vector2):
 	if has_node("Player"):

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://ch1fi2qcioljs"]
+
+[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/combat_art.gd" id="1_l2r5i"]
+
+[resource]
+script = ExtResource("1_l2r5i")
+art_name = "Screw Edge"
+power = 2.4
+num_hits = 4
+hit_ratio = Array[float]([0.2, 0.2, 0.2, 0.4])
+aoe = 2
+attribute = "physical"
+max_charge = 5
+position_effect = ""
+bonus_effect = Array[String]([])
+reaction_effect = Array[String]([])

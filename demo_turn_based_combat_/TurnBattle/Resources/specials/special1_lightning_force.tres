@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://b8pad6shrefq1"]
+
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/combat_special.gd" id="1_6547t"]
+
+[resource]
+script = ExtResource("1_6547t")
+special_name = "Lightning Force"
+power = 3.5
+num_hits = 1
+hit_ratio = Array[float]([])
+attribute = "ether"
+aoe = 1
+heal_ratio = 0.0
+affect_team = false

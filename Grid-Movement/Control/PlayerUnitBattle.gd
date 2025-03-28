@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name PlayerUnitBattle
 
-var vfx_node: PackedScene = preload("res://demo_turn_based_combat_/scenes/vfx.tscn")
+var vfx_node: PackedScene = preload("res://demo_turn_based_combat_/TurnBattle/scenes/vfx.tscn")
 @export var character: Character  # Your custom Character resource
 @export var pathfinder: PathFinding
 @export var grid_manager: GridManager

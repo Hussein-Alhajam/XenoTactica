@@ -25,7 +25,6 @@ func _ready():
 	if pathfinder == null:
 		pathfinder = get_tree().get_first_node_in_group("pathfinder")
 
-	# ✅ Dynamically connect Area2D input event
 	if $Area2D:
 		$Area2D.connect("input_event", Callable(self, "_on_area2d_input_event"))
 
@@ -104,7 +103,7 @@ func move_to_tile(target_tile: Vector2i):
 			print("❌ Tile occupied by ENEMY! Cannot move there.")
 			return
 		occupied_tiles.append(enemy_pos)
-	# ✅ Mark these tiles as obstacles in pathfinder
+	# Mark these tiles as obstacles in pathfinder
 	pathfinder.update_obstacles(occupied_tiles)
 	
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)

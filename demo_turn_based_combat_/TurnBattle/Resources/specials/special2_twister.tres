@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://dga4f57rfj0qi"]
+
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/combat_special.gd" id="1_jhdlr"]
+
+[resource]
+script = ExtResource("1_jhdlr")
+special_name = "Twister"
+power = 3.5
+num_hits = 2
+hit_ratio = Array[float]([0.4, 0.6])
+attribute = "physical"
+aoe = 1
+heal_ratio = 0.0
+affect_team = false

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://cekiqrspd7cac"]
+
+[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/combat_art.gd" id="1_xvdkp"]
+[ext_resource type="Texture2D" uid="uid://dp136ntapoxt3" path="res://demo_turn_based_combat_/TurnBattle/assets/sprites/extracted/rogue.png" id="1_y1cj3"]
+[ext_resource type="Script" uid="uid://danuq4w3l3y1c" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/character_stats.gd" id="2_7nnhs"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://demo_turn_based_combat_/TurnBattle/Resources/arts/art_anchor_shot.tres" id="2_jnx8n"]
+[ext_resource type="Resource" uid="uid://r1slhvpjfjef" path="res://demo_turn_based_combat_/TurnBattle/Resources/arts/art_double_spinning_edge.tres" id="3_wqogs"]
+[ext_resource type="Resource" uid="uid://dsksdhjhbvv6e" path="res://demo_turn_based_combat_/TurnBattle/Resources/arts/art_sword_bash.tres" id="4_1s3rl"]
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/combat_special.gd" id="7_882rh"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://demo_turn_based_combat_/TurnBattle/Resources/specials/special1_chroma_dust.tres" id="8_7ktr7"]
+[ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://demo_turn_based_combat_/TurnBattle/Resources/specials/special2_photon_edge.tres" id="9_nrt3b"]
+[ext_resource type="Resource" uid="uid://brfo106f3jjja" path="res://demo_turn_based_combat_/TurnBattle/Resources/specials/special3_lightning_buster.tres" id="10_ymhl0"]
+[ext_resource type="Resource" uid="uid://bdjn5uhfxapf2" path="res://demo_turn_based_combat_/TurnBattle/Resources/specials/special4_sacred_arrow.tres" id="11_8xkjy"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://demo_turn_based_combat_/TurnBattle/scenes/vfx.tscn" id="12_pksxv"]
+
+[resource]
+script = ExtResource("2_7nnhs")
+character_name = "Rogue"
+icon = ExtResource("1_y1cj3")
+texture = ExtResource("1_y1cj3")
+vfx_node = ExtResource("12_pksxv")
+health = 400
+strength = 20
+ether = 10
+defense = 20
+resistance = 15
+agility = 29
+element = "dark"
+arts_list = Array[ExtResource("1_xvdkp")]([ExtResource("2_jnx8n"), ExtResource("3_wqogs"), ExtResource("4_1s3rl")])
+specials_list = Array[ExtResource("7_882rh")]([ExtResource("8_7ktr7"), ExtResource("9_nrt3b"), ExtResource("10_ymhl0"), ExtResource("11_8xkjy")])

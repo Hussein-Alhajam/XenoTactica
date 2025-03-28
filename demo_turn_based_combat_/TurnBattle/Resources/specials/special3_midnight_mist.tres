@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://dk0n5jghgm11v"]
+
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/combat_special.gd" id="1_pyf67"]
+
+[resource]
+script = ExtResource("1_pyf67")
+special_name = "Midnight Mist"
+power = 3.5
+num_hits = 2
+hit_ratio = Array[float]([0.7, 0.3])
+attribute = "physical"
+aoe = 2
+heal_ratio = 0.0
+affect_team = false

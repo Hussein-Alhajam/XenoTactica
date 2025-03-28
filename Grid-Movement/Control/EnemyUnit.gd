@@ -1,59 +1,60 @@
 extends CharacterBody2D
 class_name EnemyUnit
 
-var vfx_node: PackedScene = preload("res://demo_turn_based_combat_/scenes/vfx.tscn")
-@export var character: Character
+@export var pathfinder: PathFinding
+@export var grid_manager: GridManager
+@export var move_range: int = 3
+@export var move_speed: float = 100.0
+@export var attack_range: int = 1
 
-var queue: Array[float] = []
-var speed: float  # or set this via export from the Character data
-var status := 1.0
+var is_moving = false
 
 func _ready():
-	if character:
-		speed = 200.0 / (log(character.agility) + 2) - 25
-		print("Enemy", character.title, "agility:", character.agility, "calculated speed:", speed)
-	else:
-		speed = 100.0  # fallback
-	print("✅ EnemyUnit _ready() called for", name)
-	queue_reset()
+	if grid_manager == null:
+		grid_manager = get_tree().get_first_node_in_group("grid_manager")
+	if pathfinder == null:
+		pathfinder = get_tree().get_first_node_in_group("pathfinder")
+	print("✅ EnemyUnit ready.")
 
-func queue_reset():
-	queue.clear()
-	print("🟦 Resetting enemy queue for", name)
-	for i in range(4):
-		if queue.is_empty():
-			queue.append(speed * status)
-		else:
-			queue.append(queue[-1] + speed * status)
-	print("➡️ Queue now:", queue)
+func _process(_delta):
+	if !is_moving:
+		act()
 
-func attack(tree):
-	var shift = Vector2(50, 0)
-	if position.x < get_viewport_rect().size.x / 2:
-		shift = -shift
-	await tween_movement(-shift, tree)
-	await tween_movement(shift, tree)
-	EventBus.next_turn.emit()
+func act():
+	var my_tile = grid_manager.tile_map.local_to_map(global_position)
+	var closest_player = null
+	var shortest_path = []
+	var min_distance = INF
 
-func tween_movement(shift, tree):
-	var tween = tree.create_tween()
-	tween.tween_property(self, "position", position + shift, 0.2)
-	await tween.finished
+	# Find the closest player based on actual path length
+	for player in get_tree().get_nodes_in_group("player_units"):
+		var player_tile = grid_manager.tile_map.local_to_map(player.global_position)
+		var path = pathfinder.find_path(my_tile, player_tile)
+		if path.size() > 1 and path.size() < min_distance:
+			closest_player = player
+			shortest_path = path
+			min_distance = path.size()
 
-func pop_out():
-	queue.pop_front()
-	queue.append(queue[-1] + speed * status)
+	# Stop if already adjacent (in attack range)
+	if shortest_path.size() <= attack_range + 1:
+		print("🛑 Enemy is in range, can attack.")
+		return
 
-func get_attacked(type := "", damage := 0):
-	add_vfx(type)
-	character.health -= damage
-	print(character.title, " took ", damage, " damage. Remaining HP: ", character.health)
-	if character.health <= 0:
-		print(character.title, " was defeated!")
-		queue_free()
-		
-func add_vfx(type = ""):
-	var vfx = vfx_node.instantiate()
-	add_child(vfx)
-	if type != "":
-		vfx.find_child("AnimationPlayer").play(type)
+	if shortest_path.size() > 1:
+		var move_path = shortest_path.slice(1, min(shortest_path.size(), move_range + 1))
+		follow_path(move_path)
+
+func follow_path(path: Array):
+	is_moving = true
+	for tile in path:
+		var world_pos = grid_manager.tile_map.map_to_local(tile)
+		while global_position.distance_to(world_pos) > 1.0:
+			var direction = (world_pos - global_position).normalized()
+			velocity = direction * move_speed
+			move_and_slide()
+			await get_tree().process_frame
+		global_position = world_pos
+	velocity = Vector2.ZERO
+	await get_tree().create_timer(1.0).timeout
+	is_moving = false
+	print("✅ Enemy moved to:", path[-1])

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://cqsy7ttb1n02p"]
+
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/combat_special.gd" id="1_j2ibn"]
+
+[resource]
+script = ExtResource("1_j2ibn")
+special_name = "Brutal_Lance"
+power = 3.0
+num_hits = 4
+hit_ratio = Array[float]([0.2, 0.3, 0.1, 0.4])
+attribute = "physical"
+aoe = 2
+heal_ratio = 0.0
+affect_team = false

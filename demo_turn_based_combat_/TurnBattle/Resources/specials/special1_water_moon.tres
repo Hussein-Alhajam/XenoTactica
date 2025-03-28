@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://bp7k2lwkff3ix"]
+
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://demo_turn_based_combat_/TurnBattle/scripts/resources/combat_special.gd" id="1_0x6rl"]
+
+[resource]
+script = ExtResource("1_0x6rl")
+special_name = "Water Moon"
+power = 3.5
+num_hits = 1
+hit_ratio = Array[float]([])
+attribute = "ether"
+aoe = 1
+heal_ratio = 0.0
+affect_team = false

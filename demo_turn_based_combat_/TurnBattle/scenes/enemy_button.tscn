@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm3x6yjwg0wql"]
+
+[ext_resource type="Script" uid="uid://8lcwmhos0b55" path="res://demo_turn_based_combat_/TurnBattle/scripts/enemy_button.gd" id="1_cupf7"]
+
+[node name="EnemyButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 64
+script = ExtResource("1_cupf7")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
