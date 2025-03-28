@@ -1,8 +1,14 @@
 [gd_scene load_steps=25 format=4 uid="uid://cc5hn5aulatdh"]
 
+<<<<<<< Updated upstream
 [ext_resource type="Script" uid="uid://bstbwhg0out7p" path="res://Grid-Movement/Control/Battling-Scene.gd" id="1_c21e3"]
 [ext_resource type="Script" uid="uid://bnlqm77spbq7q" path="res://demo_turn_based_combat_/TurnBattle/scripts/attack_button.gd" id="2_brajv"]
 [ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://demo_turn_based_combat_/TurnBattle/scenes/enemy_button.tscn" id="2_q2h2f"]
+=======
+[ext_resource type="Script" uid="uid://bc13gvaja1f21" path="res://demo_turn_based_combat_/scripts/Battling-Scene.gd" id="1_c21e3"]
+[ext_resource type="Script" uid="uid://yavb7hwrd2j1" path="res://demo_turn_based_combat_/scripts/attack_button.gd" id="2_brajv"]
+[ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://demo_turn_based_combat_/scenes/enemy_button.tscn" id="2_q2h2f"]
+>>>>>>> Stashed changes
 [ext_resource type="Script" uid="uid://0ca101ytw440" path="res://Grid-Movement/Resources/GridManager.gd" id="4_c21e3"]
 [ext_resource type="Script" uid="uid://xiaj8nfs36b" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="4_f87od"]
 [ext_resource type="Script" uid="uid://b42ay6nmvlewf" path="res://demo_turn_based_combat_/TurnBattle/scripts/haste_button.gd" id="4_id56c"]

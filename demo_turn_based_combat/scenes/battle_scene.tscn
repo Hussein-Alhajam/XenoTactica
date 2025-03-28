@@ -3,6 +3,7 @@
 <<<<<<< Updated upstream
 [ext_resource type="Script" uid="uid://q0vspagtdfli" path="res://scripts/battle_scene.gd" id="1_k7x86"]
 [ext_resource type="Script" uid="uid://cm6ckpj83f6y1" path="res://scripts/character_sprite.gd" id="1_vbn1p"]
+<<<<<<< Updated upstream
 [ext_resource type="Script" uid="uid://cop3jcoh3rbui" path="res://scripts/attack_button.gd" id="2_brajv"]
 =======
 [ext_resource type="Script" uid="uid://kbu278g7m6rn" path="res://scripts/battle_scene/battle_scene.gd" id="1_k7x86"]
@@ -14,6 +15,14 @@
 [ext_resource type="Script" uid="uid://p67v87vflkmd" path="res://scripts/haste_button.gd" id="4_id56c"]
 [ext_resource type="Script" uid="uid://dg3v8fv1vgk6n" path="res://scripts/flee_button.gd" id="5_0bm3q"]
 <<<<<<< Updated upstream
+=======
+[ext_resource type="Script" uid="uid://beypprwo83fes" path="res://scripts/attack_button.gd" id="2_brajv"]
+[ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://scenes/enemy_button.tscn" id="2_q2h2f"]
+[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://Resources/players/wizard.tres" id="3_1xfr0"]
+[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://Resources/players/rogue.tres" id="4_74e8g"]
+[ext_resource type="Script" uid="uid://ct5lqp0it6oea" path="res://scripts/haste_button.gd" id="4_id56c"]
+[ext_resource type="Script" uid="uid://cd3afyghqw6e0" path="res://scripts/flee_button.gd" id="5_0bm3q"]
+>>>>>>> Stashed changes
 [ext_resource type="Script" uid="uid://bk7o462jleamv" path="res://scripts/combat_option_list.gd" id="6_paiac"]
 =======
 [ext_resource type="PackedScene" uid="uid://bufo3fo4lgsaf" path="res://scenes/action_selection_container.tscn" id="6_llh1y"]
