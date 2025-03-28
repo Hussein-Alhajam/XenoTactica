@@ -1,48 +1,30 @@
-[gd_scene load_steps=25 format=4 uid="uid://cc5hn5aulatdh"]
+[gd_scene load_steps=17 format=4 uid="uid://cc5hn5aulatdh"]
 
-[ext_resource type="Script" uid="uid://b8ml67g66fxei" path="res://TurnBattle/scripts/battle_scene/battle_scene.gd" id="1_k7x86"]
-[ext_resource type="Script" uid="uid://bnlqm77spbq7q" path="res://TurnBattle/scripts/attack_button.gd" id="2_brajv"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/battle_scene/battle_scene.gd" id="1_k7x86"]
 [ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://TurnBattle/scenes/enemy_button.tscn" id="2_q2h2f"]
-[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://TurnBattle/Resources/players/wizard.tres" id="3_1xfr0"]
-[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://TurnBattle/Resources/players/rogue.tres" id="4_74e8g"]
-[ext_resource type="Script" uid="uid://b42ay6nmvlewf" path="res://TurnBattle/scripts/haste_button.gd" id="4_id56c"]
-[ext_resource type="Script" uid="uid://5ysl2fg0y1le" path="res://TurnBattle/scripts/flee_button.gd" id="5_0bm3q"]
+[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://TurnBattle/resources/players/wizard.tres" id="3_1xfr0"]
+[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://TurnBattle/resources/players/rogue.tres" id="4_74e8g"]
 [ext_resource type="PackedScene" uid="uid://bufo3fo4lgsaf" path="res://TurnBattle/scenes/action_selection_container.tscn" id="6_llh1y"]
-[ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://TurnBattle/Resources/enemies/gorgon.tres" id="6_wea8f"]
-[ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://TurnBattle/Resources/enemies/cyclops.tres" id="7_6ucfx"]
-[ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://TurnBattle/Resources/players/knight.tres" id="7_c3ipe"]
-[ext_resource type="Script" uid="uid://0ca101ytw440" path="res://Grid-Movement/Resources/GridManager.gd" id="7_tjiub"]
-[ext_resource type="Script" uid="uid://bxjx0pdydv5qe" path="res://Grid-Movement/Resources/PathFinding.gd" id="8_nl3bw"]
-[ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://TurnBattle/Resources/enemies/kraken.tres" id="8_qg17s"]
-[ext_resource type="Script" uid="uid://xiaj8nfs36b" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="9_tjiub"]
+[ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://TurnBattle/resources/enemies/gorgon.tres" id="6_wea8f"]
+[ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://TurnBattle/resources/enemies/cyclops.tres" id="7_6ucfx"]
+[ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://TurnBattle/resources/players/knight.tres" id="7_c3ipe"]
+[ext_resource type="Script" path="res://Grid-Movement/Resources/GridManager.gd" id="7_tjiub"]
+[ext_resource type="Script" path="res://Grid-Movement/Resources/PathFinding.gd" id="8_nl3bw"]
+[ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://TurnBattle/resources/enemies/kraken.tres" id="8_qg17s"]
+[ext_resource type="Script" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="9_tjiub"]
 [ext_resource type="PackedScene" uid="uid://cguk7p8fnv2ra" path="res://TurnBattle/scenes/character.tscn" id="9_y7v6u"]
-[ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://TurnBattle/Resources/map_tileset.tres" id="12_hp3cp"]
+[ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://TurnBattle/resources/map_tileset.tres" id="12_hp3cp"]
 [ext_resource type="PackedScene" uid="uid://cmaes8al2b5cc" path="res://PauseMenu/PauseMenu_Battle.tscn" id="15_fb2m3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkmgs"]
-bg_color = Color(8.85606e-06, 0.279961, 0.7771, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nreuw"]
-bg_color = Color(0.689774, 0.28914, 1.92523e-07, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r17xs"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7006"]
-bg_color = Color(0.583497, 0.192015, 2.88785e-07, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ma1ik"]
-bg_color = Color(0.24548, 0.467054, 0.202911, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sryic"]
 bg_color = Color(0, 0, 0, 0.513726)
 
-[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline", "combat_options")]
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("player_group", "enemy_group", "timeline")]
 scale = Vector2(1, 0.98719)
 script = ExtResource("1_k7x86")
 player_group = NodePath("Players")
 enemy_group = NodePath("Enemies")
 timeline = NodePath("UI/Timeline")
-combat_options = NodePath("UI/CombatOptions")
 enemy_button = ExtResource("2_q2h2f")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -115,195 +97,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 expand_mode = 1
 stretch_mode = 4
-
-[node name="CombatOptions" type="VBoxContainer" parent="UI"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -103.0
-offset_top = -48.0
-offset_right = 103.0
-offset_bottom = 48.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AttackButton" type="Button" parent="UI/CombatOptions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "Attack
-"
-script = ExtResource("2_brajv")
-
-[node name="HasteButton" type="Button" parent="UI/CombatOptions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "Haste"
-script = ExtResource("4_id56c")
-
-[node name="FleeButton" type="Button" parent="UI/CombatOptions"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "Flee"
-script = ExtResource("5_0bm3q")
-
-[node name="EnemySelection" type="VBoxContainer" parent="UI"]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Controls" type="VBoxContainer" parent="UI"]
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 136.0
-offset_top = -236.0
-offset_right = 294.0
-offset_bottom = -132.0
-grow_vertical = 0
-
-[node name="TopContainer" type="HBoxContainer" parent="UI/Controls"]
-layout_mode = 2
-alignment = 1
-
-[node name="TopPanel" type="Panel" parent="UI/Controls/TopContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_wkmgs")
-
-[node name="Label" type="Label" parent="UI/Controls/TopContainer/TopPanel"]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 49.0
-theme_override_font_sizes/font_size = 32
-text = "W"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CenterContainer" type="HBoxContainer" parent="UI/Controls"]
-layout_mode = 2
-
-[node name="LeftPanel" type="Panel" parent="UI/Controls/CenterContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nreuw")
-
-[node name="Label" type="Label" parent="UI/Controls/CenterContainer/LeftPanel"]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 49.0
-theme_override_font_sizes/font_size = 32
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EmptyPanel" type="Panel" parent="UI/Controls/CenterContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_r17xs")
-
-[node name="RightPanel" type="Panel" parent="UI/Controls/CenterContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y7006")
-
-[node name="Label" type="Label" parent="UI/Controls/CenterContainer/RightPanel"]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 49.0
-theme_override_font_sizes/font_size = 32
-text = "D"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BottomContainer" type="HBoxContainer" parent="UI/Controls"]
-layout_mode = 2
-alignment = 1
-
-[node name="BottomPanel" type="Panel" parent="UI/Controls/BottomContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ma1ik")
-
-[node name="Label" type="Label" parent="UI/Controls/BottomContainer/BottomPanel"]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 49.0
-theme_override_font_sizes/font_size = 32
-text = "S"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="UpContainer" type="BoxContainer" parent="UI"]
-offset_left = 160.0
-offset_top = 568.0
-offset_right = 260.0
-offset_bottom = 608.0
-
-[node name="UpText" type="Label" parent="UI/UpContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_sryic")
-text = "up
-"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="LeftContainer" type="BoxContainer" parent="UI"]
-offset_left = 32.0
-offset_top = 659.0
-offset_right = 132.0
-offset_bottom = 699.0
-
-[node name="LeftText" type="Label" parent="UI/LeftContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_sryic")
-text = "left"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="RightContainer" type="BoxContainer" parent="UI"]
-offset_left = 296.0
-offset_top = 660.0
-offset_right = 396.0
-offset_bottom = 700.0
-
-[node name="RightText" type="Label" parent="UI/RightContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_sryic")
-text = "right"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="DownContainer" type="BoxContainer" parent="UI"]
-offset_left = 160.0
-offset_top = 768.0
-offset_right = 260.0
-offset_bottom = 808.0
-
-[node name="DownText" type="Label" parent="UI/DownContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_sryic")
-text = "down
-"
-horizontal_alignment = 1
-autowrap_mode = 3
 
 [node name="ActionLog" type="Label" parent="UI"]
 custom_minimum_size = Vector2(200, 0)
@@ -385,6 +178,6 @@ character_stats = ExtResource("8_qg17s")
 
 [node name="PauseMenu_Battle" parent="." instance=ExtResource("15_fb2m3")]
 
-[connection signal="pressed" from="UI/CombatOptions/AttackButton" to="UI/CombatOptions/AttackButton" method="_on_pressed"]
-[connection signal="pressed" from="UI/CombatOptions/HasteButton" to="UI/CombatOptions/HasteButton" method="_on_pressed"]
-[connection signal="pressed" from="UI/CombatOptions/FleeButton" to="UI/CombatOptions/FleeButton" method="_on_pressed"]
+[connection signal="attack_selected" from="UI/ActionSelectionContainer" to="." method="_on_action_selection_container_attack_selected"]
+[connection signal="end_turn_selected" from="UI/ActionSelectionContainer" to="." method="_on_action_selection_container_end_turn_selected"]
+[connection signal="move_selected" from="UI/ActionSelectionContainer" to="." method="_on_action_selection_container_move_selected"]

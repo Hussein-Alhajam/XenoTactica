@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cguk7p8fnv2ra"]
 
-[ext_resource type="Script" uid="uid://b124joomhljtd" path="res://TurnBattle/scripts/character/character.gd" id="1_p5lt1"]
-[ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://TurnBattle/assets/sprites/extracted/knight.png" id="2_c86bg"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/character/character.gd" id="1_p5lt1"]
+[ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://assets/sprites/extracted/knight.png" id="2_c86bg"]
 [ext_resource type="PackedScene" uid="uid://dis4k61okmel3" path="res://TurnBattle/scenes/health_bar.tscn" id="3_bnxmb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctlu3"]

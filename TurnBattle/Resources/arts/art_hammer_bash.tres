@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://paa0nhcb8d6"]
 
-[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_7d8tb"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_7d8tb"]
 
 [resource]
 script = ExtResource("1_7d8tb")
@@ -12,5 +12,5 @@ aoe = 1
 attribute = "physical"
 max_charge = 6
 position_effect = ""
-bonus_effect = Array[String]([])
-reaction_effect = Array[String](["topple"])
+bonus_effects = Array[String]([])
+reaction_effects = Array[String](["Topple"])

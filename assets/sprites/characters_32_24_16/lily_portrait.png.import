@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kjhsx4b2l2by"
-path="res://.godot/imported/cyclops_sprite.png-e8aa77ce9b79f54651ab1ce9206ebdfa.ctex"
+uid="uid://dwloegvbikkhv"
+path="res://.godot/imported/lily_portrait.png-477dbe7b3e6c977567c620cdfb8270f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/cyclops_sprite.png"
-dest_files=["res://.godot/imported/cyclops_sprite.png-e8aa77ce9b79f54651ab1ce9206ebdfa.ctex"]
+source_file="res://assets/sprites/characters_32_24_16/lily_portrait.png"
+dest_files=["res://.godot/imported/lily_portrait.png-477dbe7b3e6c977567c620cdfb8270f9.ctex"]
 
 [params]
 

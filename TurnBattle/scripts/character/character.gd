@@ -265,19 +265,24 @@ func use_special():
 		return null
 
 
-func get_art_name(num):
-	return arts_list	[num].art_name
+func get_art_info(num):
+	var art_info = {
+		"name": arts_list[num].art_name,
+		"effects": arts_list[num].get_effects(),
+		"current_charge": arts_list[num].current_charge,
+		"max_charge": arts_list[num].max_charge,
+	}
+	return art_info
 
 
-func get_art_charges(num):
-	return [arts_list[num].current_charge, arts_list[num].max_charge]
-
-
-func get_special_name():
+func get_special_info():
 	if special_charge > 0:
-		return specials_list[special_charge - 1].special_name
+		var special_info = {
+			"name": specials_list[special_charge - 1].special_name,
+		}
 	else:
 		return "no special charge"
+
 
 func _input(event):
 	if is_moving or grid_manager == null or pathfinder == null:

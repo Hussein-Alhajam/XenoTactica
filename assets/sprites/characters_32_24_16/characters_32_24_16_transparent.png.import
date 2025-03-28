@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3vl826lu3pd"
-path="res://.godot/imported/BigSlashV.png-e5f99946b26e9e39548414343de7e451.ctex"
+uid="uid://dqoodythna0gf"
+path="res://.godot/imported/characters_32_24_16_transparent.png-c8eb1ce1ce2d102d409154f27dacc6e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/ATTACK FREE/BigSlashV.png"
-dest_files=["res://.godot/imported/BigSlashV.png-e5f99946b26e9e39548414343de7e451.ctex"]
+source_file="res://assets/sprites/characters_32_24_16/characters_32_24_16_transparent.png"
+dest_files=["res://.godot/imported/characters_32_24_16_transparent.png-c8eb1ce1ce2d102d409154f27dacc6e8.ctex"]
 
 [params]
 

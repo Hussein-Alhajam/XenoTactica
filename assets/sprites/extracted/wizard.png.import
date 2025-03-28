@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckc42idvo57sv"
-path="res://.godot/imported/lily_character.png-c8cd998523d3b4448cf978941c809ae6.ctex"
+uid="uid://wcu7d45wawc7"
+path="res://.godot/imported/wizard.png-ac0435946c2159867805a5cb3b09636a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/characters_32_24_16/lily_character.png"
-dest_files=["res://.godot/imported/lily_character.png-c8cd998523d3b4448cf978941c809ae6.ctex"]
+source_file="res://assets/sprites/extracted/wizard.png"
+dest_files=["res://.godot/imported/wizard.png-ac0435946c2159867805a5cb3b09636a.ctex"]
 
 [params]
 

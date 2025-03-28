@@ -4,6 +4,7 @@ class_name CombatArt
 
 # signals
 # export variables
+@export_group("damage")
 @export var art_name: String
 @export var power: float # scales the str/eth of char; affects damage / healing of art
 @export var num_hits: int # number of hits of the art
@@ -25,8 +26,8 @@ class_name CombatArt
 
 @export_group("Effects")
 @export 	var position_effect: String # bonus front/back/side dmg
-@export var bonus_effect: Array[String] # bonus dmg against toppled, launched, or with max health
-@export var reaction_effect: Array[String]
+@export var bonus_effects: Array[String] # bonus dmg against toppled, launched, or with max health
+@export var reaction_effects: Array[String]
 
 # public variables
 var current_charge: int 
@@ -78,3 +79,24 @@ func use_art():
 
 	else:
 		Global.battle_scene.update_action_log(art_name + " is not charged")
+
+
+func get_effects():
+	var effects: Array[String] = []
+	
+	if reaction_effects:
+		effects.append(reaction_effects)
+	if bonus_effects:
+		effects.append(bonus_effects)
+	if position_effect:
+		match position_effect:
+			"Back":
+				effects.append("Back Dmg+")
+			"Side":
+				effects.append("Side Dmg+")
+			"Front":
+				effects.append("Front Dmg+")
+	if aoe > 1:
+		effects.append("AOE")
+	
+	return effects

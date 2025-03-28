@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by6ikhhfuoggp"
-path="res://.godot/imported/willy_character.png-66a8bedbebef7e7e008b7c808b1e2098.ctex"
+uid="uid://d0xp0nmh7adc6"
+path="res://.godot/imported/willy_portrait.png-719887e45fd8969d3e885ab6a9d7d506.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/characters_32_24_16/willy_character.png"
-dest_files=["res://.godot/imported/willy_character.png-66a8bedbebef7e7e008b7c808b1e2098.ctex"]
+source_file="res://assets/sprites/characters_32_24_16/willy_portrait.png"
+dest_files=["res://.godot/imported/willy_portrait.png-719887e45fd8969d3e885ab6a9d7d506.ctex"]
 
 [params]
 

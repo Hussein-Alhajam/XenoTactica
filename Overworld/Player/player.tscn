@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ii0tl3weniuv"]
 
-[ext_resource type="Script" uid="uid://bddbkof0u75if" path="res://Overworld/Player/player.gd" id="1_ou22a"]
-[ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://TurnBattle/assets/sprites/extracted/knight.png" id="2_vde5r"]
+[ext_resource type="Script" path="res://Overworld/Player/player.gd" id="1_ou22a"]
+[ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://assets/sprites/extracted/knight.png" id="2_vde5r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rn0si"]
 radius = 8.0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wiottnlaefoj"
-path="res://.godot/imported/vSlash1.png-b85fb73acdecffc2dd265ef77aa2e62f.ctex"
+uid="uid://dnu0v4va1cw5u"
+path="res://.godot/imported/VslashSmall1.png-3d930852f74d6a8de91423f1ceb2082f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/ATTACK FREE/vSlash1.png"
-dest_files=["res://.godot/imported/vSlash1.png-b85fb73acdecffc2dd265ef77aa2e62f.ctex"]
+source_file="res://assets/sprites/ATTACK FREE/VslashSmall1.png"
+dest_files=["res://.godot/imported/VslashSmall1.png-3d930852f74d6a8de91423f1ceb2082f.ctex"]
 
 [params]
 

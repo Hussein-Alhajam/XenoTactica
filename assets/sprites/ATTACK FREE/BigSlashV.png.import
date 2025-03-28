@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dni018trtcdv5"
-path="res://.godot/imported/kraken_sprite.png-910b4b55da6a2c7972e214aa67880838.ctex"
+uid="uid://d3vl826lu3pd"
+path="res://.godot/imported/BigSlashV.png-75ce5a112a32e6ad89424f8b9c661304.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/kraken_sprite.png"
-dest_files=["res://.godot/imported/kraken_sprite.png-910b4b55da6a2c7972e214aa67880838.ctex"]
+source_file="res://assets/sprites/ATTACK FREE/BigSlashV.png"
+dest_files=["res://.godot/imported/BigSlashV.png-75ce5a112a32e6ad89424f8b9c661304.ctex"]
 
 [params]
 

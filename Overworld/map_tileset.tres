@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://crfevbytpkyck"]
 
-[ext_resource type="Texture2D" uid="uid://ciy2ns5d37j11" path="res://TurnBattle/assets/sprites/grasslands.png" id="1_fwrcv"]
+[ext_resource type="Texture2D" uid="uid://ciy2ns5d37j11" path="res://assets/sprites/grasslands.png" id="1_fwrcv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_fwrcv"]
 vertices = PackedVector2Array(40, 40, -40, 40, -40, -40, 40, -40)

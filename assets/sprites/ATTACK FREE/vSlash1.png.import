@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwloegvbikkhv"
-path="res://.godot/imported/lily_portrait.png-0f41b6bed84803264009c61509074f9b.ctex"
+uid="uid://wiottnlaefoj"
+path="res://.godot/imported/vSlash1.png-30add96ad39edfee7b354b7b2ee650ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/characters_32_24_16/lily_portrait.png"
-dest_files=["res://.godot/imported/lily_portrait.png-0f41b6bed84803264009c61509074f9b.ctex"]
+source_file="res://assets/sprites/ATTACK FREE/vSlash1.png"
+dest_files=["res://.godot/imported/vSlash1.png-30add96ad39edfee7b354b7b2ee650ae.ctex"]
 
 [params]
 

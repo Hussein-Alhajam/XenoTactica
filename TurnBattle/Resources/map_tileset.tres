@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://epicx2i3owex"]
 
-[ext_resource type="Texture2D" uid="uid://ciy2ns5d37j11" path="res://TurnBattle/assets/sprites/grasslands.png" id="1_cbr0g"]
+[ext_resource type="Texture2D" uid="uid://ciy2ns5d37j11" path="res://assets/sprites/grasslands.png" id="1_cbr0g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tambf"]
 texture = ExtResource("1_cbr0g")

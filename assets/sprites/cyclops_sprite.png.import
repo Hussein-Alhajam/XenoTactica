@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnu0v4va1cw5u"
-path="res://.godot/imported/VslashSmall1.png-7996b46d918f21cfa931f8f86a0affd7.ctex"
+uid="uid://kjhsx4b2l2by"
+path="res://.godot/imported/cyclops_sprite.png-80601f857b415eb64851a27fbb177e1d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/ATTACK FREE/VslashSmall1.png"
-dest_files=["res://.godot/imported/VslashSmall1.png-7996b46d918f21cfa931f8f86a0affd7.ctex"]
+source_file="res://assets/sprites/cyclops_sprite.png"
+dest_files=["res://.godot/imported/cyclops_sprite.png-80601f857b415eb64851a27fbb177e1d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqoodythna0gf"
-path="res://.godot/imported/characters_32_24_16_transparent.png-23268769e913994b5a6e9486ac170c70.ctex"
+uid="uid://df4i2tbwdossa"
+path="res://.godot/imported/squirrel.png-38f5d80d9e7bb193cb51bdd5e1cc6d0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/characters_32_24_16/characters_32_24_16_transparent.png"
-dest_files=["res://.godot/imported/characters_32_24_16_transparent.png-23268769e913994b5a6e9486ac170c70.ctex"]
+source_file="res://assets/sprites/characters_32_24_16/squirrel.png"
+dest_files=["res://.godot/imported/squirrel.png-38f5d80d9e7bb193cb51bdd5e1cc6d0f.ctex"]
 
 [params]
 

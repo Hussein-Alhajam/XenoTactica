@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp136ntapoxt3"
-path="res://.godot/imported/rogue.png-debb06213b3d1e6c25fa997c063c9529.ctex"
+uid="uid://by6ikhhfuoggp"
+path="res://.godot/imported/willy_character.png-990e9d137f1f085b640bead8134c6f09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/extracted/rogue.png"
-dest_files=["res://.godot/imported/rogue.png-debb06213b3d1e6c25fa997c063c9529.ctex"]
+source_file="res://assets/sprites/characters_32_24_16/willy_character.png"
+dest_files=["res://.godot/imported/willy_character.png-990e9d137f1f085b640bead8134c6f09.ctex"]
 
 [params]
 

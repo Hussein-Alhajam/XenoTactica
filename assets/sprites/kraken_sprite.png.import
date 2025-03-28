@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0xp0nmh7adc6"
-path="res://.godot/imported/willy_portrait.png-31e58e90dbeb80e38c96e100ba78a9d6.ctex"
+uid="uid://dni018trtcdv5"
+path="res://.godot/imported/kraken_sprite.png-abebb1de79ce9e0da2fa72b8b4c4462d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/characters_32_24_16/willy_portrait.png"
-dest_files=["res://.godot/imported/willy_portrait.png-31e58e90dbeb80e38c96e100ba78a9d6.ctex"]
+source_file="res://assets/sprites/kraken_sprite.png"
+dest_files=["res://.godot/imported/kraken_sprite.png-abebb1de79ce9e0da2fa72b8b4c4462d.ctex"]
 
 [params]
 

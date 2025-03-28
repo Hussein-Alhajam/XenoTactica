@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciy2ns5d37j11"
-path="res://.godot/imported/grasslands.png-d85b2524986c033466fe057f99d57f06.ctex"
+uid="uid://cxdb38y3wn5uu"
+path="res://.godot/imported/gorgon_sprite.png-22cf1b457cb3d9018590c84f5f44ca0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/grasslands.png"
-dest_files=["res://.godot/imported/grasslands.png-d85b2524986c033466fe057f99d57f06.ctex"]
+source_file="res://assets/sprites/gorgon_sprite.png"
+dest_files=["res://.godot/imported/gorgon_sprite.png-22cf1b457cb3d9018590c84f5f44ca0d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxdb38y3wn5uu"
-path="res://.godot/imported/gorgon_sprite.png-14257abc37e09d08151e13a07a0d3e2c.ctex"
+uid="uid://b1ervbq0i1r25"
+path="res://.godot/imported/Hslash1.png-8b8d37de2a81c658f5253c1cb2e79400.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TurnBattle/assets/sprites/gorgon_sprite.png"
-dest_files=["res://.godot/imported/gorgon_sprite.png-14257abc37e09d08151e13a07a0d3e2c.ctex"]
+source_file="res://assets/sprites/ATTACK FREE/Hslash1.png"
+dest_files=["res://.godot/imported/Hslash1.png-8b8d37de2a81c658f5253c1cb2e79400.ctex"]
 
 [params]
 
