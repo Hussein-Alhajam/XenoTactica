@@ -12,5 +12,5 @@ aoe = 1
 attribute = "ether"
 max_charge = 3
 position_effect = ""
-bonus_effect = Array[String](["topple_up"])
-reaction_effect = Array[String]([])
+bonus_effects = Array[String](["Topple Dmg+"])
+reaction_effects = Array[String]([])

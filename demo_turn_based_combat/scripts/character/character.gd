@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 class_name Character # name this CharacterStats?
 
@@ -249,8 +249,14 @@ func use_special():
 		return null
 
 
-func get_art_name(num):
-	return arts_list	[num].art_name
+func get_art_info(num):
+	var art_info = {
+		"name": arts_list[num].art_name,
+		"effects": arts_list[num].get_effects(),
+		"current_charge": arts_list[num].current_charge,
+		"max_charge": arts_list[num].max_charge,
+	}
+	return art_info
 
 
 func get_art_charges(num):

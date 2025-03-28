@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://dcso4aaxs3ncp"]
+
+[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_wx3hy"]
+
+[resource]
+script = ExtResource("1_wx3hy")
+art_name = "Windmill"
+power = 1.3
+num_hits = 2
+hit_ratio = Array[float]([0.5, 0.5])
+aoe = 2
+attribute = "physical"
+max_charge = 3
+position_effect = ""
+bonus_effect = Array[String]([])
+reaction_effect = Array[String]([])

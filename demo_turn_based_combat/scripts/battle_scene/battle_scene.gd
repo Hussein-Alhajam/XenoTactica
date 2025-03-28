@@ -15,19 +15,16 @@ enum ActiveHud { COMBAT, SETTINGS_OPTIONS, TITLE_MENU }
 @export var enemy_group: Node2D # hold the 'Enemies' node
 @export var timeline: HBoxContainer # hold the "Timeline' node
 
-@export var combat_options: VBoxContainer # hold the 'CombatOptions' node
-@export var enemy_button: PackedScene # variable to hold "EnemyButton'
+@export var combat_options: VBoxContainer # redundant | hold the 'CombatOptions' node
+@export var enemy_button: PackedScene # redundant | variable to hold "EnemyButton'
 
 # public variables
 var sorted_array = [] # used for sorting the turn order (?)
 var players: Array[Character] # used to hold Player 'scene' nodes
 var enemies: Array[Character] # used to hold Enemy 'scene' nodes
-
 var is_arts_selected: bool = false # should make into FSM
-
 var turn_state = TurnState.NEUTRAL
 var active_hud = ActiveHud.COMBAT
-
 # temp variable for the temp controls UI
 var ui_controls := {}
 
@@ -68,77 +65,78 @@ func _ready():
 	next_turn()
 
 func _process(delta: float) -> void:
+	pass
 	# only give player controls if it is a player char's turn
-	if sorted_array[0]["character"] in players:
-		# show hud for controls
-		# should 'hide' attack controls if turn_state.ATTACKED 
-			# to better show player they can't attack
-		if not is_arts_selected:
-			# update the action selection
-			# rearrange to have up: ar1, right: art2, down: art3
-				# left: select arts
-			ui_controls["up"].text = "Items"
-			var special_name = sorted_array[0]["character"].get_special_name()
-			ui_controls["left"].text = special_name
-			#$UI/LeftContainer/LeftText.text = "Special " + str(sorted_array[0].special_charge)
-			ui_controls["down"].text = "Arts"
-			ui_controls["right"].text = "Attack"
-			
-			if Input.is_action_just_pressed("auto_attack"):
-				# print some display, then call attack
-				$UI/ActionLog.text = "Used Attack \nArts Charged by 1"
-				# if using the priority queue for turn order,
-				# and assuming controls are only available when current turn is a player,
-				# (i.e., if we are in controls, first element in queue is a player)
-				# make that player character charge their arts
-				use_character_normal_attack()
-
-			if Input.is_action_just_pressed("special"):
-				use_character_special()
-
-			if Input.is_action_just_pressed("items_selection"):
-				$UI/ActionLog.text = "entered items selection \n (not implemented)"
-			if Input.is_action_just_pressed("arts_selection"):
-				#$UI/ActionLog.text = "entered arts selection"
-				is_arts_selected = true
-
-		else:
-			# update the action selection
-			# temp 'hard code-y' text updates
-			
-			#arts_selected.emit()
-			# temp way to update text
-			# alternatives: 1. use signal in global event_bus,
-				# connect to combat_art and combat_special 
-				# (need some init func in art, special, and character)
-			var art0name = sorted_array[0]["character"].get_art_name(0)
-			var art0charges = sorted_array[0]["character"].get_art_charges(0)
-			var art1name = sorted_array[0]["character"].get_art_name(1)
-			var art1charges = sorted_array[0]["character"].get_art_charges(1)
-			var art2name = sorted_array[0]["character"].get_art_name(2)
-			var art2charges = sorted_array[0]["character"].get_art_charges(2)
-			
-			ui_controls["up"].text = str(art1name) + " " + str(art1charges[0]) + "/" + str(art1charges[1])
-			ui_controls["left"].text = str(art0name) + " " + str(art0charges[0]) + "/" + str(art0charges[1])
-			ui_controls["right"].text = str(art2name) + " " + str(art2charges[0]) + "/" + str(art2charges[1])
-			
-			#str(sorted_array[0].arts_list[1].art_name) + " " + str(sorted_array[0].arts_list[1].current_charge) + "/" + str(sorted_array[0].arts_list[1].max_charge)
-			#str(sorted_array[0].arts_list[0].art_name) + " " + str(sorted_array[0].arts_list[0].current_charge) + "/" + str(sorted_array[0].arts_list[0].max_charge)
-			#str(sorted_array[0].arts_list[2].art_name) + " " + str(sorted_array[0].arts_list[2].current_charge) + "/" + str(sorted_array[0].arts_list[2].max_charge)
-			ui_controls["down"].text = "Exit Arts"
-			
-			if Input.is_action_just_pressed("left_art"):
-				use_character_art(0)
-
-			if Input.is_action_just_pressed("up_art"):
-				use_character_art(1)
-
-			if Input.is_action_just_pressed("right_art"):
-				use_character_art(2)
-
-			if Input.is_action_just_pressed("arts_back"):
-				#$ActionLog.text = "exited arts selection"
-				is_arts_selected = false
+	#if sorted_array[0]["character"] in players:
+		## show hud for controls
+		## should 'hide' attack controls if turn_state.ATTACKED 
+			## to better show player they can't attack
+		#if not is_arts_selected:
+			## update the action selection
+			## rearrange to have up: ar1, right: art2, down: art3
+				## left: select arts
+			#ui_controls["up"].text = "Items"
+			#var special_name = sorted_array[0]["character"].get_special_name()
+			#ui_controls["left"].text = special_name
+			##$UI/LeftContainer/LeftText.text = "Special " + str(sorted_array[0].special_charge)
+			#ui_controls["down"].text = "Arts"
+			#ui_controls["right"].text = "Attack"
+			#
+			#if Input.is_action_just_pressed("auto_attack"):
+				## print some display, then call attack
+				#$UI/ActionLog.text = "Used Attack \nArts Charged by 1"
+				## if using the priority queue for turn order,
+				## and assuming controls are only available when current turn is a player,
+				## (i.e., if we are in controls, first element in queue is a player)
+				## make that player character charge their arts
+				#use_character_normal_attack()
+#
+			#if Input.is_action_just_pressed("special"):
+				#use_character_special()
+#
+			#if Input.is_action_just_pressed("items_selection"):
+				#$UI/ActionLog.text = "entered items selection \n (not implemented)"
+			#if Input.is_action_just_pressed("arts_selection"):
+				##$UI/ActionLog.text = "entered arts selection"
+				#is_arts_selected = true
+#
+		#else:
+			## update the action selection
+			## temp 'hard code-y' text updates
+			#
+			##arts_selected.emit()
+			## temp way to update text
+			## alternatives: 1. use signal in global event_bus,
+				## connect to combat_art and combat_special 
+				## (need some init func in art, special, and character)
+			#var art0name = sorted_array[0]["character"].get_art_name(0)
+			#var art0charges = sorted_array[0]["character"].get_art_charges(0)
+			#var art1name = sorted_array[0]["character"].get_art_name(1)
+			#var art1charges = sorted_array[0]["character"].get_art_charges(1)
+			#var art2name = sorted_array[0]["character"].get_art_name(2)
+			#var art2charges = sorted_array[0]["character"].get_art_charges(2)
+			#
+			#ui_controls["up"].text = str(art1name) + " " + str(art1charges[0]) + "/" + str(art1charges[1])
+			#ui_controls["left"].text = str(art0name) + " " + str(art0charges[0]) + "/" + str(art0charges[1])
+			#ui_controls["right"].text = str(art2name) + " " + str(art2charges[0]) + "/" + str(art2charges[1])
+			#
+			##str(sorted_array[0].arts_list[1].art_name) + " " + str(sorted_array[0].arts_list[1].current_charge) + "/" + str(sorted_array[0].arts_list[1].max_charge)
+			##str(sorted_array[0].arts_list[0].art_name) + " " + str(sorted_array[0].arts_list[0].current_charge) + "/" + str(sorted_array[0].arts_list[0].max_charge)
+			##str(sorted_array[0].arts_list[2].art_name) + " " + str(sorted_array[0].arts_list[2].current_charge) + "/" + str(sorted_array[0].arts_list[2].max_charge)
+			#ui_controls["down"].text = "Exit Arts"
+			#
+			#if Input.is_action_just_pressed("left_art"):
+				#use_character_art(0)
+#
+			#if Input.is_action_just_pressed("up_art"):
+				#use_character_art(1)
+#
+			#if Input.is_action_just_pressed("right_art"):
+				#use_character_art(2)
+#
+			#if Input.is_action_just_pressed("arts_back"):
+				##$ActionLog.text = "exited arts selection"
+				#is_arts_selected = false
 
 
 func update_action_log(message: String):
@@ -266,35 +264,40 @@ func give_enemy_turn():
 	players.pick_random().get_attacked("", 1) # temp randomly select a player to be attacked
 
 
-func use_character_normal_attack():
+func use_character_normal_attack(target_enemy: Character):
 	# use: calls the use_normal_attack() function for the
 		# first (current turn) character in the queue 
 	var damage = sorted_array[0]["character"].use_normal_attack()
 	deal_damage(damage)
 	
-	enemies.pick_random().get_attacked("", damage) # temp select enemy at random
+	target_enemy.get_attacked("", damage)
+	#enemies.pick_random().get_attacked("", damage) # temp select enemy at random
 
 
-func use_character_art(art_num: int):
+func use_character_art(target_enemy: Character, art_num: int):
 	# use: calls the use_art() function for the 
 		# first (current turn) character in the queue
+	
+	# check for damage or healing
 	var damage = sorted_array[0]["character"].use_art(art_num)
 	if damage:
 		deal_damage(damage)
-		enemies.pick_random().get_attacked("", damage) # temp select enemy at random
+		target_enemy.get_attacked("", damage)
+		#enemies.pick_random().get_attacked("", damage) # temp select enemy at random
 		is_arts_selected = false
 	else:
 		update_action_log("Art is not charged")
 		return
 
 
-func use_character_special():
+func use_character_special(target_enemy: Character):
 	# use: calls the use_special() function for the
 		# first (current turn) character in the queue 
 	var damage = sorted_array[0]["character"].use_special()
 	if damage:
 		deal_damage(damage)
-		enemies.pick_random().get_attacked("", damage) # temp select enemy at random
+		target_enemy.get_attacked("", damage)
+		#enemies.pick_random().get_attacked("", damage) # temp select enemy at random
 	else:
 		update_action_log("Special has no charge")
 		return
@@ -319,28 +322,41 @@ func kill_character(character: Character):
 	sort_and_display()
 
 
+func get_enemies():
+	return enemies
+
+
+func get_players():
+	return players
+
+
+func get_character_arts():
+	var arts_info = [
+		["art0", sorted_array[0]["character"].get_art_info(0)],
+		["art1", sorted_array[0]["character"].get_art_info(1)],
+		["art2", sorted_array[0]["character"].get_art_info(2)],
+	]
+
+	return arts_info
+
+
 # functions connected to signals from action select menu 
 func _on_action_selection_container_move_selected() -> void:
 	pass # Replace with function body.
 
 
-func _on_action_selection_container_normal_attack_selected() -> void:
-	use_character_normal_attack()
-
-
-func _on_action_selection_container_art_0_selected() -> void:
-	use_character_art(0)
-
-
-func _on_action_selection_container_art_1_selected() -> void:
-	use_character_art(1)
-
-
-func _on_action_selection_container_art_2_selected() -> void:
-	use_character_art(2)
-
-func _on_action_selection_container_special_selected() -> void:
-	use_character_special()
+func _on_action_selection_container_attack_selected(attack_type: String, target: Character) -> void:
+	match attack_type:
+		"normal_attack":
+			use_character_normal_attack(target)
+		"art0":
+			use_character_art(target, 0)
+		"art1":
+			use_character_art(target, 1)
+		"art2":
+			use_character_art(target, 2)
+		"special":
+			use_character_special(target)
 
 
 func _on_action_selection_container_end_turn_selected() -> void:

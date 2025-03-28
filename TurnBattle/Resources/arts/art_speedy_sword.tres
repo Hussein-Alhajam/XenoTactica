@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://bldjqd85xly7p"]
+
+[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_bp65u"]
+
+[resource]
+script = ExtResource("1_bp65u")
+art_name = "Speedy Sword"
+power = 1.5
+num_hits = 3
+hit_ratio = Array[float]([0.3, 0.3, 0.4])
+aoe = 1
+attribute = "physical"
+max_charge = 4
+position_effect = ""
+bonus_effect = Array[String]([])
+reaction_effect = Array[String](["break"])

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://nvgog6nm6iwk"]
+
+[ext_resource type="Texture2D" uid="uid://wcu7d45wawc7" path="res://TurnBattle/assets/sprites/extracted/wizard.png" id="1_2bg7t"]
+[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_f3e04"]
+[ext_resource type="Script" uid="uid://danuq4w3l3y1c" path="res://TurnBattle/scripts/resources/character_stats.gd" id="2_2svqr"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://TurnBattle/Resources/arts/art_anchor_shot.tres" id="2_e5egu"]
+[ext_resource type="Resource" uid="uid://r1slhvpjfjef" path="res://TurnBattle/Resources/arts/art_double_spinning_edge.tres" id="3_uu0da"]
+[ext_resource type="Resource" uid="uid://dsksdhjhbvv6e" path="res://TurnBattle/Resources/arts/art_sword_bash.tres" id="4_1qkkm"]
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_35w2o"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://TurnBattle/Resources/specials/special1_chroma_dust.tres" id="8_cdn3c"]
+[ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://TurnBattle/Resources/specials/special2_photon_edge.tres" id="9_hfdk0"]
+[ext_resource type="Resource" uid="uid://brfo106f3jjja" path="res://TurnBattle/Resources/specials/special3_lightning_buster.tres" id="10_vnj60"]
+[ext_resource type="Resource" uid="uid://bdjn5uhfxapf2" path="res://TurnBattle/Resources/specials/special4_sacred_arrow.tres" id="11_lxqk1"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_rn1jk"]
+
+[resource]
+script = ExtResource("2_2svqr")
+character_name = "Wizard"
+icon = ExtResource("1_2bg7t")
+texture = ExtResource("1_2bg7t")
+vfx_node = ExtResource("12_rn1jk")
+health = 450
+strength = 5
+ether = 30
+defense = 10
+resistance = 30
+agility = 21
+element = "fire"
+arts_list = Array[ExtResource("1_f3e04")]([ExtResource("2_e5egu"), ExtResource("3_uu0da"), ExtResource("4_1qkkm")])
+specials_list = Array[ExtResource("7_35w2o")]([ExtResource("8_cdn3c"), ExtResource("9_hfdk0"), ExtResource("10_vnj60"), ExtResource("11_lxqk1")])

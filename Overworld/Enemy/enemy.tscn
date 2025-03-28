@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://dbe6ybprf7461"]
 
-[ext_resource type="Script" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
+[ext_resource type="Script" uid="uid://ce4rp23jh71d" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
 [ext_resource type="PackedScene" uid="uid://contxrld56mlo" path="res://Overworld/Enemy/battle_transition.tscn" id="3_6qser"]
-[ext_resource type="Script" path="res://Overworld/Enemy/state_machine.gd" id="3_aqlo4"]
+[ext_resource type="Script" uid="uid://dqnaoigdp4v72" path="res://Overworld/Enemy/state_machine.gd" id="3_aqlo4"]
 [ext_resource type="PackedScene" uid="uid://vvnj7urn8vgj" path="res://Overworld/Enemy/detection_zone.tscn" id="3_d8m0o"]
-[ext_resource type="Script" path="res://Overworld/Enemy/enemy_idle.gd" id="5_0koic"]
-[ext_resource type="Script" path="res://Overworld/Enemy/enemy_chase.gd" id="5_3cc1d"]
-[ext_resource type="Script" path="res://Overworld/Enemy/enemy_attack.gd" id="5_anksf"]
+[ext_resource type="Script" uid="uid://bdnid4se5o5g6" path="res://Overworld/Enemy/enemy_idle.gd" id="5_0koic"]
+[ext_resource type="Script" uid="uid://dfsb0smqvyean" path="res://Overworld/Enemy/enemy_chase.gd" id="5_3cc1d"]
+[ext_resource type="Script" uid="uid://bpqgfpif05wjs" path="res://Overworld/Enemy/enemy_attack.gd" id="5_anksf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh6km"]
 size = Vector2(40, 40)

@@ -1,13 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://2olhiqrswect"]
 
-[ext_resource type="Script" path="res://addons/gaea/editor/update_button.gd" id="1_8ury3"]
-[ext_resource type="PackedScene" uid="uid://6pmddcctde0v" path="res://addons/gaea/editor/download_update_panel.tscn" id="2_bw0il"]
+[ext_resource type="PackedScene" uid="uid://6pmddcctde0v" path="res://PCG_addons(Gaea)/gaea/editor/download_update_panel.tscn" id="2_bw0il"]
+
+[sub_resource type="Resource" id="Resource_eldlw"]
+metadata/__load_path__ = "res://addons/gaea/editor/update_button.gd"
 
 [node name="UpdateButton" type="Button"]
 visible = false
 text = "Gaea v1.0.0 available"
 flat = true
-script = ExtResource("1_8ury3")
+script = SubResource("Resource_eldlw")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://dsybg08jhne6w"]
+
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://TurnBattle/scripts/resources/combat_special.gd" id="1_jaxfk"]
+
+[resource]
+script = ExtResource("1_jaxfk")
+special_name = "Crimson Storm"
+power = 5.0
+num_hits = 5
+hit_ratio = Array[float]([0.1, 0.2, 0.2, 0.2, 0.3])
+attribute = "physical"
+aoe = 2
+heal_ratio = 0.0
+affect_team = false

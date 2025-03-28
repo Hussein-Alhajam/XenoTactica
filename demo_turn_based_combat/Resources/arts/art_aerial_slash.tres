@@ -12,5 +12,5 @@ aoe = 1
 attribute = "physical"
 max_charge = 7
 position_effect = ""
-bonus_effect = Array[String]([])
-reaction_effect = Array[String](["smash"])
+bonus_effects = Array[String]([])
+reaction_effects = Array[String](["Smash"])

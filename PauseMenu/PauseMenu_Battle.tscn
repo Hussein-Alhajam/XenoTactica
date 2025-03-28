@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmaes8al2b5cc"]
+
+[ext_resource type="Script" uid="uid://cnyr7l0o10lsn" path="res://PauseMenu/pause_menu_battle.gd" id="1_1wtr1"]
+[ext_resource type="FontFile" uid="uid://dvnph6jytvkss" path="res://StartScreen/Assets/pokemonemerald.ttf" id="1_nhanh"]
+
+[node name="PauseMenu_Battle" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_1wtr1")
+
+[node name="bg_overlay" type="ColorRect" parent="."]
+process_mode = 1
+anchors_preset = -1
+anchor_left = 0.484
+anchor_top = 0.413
+anchor_right = 0.484
+anchor_bottom = 0.413
+offset_left = -717.4
+offset_top = -296.7
+offset_right = -428.4
+offset_bottom = 17.3
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5.2, 2.32)
+color = Color(0.646029, 0.646029, 0.646029, 0.345098)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 637.0
+offset_top = 273.0
+offset_right = 926.0
+offset_bottom = 587.0
+
+[node name="Resume" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_nhanh")
+theme_override_font_sizes/font_size = 100
+text = "Resume"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_nhanh")
+theme_override_font_sizes/font_size = 100
+text = "Settings"
+
+[node name="Flee" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_nhanh")
+theme_override_font_sizes/font_size = 100
+text = "Flee"
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Flee" to="." method="_on_flee_pressed"]

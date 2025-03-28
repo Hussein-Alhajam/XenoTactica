@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CombatSpecial" load_steps=2 format=3 uid="uid://tyyvnh4a33f3"]
+
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://TurnBattle/scripts/resources/combat_special.gd" id="1_74jnx"]
+
+[resource]
+script = ExtResource("1_74jnx")
+special_name = "Burning Sword"
+power = 5.5
+num_hits = 11
+hit_ratio = Array[float]([])
+attribute = "ether"
+aoe = 1
+heal_ratio = 0.0
+affect_team = false

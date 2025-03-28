@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cguk7p8fnv2ra"]
+[gd_scene load_steps=5 format=3 uid="uid://cguk7p8fnv2ra"]
 
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_p5lt1"]
 [ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://assets/sprites/extracted/knight.png" id="2_5ttit"]
 [ext_resource type="PackedScene" uid="uid://dis4k61okmel3" path="res://scenes/health_bar.tscn" id="3_bnxmb"]
 
-[node name="Character" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qh0a0"]
+
+[node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_p5lt1")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
@@ -19,3 +21,6 @@ offset_bottom = 47.0
 
 [node name="DamageNumberOrigin" type="Node2D" parent="."]
 position = Vector2(0, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qh0a0")

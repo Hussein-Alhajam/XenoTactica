@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cexk00ops265y"]
+
+[ext_resource type="Script" uid="uid://ddp0i3vvoir7a" path="res://Grid-Movement/Control/PlayerUnitBattle.gd" id="1_sb1a8"]
+[ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://TurnBattle/Resources/players/knight.tres" id="2_owarb"]
+[ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://TurnBattle/assets/sprites/extracted/knight.png" id="2_tuajv"]
+[ext_resource type="PackedScene" uid="uid://dis4k61okmel3" path="res://TurnBattle/scenes/health_bar.tscn" id="3_sb1a8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xu7ay"]
+
+[node name="Player" type="CharacterBody2D" groups=["player_units"]]
+visibility_layer = 4
+scale = Vector2(2, 2)
+script = ExtResource("1_sb1a8")
+character_stats = ExtResource("2_owarb")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.500244)
+shape = SubResource("CapsuleShape2D_xu7ay")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8.5, -9.50024)
+texture = ExtResource("2_tuajv")
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0.5, -0.50024)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("CapsuleShape2D_xu7ay")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_sb1a8")]
+offset_left = -17.5
+offset_top = 21.0
+offset_right = 32.5
+offset_bottom = 25.0
+max_value = 60.0
+
+[node name="DamageNumberOrigin" type="Node2D" parent="."]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

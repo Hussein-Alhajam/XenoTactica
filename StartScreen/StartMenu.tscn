@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlel4enfi61n0"]
 
-[ext_resource type="Script" uid="uid://rvfdm32bl3s1" path="res://StartScreen/Menu.gd" id="1_w847x"]
+[ext_resource type="Script" path="res://StartScreen/Menu.gd" id="1_w847x"]
 [ext_resource type="Texture2D" uid="uid://bpfl8815m1cya" path="res://StartScreen/Assets/24.png" id="1_xejcj"]
 [ext_resource type="FontFile" uid="uid://dvnph6jytvkss" path="res://StartScreen/Assets/pokemonemerald.ttf" id="2_w847x"]
 [ext_resource type="Texture2D" uid="uid://ccppngpqntvqe" path="res://StartScreen/Assets/Button_52x14.png" id="3_x4r01"]

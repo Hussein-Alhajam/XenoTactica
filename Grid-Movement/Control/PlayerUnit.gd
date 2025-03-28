@@ -1,6 +1,13 @@
+#extends "res://demo_turn_based_combat_/scripts/character_sprite.gd"
 extends CharacterBody2D
 class_name PlayerUnit
 
+const RangeShape = preload("res://Grid-Movement/Resources/RangeShape.gd").RangeShape
+
+@export_enum("DIAMOND", "SQUARE", "CROSS", "TRIANGLE") var movement_shape: int = RangeShape.DIAMOND
+@export_enum("DIAMOND", "SQUARE", "CROSS", "TRIANGLE") var attack_shape: int = RangeShape.DIAMOND
+
+@export var character_data: Character
 @export var pathfinder: PathFinding
 @export var grid_manager: GridManager
 @export var move_range: int = 3
@@ -18,11 +25,12 @@ func _ready():
 	if pathfinder == null:
 		pathfinder = get_tree().get_first_node_in_group("pathfinder")
 
-	# ✅ Dynamically connect Area2D input event
 	if $Area2D:
 		$Area2D.connect("input_event", Callable(self, "_on_area2d_input_event"))
 
 	print("✅ PlayerUnit ready.")
+	if character_data:
+		$Sprite2D.texture = character_data.texture
 
 func _input(event):
 	# Don't use normal click detection for selection anymore since Area2D handles it
@@ -60,7 +68,7 @@ func select_unit():
 			var pos = grid_manager.tile_map.local_to_map(unit.global_position)
 			occupied_tiles.append(pos)
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
-	grid_manager.highlight_tiles(unit_tile, move_range)
+	grid_manager.highlight_tiles(unit_tile, move_range, movement_shape)
 	print("✅ Unit selected. Showing movement range.")
 
 func cancel_selection():
@@ -95,7 +103,7 @@ func move_to_tile(target_tile: Vector2i):
 			print("❌ Tile occupied by ENEMY! Cannot move there.")
 			return
 		occupied_tiles.append(enemy_pos)
-	# ✅ Mark these tiles as obstacles in pathfinder
+	# Mark these tiles as obstacles in pathfinder
 	pathfinder.update_obstacles(occupied_tiles)
 	
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
@@ -129,5 +137,5 @@ func follow_path(path: Array):
 	
 	# After move, show attack range
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
-	grid_manager.highlight_attack_tiles(unit_tile, attack_range)
+	grid_manager.highlight_attack_tiles(unit_tile, attack_range, attack_shape)
 	is_attacking = true

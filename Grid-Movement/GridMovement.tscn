@@ -1,16 +1,17 @@
-[gd_scene load_steps=16 format=4 uid="uid://dyso1d2sl5dn6"]
+[gd_scene load_steps=20 format=4 uid="uid://dyso1d2sl5dn6"]
 
 [ext_resource type="Script" path="res://Grid-Movement/Resources/GridManager.gd" id="1_m1wtr"]
 [ext_resource type="Script" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="3_6ylrr"]
 [ext_resource type="Script" path="res://Grid-Movement/Resources/PathFinding.gd" id="4_tdhi0"]
 [ext_resource type="Script" path="res://Grid-Movement/Control/PlayerUnit.gd" id="5_nsv4m"]
-[ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://demo_turn_based_combat_/assets/sprites/extracted/knight.png" id="6_4qc5x"]
-[ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://demo_turn_based_combat_/Resources/map_tileset.tres" id="7_146pi"]
-[ext_resource type="Texture2D" uid="uid://wcu7d45wawc7" path="res://demo_turn_based_combat_/assets/sprites/extracted/wizard.png" id="7_imcac"]
-[ext_resource type="Texture2D" uid="uid://dp136ntapoxt3" path="res://demo_turn_based_combat_/assets/sprites/extracted/rogue.png" id="8_ye0gv"]
-[ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/assets/sprites/gorgon_sprite.png" id="9_tdhi0"]
-[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="10_nsv4m"]
-[ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://demo_turn_based_combat_/assets/sprites/kraken_sprite.png" id="11_4qc5x"]
+[ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://TurnBattle/assets/sprites/extracted/knight.png" id="6_4qc5x"]
+[ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://TurnBattle/Resources/map_tileset.tres" id="7_146pi"]
+[ext_resource type="Texture2D" uid="uid://wcu7d45wawc7" path="res://TurnBattle/assets/sprites/extracted/wizard.png" id="7_imcac"]
+[ext_resource type="Texture2D" uid="uid://dp136ntapoxt3" path="res://TurnBattle/assets/sprites/extracted/rogue.png" id="8_ye0gv"]
+[ext_resource type="Script" path="res://Grid-Movement/Control/EnemyUnit.gd" id="9_4qc5x"]
+[ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://TurnBattle/assets/sprites/gorgon_sprite.png" id="9_tdhi0"]
+[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://TurnBattle/assets/sprites/cyclops_sprite.png" id="10_nsv4m"]
+[ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://TurnBattle/assets/sprites/kraken_sprite.png" id="11_4qc5x"]
 [ext_resource type="Script" path="res://Grid-Movement/Transitions/BattleTransition.gd" id="12_nsv4m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xu7ay"]
@@ -19,12 +20,22 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_53fq6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qc5x"]
+size = Vector2(60, 62.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imcac"]
+size = Vector2(62.5, 59.1667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ye0gv"]
+size = Vector2(58.3333, 54.1667)
+
 [node name="GridMovement" type="Node2D"]
 
-[node name="GridManager" type="Node2D" parent="." node_paths=PackedStringArray("tile_map", "pathfinder")]
+[node name="GridManager" type="Node2D" parent="." node_paths=PackedStringArray("tile_map", "pathfinder", "overlay_container")]
 script = ExtResource("1_m1wtr")
 tile_map = NodePath("../TileMapLayer")
 pathfinder = NodePath("../PathFinding")
+overlay_container = NodePath("../OverlayContainer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("grid_manager")]
 tile_map_data = PackedByteArray("AAD//wAAAAADAAAAAAD//wEAAAADAAAAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAIAAAD//wMAAAADAAAAAAD//wIAAAADAAAAAAD//wQAAAADAAAAAAD//wUAAAADAAAAAAD//wYAAAADAAAAAAD//wcAAAADAAAAAAD//wgAAAADAAAAAAD//wkAAAADAAAAAAD//woAAAADAAAAAAD//wsAAAADAAAAAAAAAAsAAAADAAAAAAABAAsAAAADAAAAAAACAAsAAAADAAAAAAADAAsAAAADAAAAAAAEAAsAAAADAAAAAAAFAAsAAAADAAAAAAAGAAsAAAADAAAAAAAHAAsAAAADAAAAAAAIAAsAAAADAAAAAAAJAAsAAAADAAAAAAAKAAsAAAADAAAAAAALAAsAAAADAAAAAAAMAAsAAAADAAAAAAANAAsAAAADAAAAAAAOAAsAAAADAAAAAAAPAAsAAAADAAAAAAAQAAsAAAADAAAAAAARAAsAAAADAAAAAAASAAsAAAADAAAAAAATAAsAAAADAAAAAAATAAoAAAACAAMAAAAUAAoAAAADAAAAAAAUAAsAAAADAAAAAAAUAAkAAAADAAAAAAAUAAgAAAADAAAAAAAUAAcAAAADAAAAAAAUAAYAAAADAAAAAAAUAAUAAAADAAAAAAAUAAQAAAADAAAAAAAUAAMAAAADAAAAAAATAAMAAAACAAIAAAATAAIAAAACAAIAAAAUAAIAAAADAAAAAAAUAAEAAAADAAAAAAATAAEAAAACAAIAAAATAAAAAAACAAEAAAATAP//AAADAAAAAAAUAP//AAADAAAAAAAUAAAAAAADAAAAAAASAP//AAADAAAAAAARAP//AAADAAAAAAAQAP//AAADAAAAAAAPAP//AAADAAAAAAAOAP//AAADAAAAAAANAP//AAADAAAAAAAMAP//AAADAAAAAAALAP//AAADAAAAAAAKAP//AAADAAAAAAAJAP//AAADAAAAAAAIAP//AAADAAAAAAAHAP//AAADAAAAAAAGAP//AAADAAAAAAAFAP//AAADAAAAAAAEAP//AAADAAAAAAADAP//AAADAAAAAAACAP//AAADAAAAAAABAP//AAADAAAAAAAAAP//AAADAAAAAAD/////AAADAAAAAAAAAAoAAAAAAAMAAAAAAAAAAAAAAAEAAAABAAIAAAAEAAMAAAABAAMAAAABAAIAAAABAAQAAAABAAIAAAABAAUAAAABAAIAAAAAAAUAAAAAAAIAAAAAAAQAAAAAAAIAAAAAAAYAAAAAAAIAAAAAAAcAAAAAAAIAAAAAAAgAAAAAAAIAAAAAAAkAAAAAAAIAAAABAAoAAAABAAMAAAACAAoAAAABAAMAAAADAAoAAAABAAMAAAAGAAoAAAABAAMAAAAFAAoAAAABAAMAAAAEAAoAAAABAAMAAAAHAAoAAAABAAMAAAAIAAoAAAABAAMAAAAJAAoAAAABAAMAAAAKAAoAAAABAAMAAAALAAoAAAABAAMAAAAMAAoAAAABAAMAAAANAAoAAAABAAMAAAAOAAoAAAABAAMAAAAPAAoAAAABAAMAAAAQAAoAAAABAAMAAAARAAoAAAABAAMAAAASAAoAAAABAAMAAAASAAkAAAABAAIAAAATAAkAAAACAAIAAAATAAgAAAACAAIAAAATAAcAAAACAAIAAAATAAYAAAACAAIAAAATAAUAAAACAAIAAAATAAQAAAACAAIAAAASAAAAAAABAAEAAAARAAAAAAABAAEAAAAQAAAAAAABAAEAAAAPAAAAAAABAAEAAAAOAAAAAAABAAEAAAANAAAAAAABAAEAAAAMAAAAAAABAAEAAAALAAAAAAABAAEAAAAKAAAAAAABAAEAAAAJAAAAAAABAAEAAAAIAAAAAAABAAEAAAAHAAAAAAABAAEAAAAGAAAAAAABAAEAAAAFAAAAAAABAAEAAAAEAAAAAAABAAEAAAADAAAAAAABAAEAAAACAAAAAAABAAEAAAABAAAAAAABAAEAAAABAAEAAAAEAAIAAAABAAYAAAABAAIAAAABAAcAAAABAAIAAAABAAgAAAABAAIAAAABAAkAAAABAAIAAAACAAEAAAAFAAIAAAACAAIAAAAFAAMAAAACAAMAAAABAAIAAAACAAQAAAABAAIAAAACAAUAAAAEAAAAAAACAAYAAAABAAIAAAACAAcAAAABAAIAAAACAAgAAAABAAIAAAACAAkAAAABAAIAAAADAAEAAAABAAIAAAADAAIAAAABAAIAAAADAAMAAAABAAIAAAADAAQAAAABAAIAAAADAAUAAAABAAIAAAADAAYAAAABAAIAAAADAAcAAAABAAIAAAADAAgAAAABAAIAAAADAAkAAAADAAAAAAAEAAEAAAABAAIAAAAEAAIAAAABAAIAAAAEAAMAAAABAAIAAAAEAAQAAAABAAIAAAAEAAUAAAABAAIAAAAEAAYAAAABAAIAAAAEAAcAAAABAAIAAAAEAAgAAAABAAIAAAAEAAkAAAABAAIAAAAFAAEAAAABAAIAAAAFAAIAAAAEAAAAAAAFAAMAAAABAAIAAAAFAAQAAAABAAIAAAAFAAUAAAABAAIAAAAFAAYAAAAEAAIAAAAFAAcAAAAEAAMAAAAFAAgAAAABAAIAAAAFAAkAAAABAAIAAAAGAAEAAAABAAIAAAAGAAIAAAABAAIAAAAGAAMAAAABAAIAAAAGAAQAAAABAAIAAAAGAAUAAAABAAIAAAAGAAYAAAAFAAIAAAAGAAcAAAAFAAMAAAAGAAgAAAABAAIAAAAGAAkAAAABAAIAAAAHAAEAAAABAAIAAAAHAAIAAAABAAIAAAAHAAMAAAABAAIAAAAHAAQAAAABAAIAAAAHAAUAAAABAAIAAAAHAAYAAAABAAIAAAAHAAcAAAABAAIAAAAHAAgAAAABAAIAAAAHAAkAAAABAAIAAAAIAAEAAAABAAIAAAAIAAIAAAABAAIAAAAIAAMAAAABAAIAAAAIAAQAAAABAAIAAAAIAAUAAAABAAIAAAAIAAYAAAABAAIAAAAIAAcAAAABAAIAAAAIAAgAAAAEAAAAAAAIAAkAAAABAAIAAAAJAAEAAAABAAIAAAAJAAIAAAABAAIAAAAJAAMAAAABAAIAAAAJAAQAAAABAAIAAAAJAAUAAAABAAIAAAAJAAYAAAABAAIAAAAJAAcAAAABAAIAAAAJAAgAAAABAAIAAAAJAAkAAAABAAIAAAAKAAEAAAABAAIAAAAKAAIAAAABAAIAAAAKAAMAAAABAAIAAAAKAAQAAAABAAIAAAAKAAUAAAABAAIAAAAKAAYAAAABAAIAAAAKAAcAAAABAAIAAAAKAAgAAAABAAIAAAAKAAkAAAABAAIAAAALAAEAAAAEAAAAAAALAAIAAAABAAIAAAALAAMAAAABAAIAAAALAAQAAAADAAAAAAALAAUAAAABAAIAAAALAAYAAAABAAIAAAALAAcAAAABAAIAAAALAAgAAAABAAIAAAALAAkAAAABAAIAAAAMAAEAAAABAAIAAAAMAAIAAAABAAIAAAAMAAMAAAABAAIAAAAMAAQAAAABAAIAAAAMAAUAAAABAAIAAAAMAAYAAAABAAIAAAAMAAcAAAABAAIAAAAMAAgAAAABAAIAAAAMAAkAAAABAAIAAAANAAEAAAABAAIAAAANAAIAAAABAAIAAAANAAMAAAABAAIAAAANAAQAAAABAAIAAAANAAUAAAABAAIAAAANAAYAAAABAAIAAAANAAcAAAABAAIAAAANAAgAAAABAAIAAAANAAkAAAABAAIAAAAOAAEAAAABAAIAAAAOAAIAAAABAAIAAAAOAAMAAAABAAIAAAAOAAQAAAABAAIAAAAOAAUAAAABAAIAAAAOAAYAAAABAAIAAAAOAAcAAAABAAIAAAAOAAgAAAAEAAAAAAAOAAkAAAABAAIAAAAPAAEAAAADAAAAAAAPAAIAAAABAAIAAAAPAAMAAAABAAIAAAAPAAQAAAABAAIAAAAPAAUAAAABAAIAAAAPAAYAAAABAAIAAAAPAAcAAAABAAIAAAAPAAgAAAABAAIAAAAPAAkAAAABAAIAAAAQAAEAAAABAAIAAAAQAAIAAAABAAIAAAAQAAMAAAABAAIAAAAQAAQAAAABAAIAAAAQAAYAAAAEAAAAAAAQAAcAAAABAAIAAAAQAAgAAAAEAAIAAAAQAAkAAAAEAAMAAAARAAEAAAABAAIAAAARAAIAAAABAAIAAAARAAMAAAABAAIAAAARAAQAAAABAAIAAAARAAUAAAABAAIAAAARAAYAAAABAAIAAAARAAcAAAABAAIAAAARAAgAAAAFAAIAAAARAAkAAAAFAAMAAAASAAEAAAABAAIAAAASAAIAAAABAAIAAAASAAMAAAABAAIAAAASAAQAAAABAAIAAAASAAUAAAABAAIAAAASAAYAAAABAAIAAAASAAcAAAABAAIAAAASAAgAAAABAAIAAAAQAAUAAAABAAIAAAA=")
@@ -35,6 +46,8 @@ grid_manager = NodePath("../GridManager")
 [node name="PathFinding" type="Node2D" parent="." node_paths=PackedStringArray("grid_manager")]
 script = ExtResource("4_tdhi0")
 grid_manager = NodePath("../GridManager")
+
+[node name="OverlayContainer" type="Node2D" parent="."]
 
 [node name="Players" type="Node2D" parent="."]
 position = Vector2(252, 22.2855)
@@ -119,20 +132,50 @@ position = Vector2(819, 449)
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(-165, -78)
 
-[node name="Enemy" type="Sprite2D" parent="Enemies" groups=["enemy_units"]]
+[node name="Enemy" type="CharacterBody2D" parent="Enemies" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["enemy_units"]]
 position = Vector2(368, 361)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("9_tdhi0")
+script = ExtResource("9_4qc5x")
+pathfinder = NodePath("../../PathFinding")
+grid_manager = NodePath("../../GridManager")
+attack_range = 5
 
-[node name="Enemy2" type="Sprite2D" parent="Enemies" groups=["enemy_units"]]
+[node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy"]
+texture = ExtResource("10_nsv4m")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy"]
+position = Vector2(-2.5, -1.25)
+shape = SubResource("RectangleShape2D_4qc5x")
+
+[node name="Enemy2" type="CharacterBody2D" parent="Enemies" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["enemy_units"]]
 position = Vector2(767, 512.567)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("10_nsv4m")
+script = ExtResource("9_4qc5x")
+pathfinder = NodePath("../../PathFinding")
+grid_manager = NodePath("../../GridManager")
 
-[node name="Enemy3" type="Sprite2D" parent="Enemies" groups=["enemy_units"]]
+[node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy2"]
+texture = ExtResource("9_tdhi0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy2"]
+position = Vector2(-0.416656, 1.61087)
+shape = SubResource("RectangleShape2D_imcac")
+
+[node name="Enemy3" type="CharacterBody2D" parent="Enemies" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["enemy_units"]]
 position = Vector2(608, 203)
 scale = Vector2(1.2, 1.2)
+script = ExtResource("9_4qc5x")
+pathfinder = NodePath("../../PathFinding")
+grid_manager = NodePath("../../GridManager")
+attack_range = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy3"]
 texture = ExtResource("11_4qc5x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy3"]
+position = Vector2(-1.66666, 1.25)
+shape = SubResource("RectangleShape2D_ye0gv")
 
 [node name="BattleTransition" type="Node2D" parent="."]
 script = ExtResource("12_nsv4m")

@@ -11,7 +11,7 @@ var is_attacking: bool = false
 var attack_tween: Tween
 
 func enter():
-	await get_tree().process_frame  # 🚀 Ensure the scene tree is fully loaded
+	await get_tree().process_frame  # Ensure the scene tree is fully loaded
 	var tree = get_tree()
 
 	if tree == null:
@@ -36,7 +36,7 @@ func enter():
 func exit():
 	print("Exiting Attack state")
 	if attack_tween and attack_tween.is_running():
-		attack_tween.kill()  # 🚀 Prevents movement bugs if the tween is interrupted
+		attack_tween.kill()  # Prevents movement bugs if the tween is interrupted
 
 func force_move_to_player():
 	if is_attacking:
@@ -53,9 +53,9 @@ func force_move_to_player():
 
 func on_attack_finished():
 	is_attacking = false
-	print("🛑 Enemy reached player's last known position! Checking collision...")
+	print("Enemy reached player's last known position! Checking collision...")
 
-	await get_tree().process_frame  # 🚀 Ensures player position updates before checking collision
+	await get_tree().process_frame  # Ensures player position updates before checking collision
 
 	if area2D == null:
 		print("❌ ERROR: area2D is NULL!")
@@ -83,11 +83,11 @@ func on_attack_finished():
 				enemy.visible = false  # Hide enemy before battle starts
 
 				# 🚀 Transition to battle scene
-				body.save_and_transition("res://demo_turn_based_combat_/scenes/battle_scene.tscn")
+				body.save_and_transition("res://TurnBattle/scenes/battle_scene.tscn")
 				return
 
 	# 🚀 If no collision, return to chase
-	print("⚠️ No valid player collision detected. Returning to chase.")
+	print("No valid player collision detected. Returning to chase.")
 	Transitioned.emit(self, "chase")
 
 

@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn2vkd5j2e0jb"]
+
+[ext_resource type="FontFile" uid="uid://dvnph6jytvkss" path="res://StartScreen/Assets/pokemonemerald.ttf" id="1_bh1g4"]
+[ext_resource type="Script" uid="uid://bih0yv47jptns" path="res://PauseMenu/pause_menu_overworld.gd" id="1_e0da4"]
+
+[node name="PauseMenu_Overworld" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_e0da4")
+
+[node name="bg_overlay" type="ColorRect" parent="."]
+process_mode = 1
+anchors_preset = -1
+anchor_left = 0.484
+anchor_top = 0.413
+anchor_right = 0.484
+anchor_bottom = 0.413
+offset_left = -736.4
+offset_top = -287.7
+offset_right = -447.4
+offset_bottom = 26.3
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5.2, 2.32)
+color = Color(0.646029, 0.646029, 0.646029, 0.345098)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 637.0
+offset_top = 273.0
+offset_right = 926.0
+offset_bottom = 587.0
+
+[node name="Resume" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bh1g4")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+action_mode = 0
+text = "Resume"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bh1g4")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+text = "Settings"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+theme_override_fonts/font = ExtResource("1_bh1g4")
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+action_mode = 0
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

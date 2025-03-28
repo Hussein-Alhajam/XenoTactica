@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://bysuvmss3spbk"]
+
+[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_tvewv"]
+
+[resource]
+script = ExtResource("1_tvewv")
+art_name = "Whirlwind"
+power = 2.0
+num_hits = 1
+hit_ratio = Array[float]([])
+aoe = 2
+attribute = "ether"
+max_charge = 4
+position_effect = ""
+bonus_effect = Array[String]([])
+reaction_effect = Array[String]([])
