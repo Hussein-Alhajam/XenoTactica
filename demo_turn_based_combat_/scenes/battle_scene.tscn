@@ -1,25 +1,22 @@
-[gd_scene load_steps=28 format=4 uid="uid://cc5hn5aulatdh"]
+[gd_scene load_steps=25 format=4 uid="uid://cc5hn5aulatdh"]
 
-[ext_resource type="Script" uid="uid://bc13gvaja1f21" path="res://demo_turn_based_combat_/scripts/Battling-Scene.gd" id="1_c21e3"]
-[ext_resource type="Script" uid="uid://cop3jcoh3rbui" path="res://demo_turn_based_combat_/scripts/attack_button.gd" id="2_brajv"]
-[ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://demo_turn_based_combat_/scenes/enemy_button.tscn" id="2_q2h2f"]
+[ext_resource type="Script" uid="uid://bstbwhg0out7p" path="res://Grid-Movement/Control/Battling-Scene.gd" id="1_c21e3"]
+[ext_resource type="Script" uid="uid://bnlqm77spbq7q" path="res://demo_turn_based_combat_/TurnBattle/scripts/attack_button.gd" id="2_brajv"]
+[ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://demo_turn_based_combat_/TurnBattle/scenes/enemy_button.tscn" id="2_q2h2f"]
 [ext_resource type="Script" uid="uid://0ca101ytw440" path="res://Grid-Movement/Resources/GridManager.gd" id="4_c21e3"]
 [ext_resource type="Script" uid="uid://xiaj8nfs36b" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="4_f87od"]
-[ext_resource type="Script" uid="uid://p67v87vflkmd" path="res://demo_turn_based_combat_/scripts/haste_button.gd" id="4_id56c"]
-[ext_resource type="Script" uid="uid://dg3v8fv1vgk6n" path="res://demo_turn_based_combat_/scripts/flee_button.gd" id="5_0bm3q"]
+[ext_resource type="Script" uid="uid://b42ay6nmvlewf" path="res://demo_turn_based_combat_/TurnBattle/scripts/haste_button.gd" id="4_id56c"]
+[ext_resource type="Script" uid="uid://5ysl2fg0y1le" path="res://demo_turn_based_combat_/TurnBattle/scripts/flee_button.gd" id="5_0bm3q"]
 [ext_resource type="Script" uid="uid://bxjx0pdydv5qe" path="res://Grid-Movement/Resources/PathFinding.gd" id="5_imvtc"]
-[ext_resource type="Script" uid="uid://bk7o462jleamv" path="res://demo_turn_based_combat_/scripts/combat_option_list.gd" id="6_paiac"]
-[ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://demo_turn_based_combat_/Resources/enemies/gorgon.tres" id="6_wea8f"]
-[ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://demo_turn_based_combat_/Resources/enemies/cyclops.tres" id="7_6ucfx"]
-[ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://demo_turn_based_combat_/Resources/enemies/kraken.tres" id="8_qg17s"]
-[ext_resource type="PackedScene" uid="uid://cexk00ops265y" path="res://Grid-Movement/Control/Knight.tscn" id="10_imvtc"]
-[ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://demo_turn_based_combat_/Resources/map_tileset.tres" id="12_hp3cp"]
-[ext_resource type="PackedScene" uid="uid://b8my6uh6yy42g" path="res://Grid-Movement/Control/Wizard.tscn" id="12_imvtc"]
-[ext_resource type="PackedScene" uid="uid://6v1caaexo5ls" path="res://Grid-Movement/Control/Rogue.tscn" id="13_80kvl"]
-[ext_resource type="Script" uid="uid://bneaei84ocs66" path="res://Grid-Movement/Control/EnemyUnit.gd" id="14_fwk0q"]
-[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/assets/sprites/cyclops_sprite.png" id="16_g6t2v"]
-[ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/assets/sprites/gorgon_sprite.png" id="18_icd8g"]
-[ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://demo_turn_based_combat_/assets/sprites/kraken_sprite.png" id="20_crx2k"]
+[ext_resource type="Script" path="res://demo_turn_based_combat_/scripts/combat_option_list.gd" id="6_paiac"]
+[ext_resource type="PackedScene" path="res://Grid-Movement/Control/Knight.tscn" id="10_imvtc"]
+[ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://demo_turn_based_combat_/TurnBattle/Resources/map_tileset.tres" id="12_hp3cp"]
+[ext_resource type="PackedScene" path="res://Grid-Movement/Control/Wizard.tscn" id="12_imvtc"]
+[ext_resource type="PackedScene" path="res://Grid-Movement/Control/Rogue.tscn" id="13_80kvl"]
+[ext_resource type="Script" uid="uid://bneaei84ocs66" path="res://Grid-Movement/Control/EnemyUnitBattle.gd" id="14_fwk0q"]
+[ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://demo_turn_based_combat_/TurnBattle/assets/sprites/cyclops_sprite.png" id="16_g6t2v"]
+[ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://demo_turn_based_combat_/TurnBattle/assets/sprites/gorgon_sprite.png" id="18_icd8g"]
+[ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://demo_turn_based_combat_/TurnBattle/assets/sprites/kraken_sprite.png" id="20_crx2k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkmgs"]
 bg_color = Color(8.85606e-06, 0.279961, 0.7771, 1)
@@ -369,7 +366,6 @@ position = Vector2(-165, -78)
 [node name="Enemy" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
 position = Vector2(372, 365.685)
 script = ExtResource("14_fwk0q")
-character = ExtResource("7_6ucfx")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy"]
 texture = ExtResource("16_g6t2v")
@@ -382,7 +378,6 @@ shape = SubResource("CapsuleShape2D_g6t2v")
 position = Vector2(767, 512.567)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("14_fwk0q")
-character = ExtResource("6_wea8f")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy2"]
 texture = ExtResource("18_icd8g")
@@ -395,7 +390,6 @@ shape = SubResource("CapsuleShape2D_g6t2v")
 position = Vector2(590, 676.669)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("14_fwk0q")
-character = ExtResource("8_qg17s")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy3"]
 texture = ExtResource("20_crx2k")

@@ -26,23 +26,40 @@ func act():
 	var shortest_path = []
 	var min_distance = INF
 
-	# Find the closest player based on actual path length
+	# Get occupied tiles: other enemies + player units
+	var occupied_tiles = []
+	for enemy in get_tree().get_nodes_in_group("enemy_units"):
+		if enemy != self:
+			var enemy_tile = grid_manager.tile_map.local_to_map(enemy.global_position)
+			occupied_tiles.append(enemy_tile)
+
+	for player in get_tree().get_nodes_in_group("player_units"):
+		var player_tile = grid_manager.tile_map.local_to_map(player.global_position)
+		occupied_tiles.append(player_tile)
+
+	# Tell the pathfinder to treat them as obstacles
+	pathfinder.update_obstacles(occupied_tiles)
+
+	# Find closest player using updated pathfinder
 	for player in get_tree().get_nodes_in_group("player_units"):
 		var player_tile = grid_manager.tile_map.local_to_map(player.global_position)
 		var path = pathfinder.find_path(my_tile, player_tile)
+		print("🧭 Path from", my_tile, "to", player_tile, ":", path)
 		if path.size() > 1 and path.size() < min_distance:
 			closest_player = player
 			shortest_path = path
 			min_distance = path.size()
 
-	# Stop if already adjacent (in attack range)
-	if shortest_path.size() <= attack_range + 1:
-		print("🛑 Enemy is in range, can attack.")
-		return
+# Only proceed if a valid path was found
+		if shortest_path.size() <= 1:
+			print("❌ Path to player blocked or invalid.")
+			return
 
-	if shortest_path.size() > 1:
-		var move_path = shortest_path.slice(1, min(shortest_path.size(), move_range + 1))
-		follow_path(move_path)
+# ✅ Now check if in range
+		if shortest_path.size() <= attack_range + 1:
+			print("🛑 Enemy is in range, can attack.")
+			return
+
 
 func follow_path(path: Array):
 	is_moving = true
