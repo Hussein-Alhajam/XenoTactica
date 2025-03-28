@@ -1,15 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://cguk7p8fnv2ra"]
+[gd_scene load_steps=6 format=3 uid="uid://cguk7p8fnv2ra"]
 
 [ext_resource type="Script" uid="uid://b124joomhljtd" path="res://demo_turn_based_combat_/TurnBattle/scripts/character/character.gd" id="1_p5lt1"]
 [ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://demo_turn_based_combat_/TurnBattle/assets/sprites/extracted/knight.png" id="2_c86bg"]
 [ext_resource type="PackedScene" uid="uid://dis4k61okmel3" path="res://demo_turn_based_combat_/TurnBattle/scenes/health_bar.tscn" id="3_bnxmb"]
 
-[node name="Character" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctlu3"]
+size = Vector2(36.5, 46.0002)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1lal"]
+size = Vector2(40, 48)
+
+[node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_p5lt1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7.75, 12.9999)
+shape = SubResource("RectangleShape2D_ctlu3")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_c86bg")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0.5, -0.50024)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-10.5, 14.5002)
+shape = SubResource("RectangleShape2D_r1lal")
 
 [node name="HealthBar" parent="." instance=ExtResource("3_bnxmb")]
 offset_left = -33.0

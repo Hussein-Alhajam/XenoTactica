@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 				# and assuming controls are only available when current turn is a player,
 				# (i.e., if we are in controls, first element in queue is a player)
 				# make that player character charge their arts
-				use_character_normal_attack()
+				move_selected()
 
 			if Input.is_action_just_pressed("special"):
 				use_character_special()
@@ -333,3 +333,8 @@ func kill_character(character: Character):
 		enemies.erase(character)
 		print(enemies)
 	sort_and_display()
+
+
+func move_selected():
+	sorted_array[0]["character"].select_unit()
+	

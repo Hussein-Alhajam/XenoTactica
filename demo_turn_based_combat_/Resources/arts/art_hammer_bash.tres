@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://paa0nhcb8d6"]
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://btcomg880iodb"]
 
 [ext_resource type="Script" uid="uid://bn5crr0duimys" path="res://demo_turn_based_combat_/scripts/combat_art.gd" id="1_7d8tb"]
 

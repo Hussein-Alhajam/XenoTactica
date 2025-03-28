@@ -1,8 +1,9 @@
 extends Node2D
 class_name BattleScene
 
+
 enum TurnState { NEUTRAL, ATTACKED, MOVED, SKIPPED }
-enum ActiveHud { COMBAT_OPTIONS, ARTS_SELECTION, SETTINGS_OPTIONS, TITLE_MENU }
+enum ActiveHud { COMBAT, SETTINGS_OPTIONS, TITLE_MENU }
 
 @export var player_group: Node2D # hold the 'Players' node
 @export var enemy_group: Node2D # hold the 'Enemies' node
@@ -13,8 +14,8 @@ enum ActiveHud { COMBAT_OPTIONS, ARTS_SELECTION, SETTINGS_OPTIONS, TITLE_MENU }
 var sorted_array = [] # [{ "character": unit, "time": value }, ...]
 var is_arts_selected: bool = false
 var turn_state = TurnState.NEUTRAL
+var active_hud = ActiveHud.COMBAT
 var ui_controls := {}
-
 
 func _ready():
 	Global.battle_scene = self
@@ -38,12 +39,15 @@ func initialize_characters():
 	# Get characters via group, instead of scene node references
 	for player in get_tree().get_nodes_in_group("player_units"):
 		player.queue = player.queue if "queue" in player else [0] # fallback if missing
+		player.append(player)
+	
 	for enemy in get_tree().get_nodes_in_group("enemy_units"):
 		enemy.queue = enemy.queue if "queue" in enemy else [0]
+		enemy.append(enemy)
 		
-		var button = enemy_button.instantiate()
-		button.character = enemy.character
-		%EnemySelection.add_child(button)
+		#var button = enemy_button.instantiate()
+		#button.character = enemy.character
+		#%EnemySelection.add_child(button)
 
 func _process(_delta):
 	var current = sorted_array[0]["character"]
@@ -90,13 +94,13 @@ func update_action_log(message: String):
 func sort_combined_queue():
 	var combined = []
 
-	print("📦 Collecting player units:")
+	print("Collecting player units:")
 	for player in get_tree().get_nodes_in_group("player_units"):
 		print("   -", player.name, "Queue:", player.queue)
 		for time in player.queue:
 			combined.append({ "character": player, "time": time })
 
-	print("📦 Collecting enemy units:")
+	print("Collecting enemy units:")
 	for enemy in get_tree().get_nodes_in_group("enemy_units"):
 		print("   -", enemy.name, "Queue:", enemy.queue)
 		for time in enemy.queue:
@@ -105,7 +109,7 @@ func sort_combined_queue():
 	sorted_array = combined
 	sorted_array.sort_custom(sort_by_time)
 
-	print("🧩 Sorted turn order:")
+	print("Sorted turn order:")
 	for entry in sorted_array:
 		print("   •", entry["character"].name, "| time:", entry["time"])
 

@@ -1,14 +1,16 @@
 extends CharacterBody2D
 class_name PlayerUnitBattle
 
-var vfx_node: PackedScene = preload("res://demo_turn_based_combat_/TurnBattle/scenes/vfx.tscn")
-@export var character: Character  # Your custom Character resource
+@export var vfx_node: PackedScene = preload("res://demo_turn_based_combat_/TurnBattle/scenes/vfx.tscn") #?
+@export var character_stats: CharacterStats # receives all 'unique traits' from this resource
 @export var pathfinder: PathFinding
 @export var grid_manager: GridManager
 @export var move_range: int = 3
 @export var move_speed: float = 100.0
 @export var attack_range: int = 1
 
+@onready var health_bar: ProgressBar = $HealthBar
+@onready var damage_numbers_origin: Node2D = $DamageNumberOrigin
 # UI & sprite
 @onready var sprite: Sprite2D = $Sprite2D
 var character_name: String
@@ -41,29 +43,34 @@ var is_attacking = false
 static var currently_selected_unit: PlayerUnitBattle = null
 
 func _ready():
-	if character:
-		# Stats setup
-		character.node = self
-		icon = character.icon
-		character_name = character.title
-		sprite.texture = character.texture
-		health = character.health
-		strength = character.strength
-		ether = character.ether
-		defense = character.defense
-		resistance = character.resistance
-		agility = character.agility
-		element = character.element
+	character_name = character_stats.character_name
+	icon = character_stats.icon
+	health = character_stats.health
+	strength = character_stats.strength
+	ether = character_stats.ether
+	defense = character_stats.defense
+	resistance = character_stats.resistance
+	agility = character_stats.agility
+	element = character_stats.element
+	arts_list = character_stats.arts_list
+	specials_list = character_stats.specials_list
+	
+	$Sprite2D.texture = character_stats.texture
+	
+	health_bar.init_health(health)
 
-		arts_list = []
-		for art in character.arts_list:
-			arts_list.append(art.duplicate(true))
+	# Ensure each character gets a unique copy of the arts
+	var new_arts_list: Array[CombatArt] = []
+	for art in arts_list:
+		new_arts_list.append(art.duplicate(true))  # Deep copy
+	arts_list = new_arts_list
+	# same for specials
+	var new_specials_list: Array[CombatSpecial] = []
+	for special in specials_list:
+		new_specials_list.append(special.duplicate(true))
+	specials_list = new_specials_list
 
-		specials_list = []
-		for special in character.specials_list:
-			specials_list.append(special.duplicate(true))
-
-		queue_reset()
+	queue_reset()
 
 	if grid_manager == null:
 		grid_manager = get_tree().get_first_node_in_group("grid_manager")
@@ -223,9 +230,24 @@ func set_status(status_type: String):
 	queue.resize(1)
 	for i in range(3):
 		queue.append(queue[-1] + speed * status)
-
+func _set_health(value: int):
+	# update health
+	health = health + value
+	print(character_name + ": " + str(health) + "hp")
+	
+	# update health bar
+	health_bar.health = health
+	
+	# show 'damage' numbers (can be heal)
+	DamageNumbers.display_number(value, damage_numbers_origin.global_position, "#FF0000")
+	# *lookup: position vs global_position
+	
+	# need some way of letting game know if this character dies
+	# try: send signal with character reference,
+	if health <= 0:
+		kill_character()
 func kill_character():
-	print("☠️", character.title, "has been defeated.")
+	print("☠️", character_name, "has been defeated.")
 	Global.battle_scene.kill_character(self)
 	queue_free()
 
