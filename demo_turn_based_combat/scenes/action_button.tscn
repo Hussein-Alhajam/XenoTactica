@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c7xmvecy4xcj5"]
+
+[node name="ActionButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Action"
+
+[node name="ActionDetails" type="Label" parent="."]
+layout_mode = 1
+offset_right = 117.0
+offset_bottom = 23.0
+text = "Bonus Damage"

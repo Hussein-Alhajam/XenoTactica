@@ -299,7 +299,6 @@ func use_character_special():
 		update_action_log("Special has no charge")
 		return
 
-
 func set_status(status_type: String):
 	# use: calls the set_status() function for the first 
 		# character in the queue
@@ -309,6 +308,46 @@ func set_status(status_type: String):
 	sort_and_display() # always call for change of speed
 
 
+func kill_character(character: Character):
+	# removes character node from respective array and updates sorted_array and display
+	if character in players:
+		players.erase(character)
+		print(players)
+	if character in enemies:
+		enemies.erase(character)
+		print(enemies)
+	sort_and_display()
+
+
+# functions connected to signals from action select menu 
+func _on_action_selection_container_move_selected() -> void:
+	pass # Replace with function body.
+
+
+func _on_action_selection_container_normal_attack_selected() -> void:
+	use_character_normal_attack()
+
+
+func _on_action_selection_container_art_0_selected() -> void:
+	use_character_art(0)
+
+
+func _on_action_selection_container_art_1_selected() -> void:
+	use_character_art(1)
+
+
+func _on_action_selection_container_art_2_selected() -> void:
+	use_character_art(2)
+
+func _on_action_selection_container_special_selected() -> void:
+	use_character_special()
+
+
+func _on_action_selection_container_end_turn_selected() -> void:
+	pass # Replace with function body.
+
+
+# redundant functions from tutorial (i think)
 func show_combat_options():
 	# use: shows the CombatOptions node
 
@@ -323,13 +362,3 @@ func select_enemy():
 	# tutorial I followed just showed these two ways
 	%EnemySelection.show()
 	%EnemySelection.get_child(0).grab_focus()
-
-
-func kill_character(character: Character):
-	if character in players:
-		players.erase(character)
-		print(players)
-	if character in enemies:
-		enemies.erase(character)
-		print(enemies)
-	sort_and_display()
