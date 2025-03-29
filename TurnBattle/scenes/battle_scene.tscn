@@ -99,6 +99,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="ActionLog" type="Label" parent="UI"]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 offset_left = 528.0
 offset_top = 730.0

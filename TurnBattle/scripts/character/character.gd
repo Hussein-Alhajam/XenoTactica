@@ -227,7 +227,7 @@ func use_art(num):
 		# calculate damage
 		var damage = arts_list[num].use_art() 
 		damage = damage * max(strength, ether)
-		print("art did " + str(damage) + " damage")
+		print(arts_list[num].art_name + " did " + str(damage) + " damage")
 		
 		charge_special(1) # charge special
 		
@@ -257,7 +257,7 @@ func use_special():
 		# calculate damage
 		var damage = specials_list[special_charge - 1].use_special()
 		damage = damage * max(strength, ether)
-		print("special did " + str(damage) + " damage")
+		print(specials_list[special_charge - 1].special_name + " did " + str(damage) + " damage")
 		reset_special_charge()
 		
 		return damage
@@ -279,9 +279,12 @@ func get_special_info():
 	if special_charge > 0:
 		var special_info = {
 			"name": specials_list[special_charge - 1].special_name,
+			"charge": special_charge,
+			#"effects": special_list[special_charge - 1].get_effects()
 		}
+		return special_info
 	else:
-		return "no special charge"
+		return null
 
 
 func _input(event):

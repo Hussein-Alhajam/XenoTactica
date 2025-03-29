@@ -39,11 +39,9 @@ func _ready():
 	
 	# loop through and append all the player resources
 	for player in player_group.get_children():
-		#player.character.init()
 		players.append(player)
 
 	for enemy in enemy_group.get_children():
-		#enemy.character.init()
 		enemies.append(enemy)
 
 	sort_and_display() 
@@ -256,6 +254,11 @@ func get_character_arts():
 	]
 
 	return arts_info
+
+
+func get_character_special():
+	var special_info = sorted_array[0]["character"].get_special_info()
+	return special_info
 
 
 func move_selected():
