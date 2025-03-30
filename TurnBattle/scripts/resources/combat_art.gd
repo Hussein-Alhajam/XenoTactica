@@ -31,8 +31,6 @@ class_name CombatArt
 
 # public variables
 var current_charge: int 
-var battle_scene: Node2D
-#var character_damage: int
 
 # private variables
 
@@ -64,7 +62,7 @@ func reset_charge():
 func use_art():
 	if is_charged(): # duplicated in character.gd, not sure which is better to get rid of 
 		reset_charge()
-		Global.battle_scene.update_action_log(art_name + " art used")
+		#Global.battle_scene.update_action_log(art_name + " art used")
 		
 		# calculate damage - raw damage of art
 		# could use list for multi hits?
@@ -78,16 +76,17 @@ func use_art():
 		return damage
 
 	else:
-		Global.battle_scene.update_action_log(art_name + " is not charged")
+		pass
+		#Global.battle_scene.update_action_log(art_name + " is not charged")
 
 
 func get_effects():
 	var effects: Array[String] = []
 	
 	if reaction_effects:
-		effects.append(reaction_effects)
+		effects.append_array(reaction_effects)
 	if bonus_effects:
-		effects.append(bonus_effects)
+		effects.append_array(bonus_effects)
 	if position_effect:
 		match position_effect:
 			"Back":
@@ -98,5 +97,7 @@ func get_effects():
 				effects.append("Front Dmg+")
 	if aoe > 1:
 		effects.append("AOE")
-	
+	if attribute == "healing":
+		effects.append("Healing")
+	#print(effects)
 	return effects

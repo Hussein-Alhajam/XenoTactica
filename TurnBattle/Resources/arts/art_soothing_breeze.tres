@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://didqv0i3hkwks"]
+
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_gm6sx"]
+
+[resource]
+script = ExtResource("1_gm6sx")
+art_name = "Soothing Breeze"
+power = 2.0
+num_hits = 1
+hit_ratio = Array[float]([])
+aoe = 20
+attribute = "healing"
+max_charge = 8
+position_effect = ""
+bonus_effects = Array[String]([])
+reaction_effects = Array[String]([])

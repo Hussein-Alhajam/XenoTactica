@@ -103,7 +103,7 @@ func sort_by_time(a, b):
 func sort_and_display():
 	# use: sorts and updates the turn order queue and 
 		# update the # UI for turn order
-	print("sort and display")
+	#print("sort and display")
 	# call our sort and update functions defined above
 	sort_combined_queue()
 	update_timeline()
@@ -169,6 +169,7 @@ func next_turn():
 
 
 func end_turn():
+	$UI/ActionSelectionContainer.hide()
 	active_character.can_be_selected = false
 	turn_state = TurnState.NEUTRAL
 	pop_out()
@@ -191,7 +192,7 @@ func update_timeline():
 
 
 func show_action_selection():
-	print("show selection")
+	#print("show selection")
 	$UI/ActionSelectionContainer.init_action_selection() # temp
 	$UI/ActionSelectionContainer.show()
 	#$UI/ActionSelectionContainer.get_child(0).grab_focus()
@@ -207,14 +208,14 @@ func can_attack():
 
 
 func deal_damage(damage: int, target_enemy: Character):
-	# changes:
-		# add: call get_attacked() for character taking attack
-
 	# use: calls the attack() function for the 
 		# first character in the queue (current turn)
-		# and call the get_attaacked function for the 
+		# and call the get_attacked function for the 
 		# target of the attack
-	
+
+	# todo changes:
+		# add: aoe param to 'hit' characters around target
+
 	# check if attack has already been used this turn
 		# somewhat redundant since player should not be 
 		# able to select the 'attacks' button if already attacked
@@ -225,7 +226,6 @@ func deal_damage(damage: int, target_enemy: Character):
 		turn_state = TurnState.ATTACKED
 	elif turn_state == TurnState.MOVED:
 		turn_state = TurnState.ENDED
-	$UI/ActionSelectionContainer.init_action_selection() # temp
 	
 	# log: check correct damage
 	print(str(damage) + "damage dealt") 
@@ -337,7 +337,6 @@ func _on_movement_finished():
 
 	if turn_state == TurnState.ENDED:
 		end_turn()
-
 
 # ---- functions connected to signals from action select menu ----
 

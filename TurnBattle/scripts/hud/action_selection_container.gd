@@ -2,11 +2,6 @@ extends Control
 
 # signals
 signal attack_selected(attack_type: String, target: Character)
-#signal normal_attack_selected
-#signal art0_selected
-#signal art1_selected
-#signal art2_selected
-#signal special_selected
 signal move_selected
 signal end_turn_selected
 
@@ -40,30 +35,30 @@ func _process(delta: float) -> void:
 	# temporarily trying the input maps
 	if Input.is_action_just_pressed("action_select_up"):
 		selected_option_index = (selected_option_index - 1) % action_vbox_list.get_child_count()
-		action_vbox_list.get_child(selected_option_index).grab_focus()
+		action_vbox_list.get_child(selected_option_index).button.grab_focus()
 	if Input.is_action_just_pressed("action_select_down"):
 		selected_option_index = (selected_option_index + 1) % action_vbox_list.get_child_count()
-		action_vbox_list.get_child(selected_option_index).grab_focus()
+		action_vbox_list.get_child(selected_option_index).button.grab_focus()
 	if Input.is_action_just_pressed("action_select_confirm"):
-		if not action_vbox_list.get_child(selected_option_index).disabled:
-			action_vbox_list.get_child(selected_option_index).emit_signal("pressed")
+		if not action_vbox_list.get_child(selected_option_index).button.disabled:
+			action_vbox_list.get_child(selected_option_index).button.emit_signal("pressed")
  
 
 func init_action_selection():
-	# ...?
 	#todo: fix ui so move and attacks buttons are properly disabled
 	show_actions("combat_actions")
+	show()
 
-	# Disable buttons based on turn state
-	var turn_state = owner.turn_state
-	for child in action_vbox_list.get_children():
-		match child.text:
-			"Move":
-				child.disabled = turn_state == owner.TurnState.MOVED or turn_state == owner.TurnState.ENDED
-			"Attacks":
-				child.disabled = turn_state == owner.TurnState.ATTACKED or turn_state == owner.TurnState.ENDED
-			"End Turn":
-				child.disabled = false  # Always enabled
+	## Disable buttons based on turn state
+	#var turn_state = owner.turn_state
+	#for child in action_vbox_list.get_children():
+		#match child.text:
+			#"Move":
+				#child.disabled = turn_state == owner.TurnState.MOVED or turn_state == owner.TurnState.ENDED
+			#"Attacks":
+				#child.disabled = turn_state == owner.TurnState.ATTACKED or turn_state == owner.TurnState.ENDED
+			#"End Turn":
+				#child.disabled = false  # Always enabled
 
 
 
@@ -86,14 +81,29 @@ func is_action_available(action: String, art_info = null):
 	return true
 
 
+func focus_first_button():
+	# helper function to grab focus for first button on list
+	await get_tree().process_frame 
+	if action_vbox_list.get_child_count() > 0:
+		action_vbox_list.get_child(selected_option_index).button.grab_focus()
+
+
 func show_actions(actions: String):
 	clear_action_options()
 	current_action_options = action_options.get(actions)
 	selected_option_index = 0
 	var is_disabled = false
+#
+	#if actions == "move_selected":
+		#add_button_to_list(
+			#"Back",
+			#"",
+			#func(): _on_action_selected("back_to_combat_actions"),
+			#false
+		#)
+		#focus_first_button()
+		#return
 
-	# temp: want to create new scene for 'button'
-	# maybe have button as root (or panel for deco?) and then 'main' text label 'sub' text label
 	for action in current_action_options:
 		if action.keys()[0] == "special":
 			show_special_button()
@@ -102,14 +112,13 @@ func show_actions(actions: String):
 			is_disabled = not is_action_available(action.keys()[0])
 			add_button_to_list(
 				action.values()[0],
+				"",
 				func(): _on_action_selected(action.keys()[0]),
 				is_disabled
 			)
 
 	# ensure a button is focused
-	await get_tree().process_frame 
-	if action_vbox_list.get_child_count() > 0:
-		action_vbox_list.get_child(selected_option_index).grab_focus()
+	focus_first_button()
 
 
 func show_enemy_selection():
@@ -125,23 +134,24 @@ func show_enemy_selection():
 		# can use enemies.filter(func = can_target_enemy())
 		# can_target_enemy(): if enemy outside range, return false
 		# then check if enemies is empty after filtering
-	
+
 	for enemy in enemies:
 		add_button_to_list(
 			enemy.character_name,
+			"",
 			func(): _on_character_selected(enemy),
 			false
 		)
 	add_button_to_list(
 		"Back",
+		"",
 		func(): _on_action_selected("attacks"),
 		false
 	)
 
+
 	# ensure a button is focused
-	await get_tree().process_frame 
-	if action_vbox_list.get_child_count() > 0:
-		action_vbox_list.get_child(selected_option_index).grab_focus()
+	focus_first_button()
 
 
 func show_player_selection():
@@ -156,19 +166,19 @@ func show_player_selection():
 	for player in players:
 		add_button_to_list(
 			player.character_name,
+			"",
 			func(): _on_character_selected(player),
 			false
 		)
 	add_button_to_list(
 		"Back",
+		"",
 		func(): _on_action_selected("attacks"),
 		false
 	)
 
 	# ensure a button is focused
-	await get_tree().process_frame 
-	if action_vbox_list.get_child_count() > 0:
-		action_vbox_list.get_child(selected_option_index).grab_focus()
+	focus_first_button()
 
 
 func show_arts_selection():
@@ -179,30 +189,36 @@ func show_arts_selection():
 	selected_option_index = 0
 	var is_disabled = false
 	var arts_info = []
+	var art_effects_as_string = ""
 	arts_info = owner.get_character_arts()
 
 	for art_info in arts_info:
 		# check if art is available (i.e., is charged)
-		if art_info[1].get("current_charge") < art_info[1].get("max_charge"):
-			# if no, disable button
-			is_disabled = not is_action_available("art", art_info)
+		is_disabled = not is_action_available("art", art_info)
+		art_effects_as_string = ""
+		for effect in art_info[1].get("effects"):
+			if art_effects_as_string == "":
+				art_effects_as_string = effect
+			else:
+				art_effects_as_string = (art_effects_as_string 
+					+ " / " + effect)
 		add_button_to_list(
 			art_info[1].get("name") + " ("
 			+ str(art_info[1].get("current_charge")) + "/"
 			+ str(art_info[1].get("max_charge")) + ")",
-			func(): _on_action_selected(art_info[0]),
+			art_effects_as_string,
+			func(): _on_art_selected(art_info[0], art_info[1].get("attribute")),
 			is_disabled
 		)
 	add_button_to_list(
 		"Back",
+		"",
 		func(): _on_action_selected("attacks"),
 		false
 	)
 
 	# ensure a button is focused
-	await get_tree().process_frame 
-	if action_vbox_list.get_child_count() > 0:
-		action_vbox_list.get_child(selected_option_index).grab_focus()
+	focus_first_button()
 
 
 func show_special_button():
@@ -220,36 +236,38 @@ func show_special_button():
 	# if special has charge (valid special returned)
 	if special_info:
 		# add active Special button
-		match special_info["charge"]:
+		match special_info.get("charge"):
 			1: charge_as_rn = "I"
 			2: charge_as_rn = "II"
 			3: charge_as_rn = "III"
 			4: charge_as_rn = "IV"
 		add_button_to_list(
 			"Special: " + charge_as_rn,
+			special_info.get("name"),
 			func(): _on_action_selected("special"),
 			false
 		)
-		# add after better buttons: sub text = special_info["name"]
 	else: # else, no special charge (None returned)
 		# add disabled button
-		add_button_to_list("Special: 0", func(): _on_action_selected("special"), true)
-	
-	pass
+		add_button_to_list(
+			"Special: 0", 
+			"",
+			func(): _on_action_selected("special"),
+			 true
+		)
 
 
-func add_button_to_list(main_text: String, function: Callable, is_disabled: bool): # sub_text: String
+func add_button_to_list(main_text: String, sub_text: String, function: Callable, is_disabled: bool): # sub_text: String
 	# helper function to add a button to the list 
-	var button = Button.new()
-	button.text = main_text
-	button.pressed.connect(func(): function.call())
+	var action_button = preload("res://TurnBattle/scenes/action_button.tscn").instantiate()
+	action_vbox_list.add_child(action_button)
+	action_button.setup(main_text, sub_text)
+	#button.text = main_text
+	action_button.button.pressed.connect(func(): function.call())
 	if is_disabled:
-		button.disabled = true
-	action_vbox_list.add_child(button)
+		action_button.button.disabled = true
 
-
-func move_selection(direction: int):
-	pass
+	#await action_button.ready
 
 
 func clear_action_options():
@@ -261,6 +279,7 @@ func _on_action_selected(action: String):
 	match action:
 		"move":
 			#print("move action selected")
+			#show_actions("move_selected")
 			move_selected.emit()
 		"attacks":
 			#print("attacks selected")
@@ -277,18 +296,27 @@ func _on_action_selected(action: String):
 			show_enemy_selection()
 		"arts_selection":
 			#print("arts selected")
-			# need to extract art details to determine attack or healing (and also info for display in label)
 			show_arts_selection()
 		"back_to_attacks":
 			#print("art back selected")
 			show_actions("attacks")
 
 
+func _on_art_selected(action: String, attribute: String):
+	if attribute == "healing":
+		pending_attack_type = action
+		show_player_selection()
+	else:
+		pending_attack_type = action
+		show_enemy_selection()
+
+
 func _on_character_selected(character: Character):
 	if pending_attack_type != "":
+		#hide()
 		attack_selected.emit(pending_attack_type, character)
 		pending_attack_type = ""
-		init_action_selection()
-		#hide()
+		#init_action_selection()
+		show_actions("combat_actions")
 	else:
 		print("somehow, no attack was selected before selecting enemy")

@@ -3,18 +3,21 @@
 extends Node
 
 
-func display_number(value: int, position: Vector2, color: String): # maybe pass a color param?
+func display_number(value: int, position: Vector2): # maybe pass a color param?
 	#print("damage" + str(value))
 	var number_label: Label = Label.new()
 	number_label.global_position = position
-	number_label.text = str(value)
+
 	number_label.z_index = 5
 	number_label.label_settings = LabelSettings.new()
 	
-	if not color:
-		color = "#FFF"
+	if value > 0: 
+		number_label.text = "+" + str(value)
+		number_label.label_settings.font_color = "#00FF00"
+	else:
+		number_label.text = str(value)
+		number_label.label_settings.font_color = "#FF0000"
 #	
-	number_label.label_settings.font_color = color
 	number_label.label_settings.font_size = 24
 	number_label.label_settings.outline_color = "#000"
 	number_label.label_settings.outline_size = 1

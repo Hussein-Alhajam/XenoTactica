@@ -28,6 +28,7 @@ var character_name: String # name of character ('name' is taken by gdscript)
 # textures (remove and assign to CharacterSprite node instead?)
 var icon: Texture2D # sprite used for the character's portrait
 # stats
+var max_health: int
 var health: int
 var strength: int 	# affects physical based damage
 var ether: int 	# affects ether based attacks and healing
@@ -63,6 +64,7 @@ var battle_scene: Node2D # used to store reference of main battle_scene Scene
 func _ready():
 	character_name = character_stats.character_name
 	icon = character_stats.icon
+	max_health = character_stats.health
 	health = character_stats.health
 	strength = character_stats.strength
 	ether = character_stats.ether
@@ -159,14 +161,14 @@ func set_status(status_type: String):
 
 func _set_health(value: int):
 	# update health
-	health = health + value
+	health = min(health + value, max_health)
 	print(character_name + ": " + str(health) + "hp")
 	
 	# update health bar
 	health_bar.health = health
 	
 	# show 'damage' numbers (can be heal)
-	DamageNumbers.display_number(value, damage_numbers_origin.global_position, "#FF0000")
+	DamageNumbers.display_number(value, damage_numbers_origin.global_position)
 	# *lookup: position vs global_position
 	
 	# need some way of letting game know if this character dies
@@ -213,9 +215,9 @@ func attack(tree):
 func use_normal_attack():
 	#print(title + ": " + arts_list[0].art_name + " charge:" + str(arts_list[0].current_charge))
 	# mechanic updates (damage, charge arts, accuracy, etc.)
-	charge_arts(1)
+	charge_arts(10)
 	# calculate damage of attack
-	var damage = max(strength, ether) # temp: use higher of strength or ether
+	var damage = strength # temp: use higher of strength or ether
 	return damage
 
 
@@ -228,9 +230,15 @@ func use_art(num):
 	if arts_list[num].is_charged(): # should find better way to check...
 		charge_arts(1) # charge other arts
 		
-		# calculate damage
+		# calculate damage (or healing)
 		var damage = arts_list[num].use_art() 
-		damage = damage * max(strength, ether)
+		if arts_list[num].attribute == "physical":
+			damage = damage * strength
+		elif arts_list[num].attribute == "ether":
+			damage = damage * ether
+		elif arts_list[num].attribute == "healing":
+			damage = -damage * ether
+			
 		print(arts_list[num].art_name + " did " + str(damage) + " damage")
 		
 		charge_special(1) # charge special
@@ -260,7 +268,10 @@ func use_special():
 	if special_charge > 0:
 		# calculate damage
 		var damage = specials_list[special_charge - 1].use_special()
-		damage = damage * max(strength, ether)
+		if specials_list[special_charge - 1].attribute == "physical":
+			damage = damage * strength
+		elif specials_list[special_charge - 1].attribute == "ether":
+			damage = damage * ether
 		print(specials_list[special_charge - 1].special_name + " did " + str(damage) + " damage")
 		reset_special_charge()
 		
@@ -272,6 +283,7 @@ func use_special():
 func get_art_info(num):
 	var art_info = {
 		"name": arts_list[num].art_name,
+		"attribute": arts_list[num].attribute,
 		"effects": arts_list[num].get_effects(),
 		"current_charge": arts_list[num].current_charge,
 		"max_charge": arts_list[num].max_charge,
