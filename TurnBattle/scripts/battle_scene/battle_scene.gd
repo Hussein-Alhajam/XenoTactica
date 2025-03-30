@@ -15,6 +15,9 @@ enum ActiveHud { COMBAT, SETTINGS_OPTIONS, TITLE_MENU }
 @export var enemy_group: Node2D # hold the 'Enemies' node
 @export var timeline: HBoxContainer # hold the "Timeline' node
 
+@export var combat_options: VBoxContainer # hold the 'CombatOptions' node
+@export var enemy_button: PackedScene # variable to hold "EnemyButton'
+
 # public variables
 var sorted_array = [] # used for sorting the turn order (?)
 var players: Array[Character] # used to hold Player 'scene' nodes
@@ -100,6 +103,7 @@ func sort_by_time(a, b):
 func sort_and_display():
 	# use: sorts and updates the turn order queue and 
 		# update the # UI for turn order
+	print("sort and display")
 	# call our sort and update functions defined above
 	sort_combined_queue()
 	update_timeline()
@@ -107,6 +111,7 @@ func sort_and_display():
 	# after sorting, if the first element in the queue
 	# is a Player, then show the option to the player
 	if active_character in players:
+		print("showing action")
 		show_action_selection()
 
 
@@ -136,6 +141,7 @@ func give_enemy_turn():
 
 
 func next_turn():
+	
 	# use: pop the queue to get the next character's turn
 		# i.e., ends the current turn and allows the next
 		# character in the queue to go
@@ -163,7 +169,7 @@ func next_turn():
 
 
 func end_turn():
-	$UI/ActionSelectionContainer.hide()
+	active_character.can_be_selected = false
 	turn_state = TurnState.NEUTRAL
 	pop_out()
 	sort_and_display() 
@@ -185,9 +191,9 @@ func update_timeline():
 
 
 func show_action_selection():
-	#print("show selection")
+	print("show selection")
 	$UI/ActionSelectionContainer.init_action_selection() # temp
-	#$UI/ActionSelectionContainer.show()
+	$UI/ActionSelectionContainer.show()
 	#$UI/ActionSelectionContainer.get_child(0).grab_focus()
 
 # ---- functions to do with attacking / turn actions ----
@@ -201,13 +207,13 @@ func can_attack():
 
 
 func deal_damage(damage: int, target_enemy: Character):
+	# changes:
+		# add: call get_attacked() for character taking attack
+
 	# use: calls the attack() function for the 
 		# first character in the queue (current turn)
-		# and call the get_attacked function for the 
+		# and call the get_attaacked function for the 
 		# target of the attack
-
-	# todo changes:
-		# add: aoe param to 'hit' characters around target
 	
 	# check if attack has already been used this turn
 		# somewhat redundant since player should not be 
@@ -217,12 +223,12 @@ func deal_damage(damage: int, target_enemy: Character):
 
 	if turn_state == TurnState.NEUTRAL:
 		turn_state = TurnState.ATTACKED
-		#show_action_selection()
 	elif turn_state == TurnState.MOVED:
 		turn_state = TurnState.ENDED
+	$UI/ActionSelectionContainer.init_action_selection() # temp
 	
 	# log: check correct damage
-	print(str(damage) + " damage dealt") 
+	print(str(damage) + "damage dealt") 
 	# perform attack
 	target_enemy.get_attacked("", damage)
 	await active_character.attack(get_tree())
@@ -305,24 +311,33 @@ func get_character_special():
 	return special_info
 
 
-func can_move():
-	if turn_state == TurnState.MOVED:
+func can_move() -> bool:
+	return turn_state != TurnState.MOVED and turn_state != TurnState.ENDED
 		#print("already moved")
-		return false
-	return true
+		#return false
+	#return true
+
 
 func move_selected():
 	if can_move():
+		$UI/ActionSelectionContainer.hide()  # Hide menu
+		active_character.can_be_selected = true
 		active_character.select_unit()
-		
-		# update state
+
+		# Update state
 		if turn_state == TurnState.NEUTRAL:
 			turn_state = TurnState.MOVED
-			show_action_selection() # temp
 		elif turn_state == TurnState.ATTACKED:
 			turn_state = TurnState.ENDED
-			#await... wait till move finishes
-			end_turn()
+		
+func _on_movement_finished():
+	$UI/ActionSelectionContainer.show()
+	$UI/ActionSelectionContainer.init_action_selection()
+	active_character.movement_finished.disconnect(_on_movement_finished)
+
+	if turn_state == TurnState.ENDED:
+		end_turn()
+
 
 # ---- functions connected to signals from action select menu ----
 
@@ -346,3 +361,5 @@ func _on_action_selection_container_attack_selected(attack_type: String, target:
 
 func _on_action_selection_container_end_turn_selected() -> void:
 	end_turn()
+
+const TurnStateEnum = TurnState

@@ -4,6 +4,7 @@ class_name CombatArt
 
 # signals
 # export variables
+@export_group("damage")
 @export var art_name: String
 @export var power: float # scales the str/eth of char; affects damage / healing of art
 @export var num_hits: int # number of hits of the art
@@ -20,7 +21,7 @@ class_name CombatArt
 							# this allows the attack to easily rotate 
 							# biggest 'hurdle' of this would be to create the function to interpret the string
 								# could use a num at the start of the string which represents size of matrix (if using matrix?)
-@export var attribute: String # damaging (physical/ether) / healing / buff / debuff
+@export var attribute: String # damaging / healing / buff / debuff
 @export var max_charge: int
 
 @export_group("Effects")
@@ -63,7 +64,7 @@ func reset_charge():
 func use_art():
 	if is_charged(): # duplicated in character.gd, not sure which is better to get rid of 
 		reset_charge()
-		#Global.battle_scene.update_action_log(art_name + " art used")
+		Global.battle_scene.update_action_log(art_name + " art used")
 		
 		# calculate damage - raw damage of art
 		# could use list for multi hits?
@@ -77,17 +78,16 @@ func use_art():
 		return damage
 
 	else:
-		pass
-		#Global.battle_scene.update_action_log(art_name + " is not charged")
+		Global.battle_scene.update_action_log(art_name + " is not charged")
 
 
 func get_effects():
 	var effects: Array[String] = []
 	
 	if reaction_effects:
-		effects.append_array(reaction_effects)
+		effects.append(reaction_effects)
 	if bonus_effects:
-		effects.append_array(bonus_effects)
+		effects.append(bonus_effects)
 	if position_effect:
 		match position_effect:
 			"Back":
@@ -98,7 +98,5 @@ func get_effects():
 				effects.append("Front Dmg+")
 	if aoe > 1:
 		effects.append("AOE")
-	if attribute == "healing":
-		effects.append("Healing")
-	#print(effects)
+	
 	return effects

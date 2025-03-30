@@ -9,7 +9,7 @@ class_name Character # name this CharacterStats?
 # export variables
 @export var character_stats: CharacterStats # receives all 'unique traits' from this resource
 # preload scene (so we don't have to set it in inspector manually)
-@export var vfx_node: PackedScene = preload("res://TurnBattle/scenes/vfx.tscn")
+@export var vfx_node: PackedScene = preload("res://TurnBattle/scenes/vfx.tscn") #?
 @export var pathfinder: PathFinding
 @export var grid_manager: GridManager
 @export var move_range: int = 3
@@ -19,12 +19,15 @@ var selected = false
 var is_moving = false
 var is_attacking = false
 static var currently_selected_unit: Character = null
+var can_be_selected := false  # This is controlled by the BattleScene when "Move" is selected
+
+signal movement_finished
+
 # public variables 
 var character_name: String # name of character ('name' is taken by gdscript)
 # textures (remove and assign to CharacterSprite node instead?)
 var icon: Texture2D # sprite used for the character's portrait
 # stats
-var max_health: int
 var health: int
 var strength: int 	# affects physical based damage
 var ether: int 	# affects ether based attacks and healing
@@ -60,7 +63,6 @@ var battle_scene: Node2D # used to store reference of main battle_scene Scene
 func _ready():
 	character_name = character_stats.character_name
 	icon = character_stats.icon
-	max_health = character_stats.health
 	health = character_stats.health
 	strength = character_stats.strength
 	ether = character_stats.ether
@@ -99,12 +101,13 @@ func _ready():
 
 func queue_reset():
 	queue.clear()
-	# add Arithmetic Progression of 5 terms
-	for i in range(5):
+	# add Arithmetic Progression of 4 terms
+	# look this up
+	for i in range(4):
 		if queue.size() == 0:
 			queue.append(speed * status)
 		else:
-			queue.append(queue[-1]  + speed * status) 
+			queue.append(queue[-1]  + speed * status) # ?
 
 
 func tween_movement(shift, tree):
@@ -144,11 +147,11 @@ func set_status(status_type: String):
 	# (so that first will always go next and not be 'replaced')
 	# game balance thing
 	print(queue)
-	for i in range(queue.size() - 1):
+	for i in range(3):
 		queue.pop_back()
 	print(queue)
 	# append the new 'order'
-	for i in range(queue.size() - 1):
+	for i in range(3):
 		queue.append(queue[-1] + speed * status)
 	print(queue)
 	print("character.set_status called")
@@ -156,14 +159,14 @@ func set_status(status_type: String):
 
 func _set_health(value: int):
 	# update health
-	health = min(health + value, max_health)
+	health = health + value
 	print(character_name + ": " + str(health) + "hp")
 	
 	# update health bar
 	health_bar.health = health
 	
 	# show 'damage' numbers (can be heal)
-	DamageNumbers.display_number(value, damage_numbers_origin.global_position)
+	DamageNumbers.display_number(value, damage_numbers_origin.global_position, "#FF0000")
 	# *lookup: position vs global_position
 	
 	# need some way of letting game know if this character dies
@@ -210,9 +213,9 @@ func attack(tree):
 func use_normal_attack():
 	#print(title + ": " + arts_list[0].art_name + " charge:" + str(arts_list[0].current_charge))
 	# mechanic updates (damage, charge arts, accuracy, etc.)
-	charge_arts(10)
+	charge_arts(1)
 	# calculate damage of attack
-	var damage = strength
+	var damage = max(strength, ether) # temp: use higher of strength or ether
 	return damage
 
 
@@ -222,23 +225,19 @@ func charge_arts(num):
 
 
 func use_art(num):
-	if arts_list[num].is_charged():
+	if arts_list[num].is_charged(): # should find better way to check...
 		charge_arts(1) # charge other arts
 		
-		# calculate damage (or healing)
+		# calculate damage
 		var damage = arts_list[num].use_art() 
-		if arts_list[num].attribute == "physical":
-			damage = damage * strength
-		elif arts_list[num].attribute == "ether":
-			damage = damage * ether
-		elif arts_list[num].attribute == "healing":
-			damage = -damage * ether
-
+		damage = damage * max(strength, ether)
 		print(arts_list[num].art_name + " did " + str(damage) + " damage")
 		
 		charge_special(1) # charge special
 		
 		return damage
+
+		#EventBus.next_turn.emit() # pass the damage value
 	else: 
 		return null
 
@@ -261,10 +260,7 @@ func use_special():
 	if special_charge > 0:
 		# calculate damage
 		var damage = specials_list[special_charge - 1].use_special()
-		if specials_list[special_charge - 1].attribute == "physical":
-			damage = damage * strength
-		elif specials_list[special_charge - 1].attribute == "ether":
-			damage = damage * ether
+		damage = damage * max(strength, ether)
 		print(specials_list[special_charge - 1].special_name + " did " + str(damage) + " damage")
 		reset_special_charge()
 		
@@ -276,7 +272,6 @@ func use_special():
 func get_art_info(num):
 	var art_info = {
 		"name": arts_list[num].art_name,
-		"attribute": arts_list[num].attribute,
 		"effects": arts_list[num].get_effects(),
 		"current_charge": arts_list[num].current_charge,
 		"max_charge": arts_list[num].max_charge,
@@ -312,20 +307,27 @@ func _input(event):
 		var clicked_tile = grid_manager.tile_map.local_to_map(mouse_pos)
 		move_to_tile(clicked_tile)
 
-#func _on_area2d_input_event(viewport, event, shape_idx):
-	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		#if not is_moving and not is_attacking:
-			#select_unit()
+func _on_area2d_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if not is_moving and not is_attacking:
+			select_unit()
 
 func select_unit():
-	if currently_selected_unit != null and currently_selected_unit != self:
+
+	if not can_be_selected:
+		print("❌ select_unit() blocked - can_be_selected is false for", name)
 		return
+
+	print("🟢 select_unit() started for", name)
 	selected = true
 	currently_selected_unit = self
 	grid_manager.clear_highlight()
+
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
+	print("🗺️ Unit tile:", unit_tile)
 	grid_manager.highlight_tiles(unit_tile, move_range)
-	print("✅ Unit selected. Showing movement range.")
+
+	print("✅ Movement range shown for", name)
 
 func cancel_selection():
 	selected = false
@@ -369,7 +371,9 @@ func follow_path(path: Array):
 			await get_tree().process_frame
 	velocity = Vector2.ZERO
 	is_moving = false
+	Global.battle_scene.show_action_selection()
 	selected = false
 	var tile = grid_manager.tile_map.local_to_map(global_position)
-	grid_manager.highlight_attack_tiles(tile, attack_range)
-	is_attacking = true
+	emit_signal("movement_finished")  # Signal movement is done
+	#grid_manager.highlight_attack_tiles(tile, attack_range)
+	#is_attacking = true

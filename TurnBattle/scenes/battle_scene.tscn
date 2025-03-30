@@ -1,18 +1,19 @@
-[gd_scene load_steps=16 format=4 uid="uid://cc5hn5aulatdh"]
+[gd_scene load_steps=17 format=4 uid="uid://cc5hn5aulatdh"]
 
-[ext_resource type="Script" path="res://TurnBattle/scripts/battle_scene/battle_scene.gd" id="1_k7x86"]
-[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://TurnBattle/resources/players/wizard.tres" id="3_1xfr0"]
-[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://TurnBattle/resources/players/rogue.tres" id="4_74e8g"]
+[ext_resource type="Script" uid="uid://b8ml67g66fxei" path="res://TurnBattle/scripts/battle_scene/battle_scene.gd" id="1_k7x86"]
+[ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://TurnBattle/scenes/enemy_button.tscn" id="2_q2h2f"]
+[ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://TurnBattle/Resources/players/wizard.tres" id="3_1xfr0"]
+[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://TurnBattle/Resources/players/rogue.tres" id="4_74e8g"]
 [ext_resource type="PackedScene" uid="uid://bufo3fo4lgsaf" path="res://TurnBattle/scenes/action_selection_container.tscn" id="6_llh1y"]
-[ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://TurnBattle/resources/enemies/gorgon.tres" id="6_wea8f"]
-[ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://TurnBattle/resources/enemies/cyclops.tres" id="7_6ucfx"]
-[ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://TurnBattle/resources/players/knight.tres" id="7_c3ipe"]
-[ext_resource type="Script" path="res://Grid-Movement/Resources/GridManager.gd" id="7_tjiub"]
-[ext_resource type="Script" path="res://Grid-Movement/Resources/PathFinding.gd" id="8_nl3bw"]
-[ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://TurnBattle/resources/enemies/kraken.tres" id="8_qg17s"]
-[ext_resource type="Script" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="9_tjiub"]
+[ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://TurnBattle/Resources/enemies/gorgon.tres" id="6_wea8f"]
+[ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://TurnBattle/Resources/enemies/cyclops.tres" id="7_6ucfx"]
+[ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://TurnBattle/Resources/players/knight.tres" id="7_c3ipe"]
+[ext_resource type="Script" uid="uid://0ca101ytw440" path="res://Grid-Movement/Resources/GridManager.gd" id="7_tjiub"]
+[ext_resource type="Script" uid="uid://bxjx0pdydv5qe" path="res://Grid-Movement/Resources/PathFinding.gd" id="8_nl3bw"]
+[ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://TurnBattle/Resources/enemies/kraken.tres" id="8_qg17s"]
+[ext_resource type="Script" uid="uid://xiaj8nfs36b" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="9_tjiub"]
 [ext_resource type="PackedScene" uid="uid://cguk7p8fnv2ra" path="res://TurnBattle/scenes/character.tscn" id="9_y7v6u"]
-[ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://TurnBattle/resources/map_tileset.tres" id="12_hp3cp"]
+[ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://TurnBattle/Resources/map_tileset.tres" id="12_hp3cp"]
 [ext_resource type="PackedScene" uid="uid://cmaes8al2b5cc" path="res://PauseMenu/PauseMenu_Battle.tscn" id="15_fb2m3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sryic"]
@@ -24,6 +25,7 @@ script = ExtResource("1_k7x86")
 player_group = NodePath("Players")
 enemy_group = NodePath("Enemies")
 timeline = NodePath("UI/Timeline")
+enemy_button = ExtResource("2_q2h2f")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -108,7 +110,6 @@ text = "log"
 autowrap_mode = 3
 
 [node name="ActionSelectionContainer" parent="UI" instance=ExtResource("6_llh1y")]
-visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -177,6 +178,7 @@ position = Vector2(414, 585.5)
 character_stats = ExtResource("8_qg17s")
 
 [node name="PauseMenu_Battle" parent="." instance=ExtResource("15_fb2m3")]
+visible = false
 
 [connection signal="attack_selected" from="UI/ActionSelectionContainer" to="." method="_on_action_selection_container_attack_selected"]
 [connection signal="end_turn_selected" from="UI/ActionSelectionContainer" to="." method="_on_action_selection_container_end_turn_selected"]

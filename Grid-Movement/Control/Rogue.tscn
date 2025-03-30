@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://6v1caaexo5ls"]
 
-[ext_resource type="Script" path="res://Grid-Movement/Control/PlayerUnitBattle.gd" id="1_m25ki"]
-[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://TurnBattle/resources/players/rogue.tres" id="2_8hic2"]
+[ext_resource type="Script" uid="uid://ddp0i3vvoir7a" path="res://Grid-Movement/Control/PlayerUnitBattle.gd" id="1_m25ki"]
+[ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://TurnBattle/Resources/players/rogue.tres" id="2_8hic2"]
 [ext_resource type="Texture2D" uid="uid://dp136ntapoxt3" path="res://assets/sprites/extracted/rogue.png" id="2_m25ki"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_53fq6"]

@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://cekiqrspd7cac"]
 
-[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_xvdkp"]
+[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_xvdkp"]
 [ext_resource type="Texture2D" uid="uid://dp136ntapoxt3" path="res://assets/sprites/extracted/rogue.png" id="1_y1cj3"]
-[ext_resource type="Script" path="res://TurnBattle/scripts/resources/character_stats.gd" id="2_7nnhs"]
-[ext_resource type="Resource" uid="uid://bldjqd85xly7p" path="res://TurnBattle/resources/arts/art_speedy_sword.tres" id="2_xht70"]
-[ext_resource type="Resource" uid="uid://djq0uo6pqn2nn" path="res://TurnBattle/resources/arts/art_power_swipe.tres" id="3_ktfki"]
-[ext_resource type="Resource" uid="uid://ycxxegfgsoga" path="res://TurnBattle/resources/arts/art_cross_edge.tres" id="4_ywegg"]
-[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_882rh"]
-[ext_resource type="Resource" uid="uid://b8pad6shrefq1" path="res://TurnBattle/resources/specials/special1_lightning_force.tres" id="8_sjbn7"]
-[ext_resource type="Resource" uid="uid://dky2f4124noq8" path="res://TurnBattle/resources/specials/special2_electric_circus.tres" id="9_naavi"]
-[ext_resource type="Resource" uid="uid://bf3nud0pt5ca4" path="res://TurnBattle/resources/specials/special3_thunder_doom.tres" id="10_3111h"]
-[ext_resource type="Resource" uid="uid://bkcqihstwxdgg" path="res://TurnBattle/resources/specials/special4_thunder_slash.tres" id="11_5jfbm"]
+[ext_resource type="Script" uid="uid://danuq4w3l3y1c" path="res://TurnBattle/scripts/resources/character_stats.gd" id="2_7nnhs"]
+[ext_resource type="Resource" uid="uid://bldjqd85xly7p" path="res://TurnBattle/Resources/arts/art_speedy_sword.tres" id="2_xht70"]
+[ext_resource type="Resource" uid="uid://djq0uo6pqn2nn" path="res://TurnBattle/Resources/arts/art_power_swipe.tres" id="3_ktfki"]
+[ext_resource type="Resource" uid="uid://ycxxegfgsoga" path="res://TurnBattle/Resources/arts/art_cross_edge.tres" id="4_ywegg"]
+[ext_resource type="Script" uid="uid://cn4lomci4qooy" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_882rh"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://TurnBattle/Resources/specials/special1_chroma_dust.tres" id="8_7ktr7"]
+[ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://TurnBattle/Resources/specials/special2_photon_edge.tres" id="9_nrt3b"]
+[ext_resource type="Resource" uid="uid://brfo106f3jjja" path="res://TurnBattle/Resources/specials/special3_lightning_buster.tres" id="10_ymhl0"]
+[ext_resource type="Resource" uid="uid://bdjn5uhfxapf2" path="res://TurnBattle/Resources/specials/special4_sacred_arrow.tres" id="11_8xkjy"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_pksxv"]
 
 [resource]
@@ -25,6 +25,6 @@ ether = 10
 defense = 20
 resistance = 15
 agility = 29
-element = "electric"
+element = "dark"
 arts_list = Array[ExtResource("1_xvdkp")]([ExtResource("2_xht70"), ExtResource("3_ktfki"), ExtResource("4_ywegg")])
-specials_list = Array[ExtResource("7_882rh")]([ExtResource("8_sjbn7"), ExtResource("9_naavi"), ExtResource("10_3111h"), ExtResource("11_5jfbm")])
+specials_list = Array[ExtResource("7_882rh")]([ExtResource("8_7ktr7"), ExtResource("9_nrt3b"), ExtResource("10_ymhl0"), ExtResource("11_8xkjy")])
