@@ -1,5 +1,32 @@
-[gd_scene format=3 uid="uid://c85hvfsh2n4n0"]
+[gd_scene load_steps=3 format=3 uid="uid://c85hvfsh2n4n0"]
 
-[node name="ActionButton" type="Button"]
-offset_right = 8.0
-offset_bottom = 8.0
+[ext_resource type="Script" path="res://TurnBattle/scripts/hud/action_button.gd" id="1_og32y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1vsf"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="ActionButtonContainer" type="PanelContainer"]
+offset_right = 111.0
+offset_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_og32y")
+
+[node name="TextList" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MainText" type="Label" parent="TextList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "main text
+"
+
+[node name="SubText" type="Label" parent="TextList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "sub text
+"
+
+[node name="ActionButton" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_n1vsf")

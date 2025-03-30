@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=4 uid="uid://cc5hn5aulatdh"]
+[gd_scene load_steps=16 format=4 uid="uid://cc5hn5aulatdh"]
 
 [ext_resource type="Script" path="res://TurnBattle/scripts/battle_scene/battle_scene.gd" id="1_k7x86"]
-[ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://TurnBattle/scenes/enemy_button.tscn" id="2_q2h2f"]
 [ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://TurnBattle/resources/players/wizard.tres" id="3_1xfr0"]
 [ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://TurnBattle/resources/players/rogue.tres" id="4_74e8g"]
 [ext_resource type="PackedScene" uid="uid://bufo3fo4lgsaf" path="res://TurnBattle/scenes/action_selection_container.tscn" id="6_llh1y"]
@@ -25,7 +24,6 @@ script = ExtResource("1_k7x86")
 player_group = NodePath("Players")
 enemy_group = NodePath("Enemies")
 timeline = NodePath("UI/Timeline")
-enemy_button = ExtResource("2_q2h2f")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://l2tec7svu05v"]
+
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_we0ly"]
+
+[resource]
+script = ExtResource("1_we0ly")
+art_name = "Healing Halo"
+power = 1.6
+num_hits = 1
+hit_ratio = Array[float]([])
+aoe = 20
+attribute = "healing"
+max_charge = 6
+position_effect = ""
+bonus_effects = Array[String]([])
+reaction_effects = Array[String]([])
