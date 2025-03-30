@@ -19,6 +19,10 @@ var selected = false
 var is_moving = false
 var is_attacking = false
 static var currently_selected_unit: Character = null
+var can_be_selected := false  # This is controlled by the BattleScene when "Move" is selected
+
+signal movement_finished
+
 # public variables 
 var character_name: String # name of character ('name' is taken by gdscript)
 # textures (remove and assign to CharacterSprite node instead?)
@@ -309,14 +313,21 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 			select_unit()
 
 func select_unit():
-	if currently_selected_unit != null and currently_selected_unit != self:
+
+	if not can_be_selected:
+		print("❌ select_unit() blocked - can_be_selected is false for", name)
 		return
+
+	print("🟢 select_unit() started for", name)
 	selected = true
 	currently_selected_unit = self
 	grid_manager.clear_highlight()
+
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
+	print("🗺️ Unit tile:", unit_tile)
 	grid_manager.highlight_tiles(unit_tile, move_range)
-	print("✅ Unit selected. Showing movement range.")
+
+	print("✅ Movement range shown for", name)
 
 func cancel_selection():
 	selected = false
@@ -360,7 +371,9 @@ func follow_path(path: Array):
 			await get_tree().process_frame
 	velocity = Vector2.ZERO
 	is_moving = false
+	Global.battle_scene.show_action_selection()
 	selected = false
 	var tile = grid_manager.tile_map.local_to_map(global_position)
-	grid_manager.highlight_attack_tiles(tile, attack_range)
-	is_attacking = true
+	emit_signal("movement_finished")  # Signal movement is done
+	#grid_manager.highlight_attack_tiles(tile, attack_range)
+	#is_attacking = true

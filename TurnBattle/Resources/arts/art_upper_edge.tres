@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://cwvbhyfl1jnlj"]
 
-[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_kp0fl"]
+[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_kp0fl"]
 
 [resource]
 script = ExtResource("1_kp0fl")

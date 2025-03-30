@@ -141,6 +141,7 @@ func give_enemy_turn():
 
 
 func next_turn():
+	
 	# use: pop the queue to get the next character's turn
 		# i.e., ends the current turn and allows the next
 		# character in the queue to go
@@ -168,6 +169,7 @@ func next_turn():
 
 
 func end_turn():
+	active_character.can_be_selected = false
 	turn_state = TurnState.NEUTRAL
 	pop_out()
 	sort_and_display() 
@@ -309,23 +311,33 @@ func get_character_special():
 	return special_info
 
 
-func can_move():
-	if turn_state == TurnState.MOVED:
+func can_move() -> bool:
+	return turn_state != TurnState.MOVED and turn_state != TurnState.ENDED
 		#print("already moved")
-		return false
-	return true
+		#return false
+	#return true
+
 
 func move_selected():
 	if can_move():
+		$UI/ActionSelectionContainer.hide()  # Hide menu
+		active_character.can_be_selected = true
 		active_character.select_unit()
-		
-		# update state
+
+		# Update state
 		if turn_state == TurnState.NEUTRAL:
 			turn_state = TurnState.MOVED
 		elif turn_state == TurnState.ATTACKED:
 			turn_state = TurnState.ENDED
-			#await... wait till move
-			end_turn()
+		
+func _on_movement_finished():
+	$UI/ActionSelectionContainer.show()
+	$UI/ActionSelectionContainer.init_action_selection()
+	active_character.movement_finished.disconnect(_on_movement_finished)
+
+	if turn_state == TurnState.ENDED:
+		end_turn()
+
 
 # ---- functions connected to signals from action select menu ----
 
@@ -348,4 +360,6 @@ func _on_action_selection_container_attack_selected(attack_type: String, target:
 
 
 func _on_action_selection_container_end_turn_selected() -> void:
-	pass # Replace with function body.
+	end_turn()
+
+const TurnStateEnum = TurnState

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bufo3fo4lgsaf"]
 
-[ext_resource type="Script" path="res://TurnBattle/scripts/hud/action_selection_container.gd" id="1_8xoiw"]
+[ext_resource type="Script" uid="uid://rj4umh6tq1iu" path="res://TurnBattle/scripts/hud/action_selection_container.gd" id="1_8xoiw"]
 
 [node name="ActionSelectionContainer" type="Control"]
 layout_mode = 3

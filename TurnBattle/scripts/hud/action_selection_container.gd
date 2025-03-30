@@ -54,6 +54,18 @@ func init_action_selection():
 	#todo: fix ui so move and attacks buttons are properly disabled
 	show_actions("combat_actions")
 
+	# Disable buttons based on turn state
+	var turn_state = owner.turn_state
+	for child in action_vbox_list.get_children():
+		match child.text:
+			"Move":
+				child.disabled = turn_state == owner.TurnState.MOVED or turn_state == owner.TurnState.ENDED
+			"Attacks":
+				child.disabled = turn_state == owner.TurnState.ATTACKED or turn_state == owner.TurnState.ENDED
+			"End Turn":
+				child.disabled = false  # Always enabled
+
+
 
 func is_action_available(action: String, art_info = null):
 	# use: check if the button's action is available
@@ -255,6 +267,7 @@ func _on_action_selected(action: String):
 			show_actions("attacks")
 		"end_turn":
 			print("turn ended")
+			end_turn_selected.emit()
 		"back_to_combat_actions":
 			#print("actions back selected")
 			show_actions("combat_actions")
