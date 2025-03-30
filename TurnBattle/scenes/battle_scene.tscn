@@ -110,6 +110,7 @@ text = "log"
 autowrap_mode = 3
 
 [node name="ActionSelectionContainer" parent="UI" instance=ExtResource("6_llh1y")]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

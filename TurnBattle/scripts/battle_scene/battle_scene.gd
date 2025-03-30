@@ -4,7 +4,7 @@ extends Node2D
 #signal arts_selected
 
 # enums
-enum TurnState { NEUTRAL, ATTACKED, MOVED, SKIPPED }
+enum TurnState { NEUTRAL, ATTACKED, MOVED, ENDED }
 enum ActiveHud { COMBAT, SETTINGS_OPTIONS, TITLE_MENU }
 
 # constants
@@ -22,14 +22,13 @@ enum ActiveHud { COMBAT, SETTINGS_OPTIONS, TITLE_MENU }
 var sorted_array = [] # used for sorting the turn order (?)
 var players: Array[Character] # used to hold Player 'scene' nodes
 var enemies: Array[Character] # used to hold Enemy 'scene' nodes
-
-var is_arts_selected: bool = false # should make into FSM
+var active_character: Character = null
 
 var turn_state = TurnState.NEUTRAL
 var active_hud = ActiveHud.COMBAT
 
 # temp variable for the temp controls UI
-var ui_controls := {}
+#var ui_controls := {}
 
 
 func _ready():
@@ -43,7 +42,7 @@ func _ready():
 
 	for enemy in enemy_group.get_children():
 		enemies.append(enemy)
-
+	
 	sort_and_display() 
 	
 	# connect the signal 'next_turn' from 'EventBus'
@@ -60,7 +59,6 @@ func _process(delta: float) -> void:
 
 func update_action_log(message: String):
 	$UI/ActionLog.text = message
-
 
 # ----functions for dealing with turn order (the character queue)----
 
@@ -81,6 +79,7 @@ func sort_combined_queue():
 			# with "character" = player and "time" = player.queue
 			player_array.append({"character": player, "time": i})
 
+
 	# do the same for enemies
 	var enemy_array = []
 	for enemy in enemies:
@@ -92,6 +91,7 @@ func sort_combined_queue():
 	# used gdscript's built in 'sort_custom' function for lists
 	# and pass it our custom sort defined below
 	sorted_array.sort_custom(sort_by_time)
+	active_character = sorted_array[0]["character"]
 
 
 func sort_by_time(a, b):
@@ -99,6 +99,81 @@ func sort_by_time(a, b):
 		# in ascending order based on their "time"
 	return a["time"] < b["time"]
 
+
+func sort_and_display():
+	# use: sorts and updates the turn order queue and 
+		# update the # UI for turn order
+	print("sort and display")
+	# call our sort and update functions defined above
+	sort_combined_queue()
+	update_timeline()
+	
+	# after sorting, if the first element in the queue
+	# is a Player, then show the option to the player
+	if active_character in players:
+		print("showing action")
+		show_action_selection()
+
+
+func pop_out():
+	# use: removes current character from sorted_array queue
+		# i.e., pops the 'speed' off queue of the current character
+		# to update their turn order and call 
+		# sort_and_display() to update the turn order queue
+		# and the turn order UI
+
+	# call the pop_out() function defined in character.gd
+	active_character.pop_out()
+
+
+func give_player_turn():
+	show_action_selection()
+	return
+
+
+func give_enemy_turn():
+	# temp - enemy has already moved
+	turn_state = TurnState.MOVED
+	var target_player = players.pick_random() # temp randomly select a player to be attacked
+	# temp - enemy only uses normal attack
+	var damage = active_character.use_normal_attack()
+	deal_damage(damage, target_player)
+
+
+func next_turn():
+	# use: pop the queue to get the next character's turn
+		# i.e., ends the current turn and allows the next
+		# character in the queue to go
+	
+	# check if either player or enemy array is empty 
+	if players.is_empty():
+		print("all players defeated")
+		return
+	if enemies.is_empty():
+		print("all enemies defeated")
+		return
+	
+	#active_character = sorted_array[0]["character"]
+
+	# if the first element is Player, give control to player
+	if active_character in players:
+		give_player_turn()
+
+	# otherwise, it's enemy's turn, handle with ai
+	# in a way, attack and getting attacked are 'separate'
+	# e.g., char does animation for attack, but doesn't actually 
+	# 'hit', then player/enemy selects a char to be attacked
+	else:
+		give_enemy_turn()
+
+
+func end_turn():
+	turn_state = TurnState.NEUTRAL
+	pop_out()
+	sort_and_display() 
+	next_turn()
+	
+# ---- functions to do with ui / hud changes ----
 
 func update_timeline():
 	# use: updates the UI to reflect the elements (characters)
@@ -113,110 +188,83 @@ func update_timeline():
 		index += 1
 
 
-func sort_and_display():
-	# use: sorts the turn order queue and update the 
-	# UI for turn order
+func show_action_selection():
+	print("show selection")
+	$UI/ActionSelectionContainer.init_action_selection() # temp
+	$UI/ActionSelectionContainer.show()
+	#$UI/ActionSelectionContainer.get_child(0).grab_focus()
 
-	# call our sort and update functions defined above
-	sort_combined_queue()
-	update_timeline()
-	
-	# after sorting, if the first element in the queue
-	# is a Player, then show the option to the player
-	#if sorted_array[0]["character"] in players:
-		#show_action_selection?
+# ---- functions to do with attacking / turn actions ----
 
 
-func pop_out():
-	# use: pops the 'speed' queue of the current character
-		# to update their turn order and call 
-		# sort_and_display() to update the turn order queue
-		# and the UI for turn order
-
-	# call the pop_out() function defined in character.gd
-	sorted_array[0]["character"].pop_out()
-	
-	sort_and_display() # always call for any change of speed
+func can_attack():
+	if turn_state == TurnState.ATTACKED or turn_state == TurnState.ENDED:
+		#print("already attacked")
+		return false
+	return true
 
 
-func next_turn():
-	# use: pop the queue to get the next character's turn
-		# i.e., ends the current turn and allows the next
-		# character in the queue to go
-
-	# if the first element is Player, give control to player
-	if sorted_array[0]["character"] in players:
-		return # temp
-
-	# otherwise, it's enemy's turn, handle with ai
-	# in a way, attack and getting attacked are 'separate'
-	# e.g., char does animation for attack, but doesn't actually 
-	# 'hit', then player/enemy selects a char to be attacked
-	
-	give_enemy_turn()
-
-
-# functions to do with attacking / turn actions
-
-func deal_damage(damage: int): # add a character to be hit
+func deal_damage(damage: int, target_enemy: Character):
 	# changes:
 		# add: call get_attacked() for character taking attack
 
-	# (current) use: calls the attack() function for the 
+	# use: calls the attack() function for the 
 		# first character in the queue (current turn)
+		# and call the get_attaacked function for the 
+		# target of the attack
 	
-	print(str(damage) + "damage dealt") # temp to check correct damage
+	# check if attack has already been used this turn
+		# somewhat redundant since player should not be 
+		# able to select the 'attacks' button if already attacked
+	if not can_attack():
+		return
+
+	if turn_state == TurnState.NEUTRAL:
+		turn_state = TurnState.ATTACKED
+	elif turn_state == TurnState.MOVED:
+		turn_state = TurnState.ENDED
+	$UI/ActionSelectionContainer.init_action_selection() # temp
 	
-	# call the attack() function defined in character.gd
-	sorted_array[0]["character"].attack(get_tree())
-	# determine who gets attacked (if player, let player
-	# select; if enemy, random or some ai), then get_attacked
-	#players.pick_random().get_attacked() # randomly select a player to be attacked
-	pop_out()
-
-
-func give_player_turn():
-	pass
-
-
-func give_enemy_turn():
-	# temp - enemy only uses normal attack
-	var damage = sorted_array[0]["character"].use_normal_attack()
-	deal_damage(damage)
-	players.pick_random().get_attacked("", damage) # temp randomly select a player to be attacked
+	# log: check correct damage
+	print(str(damage) + "damage dealt") 
+	# perform attack
+	target_enemy.get_attacked("", damage)
+	await active_character.attack(get_tree())
+	
+	if turn_state == TurnState.ENDED: # bandaid fix...
+		end_turn()
 
 
 func use_character_normal_attack(target_enemy: Character):
 	# use: calls the use_normal_attack() function for the
 		# first (current turn) character in the queue 
-	var damage = sorted_array[0]["character"].use_normal_attack()
-	deal_damage(damage)
-	
-	target_enemy.get_attacked("", damage)
+	if can_attack():
+		var damage = active_character.use_normal_attack()
+		deal_damage(damage, target_enemy)
 
 
 func use_character_art(target_enemy: Character, art_num: int):
 	# use: calls the use_art() function for the 
 		# first (current turn) character in the queue
-	var damage = sorted_array[0]["character"].use_art(art_num)
-	if damage:
-		deal_damage(damage)
-		target_enemy.get_attacked("", damage)
-	else:
-		update_action_log("Art is not charged")
-		return
+	if can_attack():
+		var damage = active_character.use_art(art_num)
+		if damage:
+			deal_damage(damage, target_enemy)
+		else:
+			update_action_log("Art is not charged")
+			return
 
 
 func use_character_special(target_enemy: Character):
 	# use: calls the use_special() function for the
 		# first (current turn) character in the queue 
-	var damage = sorted_array[0]["character"].use_special()
-	if damage:
-		deal_damage(damage)
-		target_enemy.get_attacked("", damage)
-	else:
-		update_action_log("Special has no charge")
-		return
+	if can_attack():
+		var damage = active_character.use_special()
+		if damage:
+			deal_damage(damage, target_enemy)
+		else:
+			update_action_log("Special has no charge")
+			return
 
 
 func set_status(status_type: String):
@@ -224,7 +272,7 @@ func set_status(status_type: String):
 		# character in the queue
 
 	# i.e., self-applies 'haste'
-	sorted_array[0]["character"].set_status(status_type)
+	active_character.set_status(status_type)
 	sort_and_display() # always call for change of speed
 
 
@@ -248,22 +296,36 @@ func get_players():
 
 func get_character_arts():
 	var arts_info = [
-		["art0", sorted_array[0]["character"].get_art_info(0)],
-		["art1", sorted_array[0]["character"].get_art_info(1)],
-		["art2", sorted_array[0]["character"].get_art_info(2)],
+		["art0", active_character.get_art_info(0)],
+		["art1", active_character.get_art_info(1)],
+		["art2", active_character.get_art_info(2)],
 	]
 
 	return arts_info
 
 
 func get_character_special():
-	var special_info = sorted_array[0]["character"].get_special_info()
+	var special_info = active_character.get_special_info()
 	return special_info
 
 
-func move_selected():
-	sorted_array[0]["character"].select_unit()
+func can_move():
+	if turn_state == TurnState.MOVED:
+		#print("already moved")
+		return false
+	return true
 
+func move_selected():
+	if can_move():
+		active_character.select_unit()
+		
+		# update state
+		if turn_state == TurnState.NEUTRAL:
+			turn_state = TurnState.MOVED
+		elif turn_state == TurnState.ATTACKED:
+			turn_state = TurnState.ENDED
+			#await... wait till move
+			end_turn()
 
 # ---- functions connected to signals from action select menu ----
 

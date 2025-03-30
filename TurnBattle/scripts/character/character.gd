@@ -203,7 +203,7 @@ func attack(tree):
 	await tween_movement(shift, tree)
 	
 	# emit the 'next_turn' signal from 'EventBus'
-	EventBus.next_turn.emit()	# pass the damage value
+	#EventBus.next_turn.emit()	# pass the damage value
 
 
 func use_normal_attack():

@@ -33,7 +33,7 @@ var pending_attack_type: String = ""	# stores the selected attack to be used on 
 
 
 func _ready() -> void:
-	show_actions("combat_actions")
+	init_action_selection()
 
 
 func _process(delta: float) -> void:
@@ -49,10 +49,36 @@ func _process(delta: float) -> void:
 			action_vbox_list.get_child(selected_option_index).emit_signal("pressed")
  
 
+func init_action_selection():
+	# ...?
+	#todo: fix ui so move and attacks buttons are properly disabled
+	show_actions("combat_actions")
+
+
+func is_action_available(action: String, art_info = null):
+	# use: check if the button's action is available
+		# i.e., if move and/or attack is already used this turn
+		# or if art is charged
+	match action:
+		"move":
+			return owner.can_move()
+		"attacks":
+			return owner.can_attack()
+		"art":
+			if not art_info:
+				print("did not provide valid art info")
+				return false
+			if art_info[1].get("current_charge") < art_info[1].get("max_charge"):
+				return false
+			return true
+	return true
+
+
 func show_actions(actions: String):
 	clear_action_options()
 	current_action_options = action_options.get(actions)
 	selected_option_index = 0
+	var is_disabled = false
 
 	# temp: want to create new scene for 'button'
 	# maybe have button as root (or panel for deco?) and then 'main' text label 'sub' text label
@@ -60,12 +86,12 @@ func show_actions(actions: String):
 		if action.keys()[0] == "special":
 			show_special_button()
 		else:
-			#todo: check if action is avaiable (i.e., if move and/or attack is already used this turn)
-			# if no, disable button
+			# check if action is avaiable 
+			is_disabled = not is_action_available(action.keys()[0])
 			add_button_to_list(
 				action.values()[0],
 				func(): _on_action_selected(action.keys()[0]),
-				false
+				is_disabled
 			)
 
 	# ensure a button is focused
@@ -134,6 +160,7 @@ func show_player_selection():
 
 
 func show_arts_selection():
+	is_action_available("")
 	# get the arts of the current character from the battle scene
 	# want to extract art name, current charge, max charge, bonus attributes
 	clear_action_options()
@@ -144,10 +171,9 @@ func show_arts_selection():
 
 	for art_info in arts_info:
 		# check if art is available (i.e., is charged)
-		is_disabled = false
 		if art_info[1].get("current_charge") < art_info[1].get("max_charge"):
 			# if no, disable button
-			is_disabled = true
+			is_disabled = not is_action_available("art", art_info)
 		add_button_to_list(
 			art_info[1].get("name") + " ("
 			+ str(art_info[1].get("current_charge")) + "/"
@@ -249,6 +275,7 @@ func _on_character_selected(character: Character):
 	if pending_attack_type != "":
 		attack_selected.emit(pending_attack_type, character)
 		pending_attack_type = ""
-		show_actions("combat_actions")
+		init_action_selection()
+		#hide()
 	else:
 		print("somehow, no attack was selected before selecting enemy")
