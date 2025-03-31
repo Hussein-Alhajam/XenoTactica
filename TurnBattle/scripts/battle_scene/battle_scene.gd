@@ -68,7 +68,8 @@ func sort_combined_queue():
 		# enemies in enemy_array, then combines both combined
 		# arrays into sorted_array. Array is then sorted
 		# based on the 'time' key (i.e., the 'speed' value in
-		# character.queue)
+		# character.queue). First character in this array is
+		# the current character who has their turn
 
 	var player_array = []
 	for player in players: 
@@ -103,6 +104,7 @@ func sort_by_time(a, b):
 func sort_and_display():
 	# use: sorts and updates the turn order queue and 
 		# update the # UI for turn order
+
 	#print("sort and display")
 	# call our sort and update functions defined above
 	sort_combined_queue()
@@ -111,7 +113,7 @@ func sort_and_display():
 	# after sorting, if the first element in the queue
 	# is a Player, then show the option to the player
 	if active_character in players:
-		print("showing action")
+		#print("showing action")
 		show_action_selection()
 
 
@@ -140,13 +142,31 @@ func give_enemy_turn():
 	deal_damage(damage, target_player)
 
 
+func check_active_character_status():
+	# check for reaction status on active character
+	# if reaction timer is less than 1 (status effect is over), then reset reaction status on character 
+	if active_character.reaction_turn_timer < 1:
+		active_character.reset_reaction_status()
+	# if reaction is break, decrement reaction timer
+	elif active_character.reaction_state == active_character.ReactionState.BREAK:
+		active_character.reaction_turn_timer = active_character.reaction_turn_timer - 1
+	# if reaction is topple or launch, decrement reaction timer and skip turn
+	elif active_character.reaction_state == active_character.ReactionState.TOPPLE or active_character.reaction_state == active_character.ReactionState.LAUNCH:
+		active_character.reaction_turn_timer = active_character.reaction_turn_timer - 1
+		return "skip"
+
+	# check for special combo status
+
+	# check for other statuses (none for now...)
+	# e.g., if character has a dot status, get dot status dmg, active_character.get_attacked("", damage)
+
+
 func next_turn():
-	
 	# use: pop the queue to get the next character's turn
 		# i.e., ends the current turn and allows the next
 		# character in the queue to go
 	
-	# check if either player or enemy array is empty 
+	# check if either player or enemy array is empty (end battle if so)
 	if players.is_empty():
 		print("all players defeated")
 		return
@@ -154,9 +174,11 @@ func next_turn():
 		print("all enemies defeated")
 		return
 	
-	#active_character = sorted_array[0]["character"]
+	# check for statuses on character
+	if check_active_character_status() == "skip":
+		end_turn()
 
-	# if the first element is Player, give control to player
+	# if the active char is Player, give control to player
 	if active_character in players:
 		give_player_turn()
 
@@ -229,12 +251,25 @@ func deal_damage(damage: int, target_enemy: Character):
 	
 	# log: check correct damage
 	print(str(damage) + "damage dealt") 
-	# perform attack
+	# perform attack and apply statuses
 	target_enemy.get_attacked("", damage)
+
 	await active_character.attack(get_tree())
 	
 	if turn_state == TurnState.ENDED: # bandaid fix...
 		end_turn()
+
+
+func apply_status_effect(effect: String, target_enemy: Character):
+	print("applying effect: " + effect)
+	target_enemy.add_status(effect, 1)
+		#---
+		# when using art (use_character_art), return daamge and should also 
+		# return effects from that art. Could alternatively create different method 
+		# to handle effects altogether rather than passing new effects param to deal_damage()
+		# in func apply_status_effect(effect, target_enemy):
+			# target_enemy.add_status(effect, turns)
+		#---
 
 
 func use_character_normal_attack(target_enemy: Character):
@@ -250,7 +285,11 @@ func use_character_art(target_enemy: Character, art_num: int):
 		# first (current turn) character in the queue
 	if can_attack():
 		var damage = active_character.use_art(art_num)
+		var effects = active_character.get_art_effects(art_num)
 		if damage:
+			# apply status effects (if any) to target
+			for effect in effects:
+				apply_status_effect(effect, target_enemy)
 			deal_damage(damage, target_enemy)
 		else:
 			update_action_log("Art is not charged")
@@ -269,13 +308,13 @@ func use_character_special(target_enemy: Character):
 			return
 
 
-func set_status(status_type: String):
-	# use: calls the set_status() function for the first 
-		# character in the queue
-
-	# i.e., self-applies 'haste'
-	active_character.set_status(status_type)
-	sort_and_display() # always call for change of speed
+#func set_status(status_type: String):
+	## use: calls the set_status() function for the first 
+		## character in the queue
+#
+	## i.e., self-applies 'haste'
+	#active_character.set_status(status_type)
+	#sort_and_display() # always call for change of speed
 
 
 func kill_character(character: Character):

@@ -285,7 +285,7 @@ func _on_action_selected(action: String):
 			#print("attacks selected")
 			show_actions("attacks")
 		"end_turn":
-			print("turn ended")
+			#print("turn ended")
 			end_turn_selected.emit()
 		"back_to_combat_actions":
 			#print("actions back selected")

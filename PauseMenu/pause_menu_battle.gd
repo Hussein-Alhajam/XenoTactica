@@ -20,4 +20,4 @@ func _on_flee_pressed():
 	get_tree().paused = false
 	visible = false
 	print("🏃‍♀️ Player fled!")
-	get_tree().change_scene_to_file("res://overworld.tscn")
+	get_tree().change_scene_to_file("res://Overworld/over_world.tscn")

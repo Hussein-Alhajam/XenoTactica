@@ -2,10 +2,13 @@ extends CharacterBody2D
 
 class_name Character # name this CharacterStats?
 
-# onready variables
-@onready var health_bar: ProgressBar = $HealthBar
-@onready var damage_numbers_origin: Node2D = $DamageNumberOrigin
-
+# signals
+signal movement_finished
+# enums
+enum ReactionState { NORMAL, BREAK, TOPPLE, LAUNCH }
+# constants
+# static variables
+static var currently_selected_unit: Character = null
 # export variables
 @export var character_stats: CharacterStats # receives all 'unique traits' from this resource
 # preload scene (so we don't have to set it in inspector manually)
@@ -13,21 +16,15 @@ class_name Character # name this CharacterStats?
 @export var pathfinder: PathFinding
 @export var grid_manager: GridManager
 @export var move_range: int = 3
-@export var move_speed: float = 100.0
+@export var move_speed: float = 300.0
 @export var attack_range: int = 1
+# other regular variables 
 var selected = false
 var is_moving = false
 var is_attacking = false
-static var currently_selected_unit: Character = null
 var can_be_selected := false  # This is controlled by the BattleScene when "Move" is selected
-
-signal movement_finished
-
-# public variables 
 var character_name: String # name of character ('name' is taken by gdscript)
-# textures (remove and assign to CharacterSprite node instead?)
 var icon: Texture2D # sprite used for the character's portrait
-# stats
 var max_health: int
 var health: int
 var strength: int 	# affects physical based damage
@@ -45,21 +42,19 @@ var agility: int: # affects how often the character can act
 		speed = 200.0 / (log(agility) + 2) - 25 
 		queue_reset()
 var element: String # fire/water/earth/wind/ice/electric/light/dark
-# abilities
 var arts_list: Array[CombatArt]
 var specials_list: Array[CombatSpecial]
-
-var speed: float 
-var queue: Array[float] # used to store this char's successive speed calculated from agility, should continually increase 
-var status = 1 # int? used to store reference?
-
 var special_charge: int = 0
+var reaction_turn_timer: int = 0
+var reaction_state = ReactionState.NORMAL
+var special_combo: Array[Dictionary] # stores { <element>: <turn timer> } e.g., { "fire": 1 }
+var speed: float 
+var speed_bonus:float = 1.0 # changes the speed of the character
+var queue: Array[float] # used to store this char's successive speed calculated from agility, should continually increase 
 
-# could use AutoLoad on a 'Global' script/class which has battle_scene
-# in here func _ready(): Global.battle_scene = self
-# then in other scripts, call Global.battle_scene.function()
-var battle_scene: Node2D # used to store reference of main battle_scene Scene
-
+# onready variables
+@onready var health_bar: ProgressBar = $HealthBar
+@onready var damage_numbers_origin: Node2D = $DamageNumberOrigin
 
 func _ready():
 	character_name = character_stats.character_name
@@ -101,15 +96,16 @@ func _ready():
 
 	print("✅ PlayerUnit ready.")
 
+
 func queue_reset():
 	queue.clear()
 	# add Arithmetic Progression of 4 terms
 	# look this up
-	for i in range(4):
+	for i in range(5):
 		if queue.size() == 0:
-			queue.append(speed * status)
+			queue.append(speed * speed_bonus)
 		else:
-			queue.append(queue[-1]  + speed * status) # ?
+			queue.append(queue[-1]  + speed * speed_bonus)
 
 
 func tween_movement(shift, tree):
@@ -123,7 +119,7 @@ func pop_out():
 	# remove front node (current character to attack)
 	# add next character to attack to end of queue
 	queue.pop_front()
-	queue.append(queue[-1] + speed * status) # same as in queue_reset()
+	queue.append(queue[-1] + speed * speed_bonus) # same as in queue_reset()
 
 
 func add_vfx(type: String = ""):
@@ -136,27 +132,57 @@ func add_vfx(type: String = ""):
 	vfx.find_child("AnimationPlayer").play(type)
 
 
-func set_status(status_type: String):
-	add_vfx(status_type)
+func reset_reaction_status():
+	reaction_state = ReactionState.NORMAL
+	reaction_turn_timer = 0
+
+
+func reset_status():
+	reset_reaction_status()
+	special_combo.clear()
+
+
+func add_status(status_type: String, num_turns: int):
+	#add_vfx(status_type)
 	# if the status is "Haste" or "Slow", set status value accordingly
+	print("adding status: " + status_type)
 	match status_type:
+		"Break":
+			if reaction_state == ReactionState.NORMAL:
+				reaction_state = ReactionState.BREAK
+				reaction_turn_timer = num_turns
+				print("added break for " + str(num_turns))
+		"Topple":
+			if reaction_state == ReactionState.BREAK:
+				reaction_state = ReactionState.TOPPLE
+				reaction_turn_timer = num_turns
+				print("added topple for " + str(num_turns))
+		"Launch":
+			if reaction_state == ReactionState.TOPPLE:
+				reaction_state = ReactionState.LAUNCH
+				reaction_turn_timer = num_turns
+				print("added launch for " + str(num_turns))
+		"Smash":
+			if reaction_state == ReactionState.LAUNCH:
+				print("smash used on launch")
+				reset_reaction_status()
+				return true
+				# if true, then adding status was effective; if smash, then apply smash dmg
+
 		"haste":
-			status = 0.5
-		"slow":
-			status = 2
-	
-	# pop out the elements in the queue, except for first
-	# (so that first will always go next and not be 'replaced')
-	# game balance thing
-	print(queue)
-	for i in range(3):
-		queue.pop_back()
-	print(queue)
-	# append the new 'order'
-	for i in range(3):
-		queue.append(queue[-1] + speed * status)
-	print(queue)
-	print("character.set_status called")
+			speed_bonus = 0.5
+			# pop out the elements in the queue, except for first
+			# (so that first will always go next and not be 'replaced')
+			# game balance thing
+			#print(queue)
+			#for i in range(queue.size() - 1):
+				#queue.pop_back()
+			#print(queue)
+			## append the new 'order'
+			#for i in range(queue.size() - 1):
+				#queue.append(queue[-1] + speed * status)
+			#print(queue)
+			#print("character.set_status called")
 
 
 func _set_health(value: int):
@@ -184,9 +210,19 @@ func get_attacked(type = "", damage = 0):
 	_set_health(-damage)
 
 
+func add_special_combo(element: String):
+	# if current special combo stage is none, or 1, add to it
+	if special_combo.size() < 2:
+		special_combo.append( {element: 2})
+	# if the current special stage is at 2, next will be stage 3 (the final stage) which ends the combo 
+	if special_combo.size() >= 2:
+		special_combo.clear()
+		return true # if true, then combo is finished; deal combo finisher dmg
+
+
 func kill_character():
-	print("tried killing character " + character_name)
-	Global.battle_scene.kill_character(self) # emit signal with 'self' instead?
+	print("killing character " + character_name)
+	owner.kill_character(self) # emit signal with 'self' instead?
 	queue_free()
 
 
@@ -213,17 +249,15 @@ func attack(tree):
 
 
 func use_normal_attack():
-	#print(title + ": " + arts_list[0].art_name + " charge:" + str(arts_list[0].current_charge))
 	# mechanic updates (damage, charge arts, accuracy, etc.)
-	charge_arts(10)
-	# calculate damage of attack
-	var damage = strength # temp: use higher of strength or ether
+	charge_arts(1)
+	var damage = strength
 	return damage
 
 
 func charge_arts(num):
 	for art in arts_list:
-		art.charge_art(num)
+		art.charge_art(num) # can add 'art_charge_bonus' var and multiply with (for buffs)
 
 
 func use_art(num):
@@ -248,6 +282,10 @@ func use_art(num):
 		#EventBus.next_turn.emit() # pass the damage value
 	else: 
 		return null
+
+
+func get_art_effects(num: int):
+	return arts_list[num].get_effects()
 
 
 func is_max_special_charged(): # not needed?
