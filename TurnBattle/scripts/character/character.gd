@@ -257,7 +257,7 @@ func play_attack_animation(animation, tree):
 
 func use_normal_attack():
 	# mechanic updates (damage, charge arts, accuracy, etc.)
-	charge_arts(1)
+	charge_arts(10)
 	var damage = strength
 	return damage
 
@@ -269,7 +269,7 @@ func charge_arts(num):
 
 func use_art(num):
 	if arts_list[num].is_charged(): # should find better way to check...
-		charge_arts(1) # charge other arts
+		charge_arts(10) # charge other arts
 		
 		# calculate damage (or healing)
 		var damage = arts_list[num].use_art() 
@@ -282,7 +282,7 @@ func use_art(num):
 			
 		print(arts_list[num].art_name + " did " + str(damage) + " damage")
 		
-		charge_special(1) # charge special
+		charge_special(10) # charge special
 		
 		return damage
 

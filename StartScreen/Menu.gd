@@ -6,7 +6,7 @@ func _ready():
 	$CanvasLayer/Quit.pressed.connect(_on_quit_pressed)
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file("res://Overworld/over_world.tscn")
+	get_tree().change_scene_to_file("res://TurorialArea/TutorialArea.tscn")
 
 func _on_load_pressed():
 	print("Load Game pressed (functionality coming soon)")
