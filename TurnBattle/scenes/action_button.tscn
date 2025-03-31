@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c85hvfsh2n4n0"]
 
-[ext_resource type="Script" path="res://TurnBattle/scripts/hud/action_button.gd" id="1_og32y"]
+[ext_resource type="Script" uid="uid://dtnovek6k6n3x" path="res://TurnBattle/scripts/hud/action_button.gd" id="1_og32y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1vsf"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

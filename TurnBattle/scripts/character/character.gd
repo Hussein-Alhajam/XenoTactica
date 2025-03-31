@@ -17,8 +17,9 @@ static var currently_selected_unit: Character = null
 @export var grid_manager: GridManager
 @export var move_range: int = 3
 @export var move_speed: float = 300.0
-@export var attack_range: int = 1
+@export var attack_range: int = 2
 # other regular variables 
+var tile_size = 80
 var selected = false
 var is_moving = false
 var is_attacking = false
@@ -344,13 +345,6 @@ func _input(event):
 	if is_moving or grid_manager == null or pathfinder == null:
 		return
 
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-		if is_attacking:
-			cancel_attack_selection()
-		elif selected:
-			cancel_selection()
-		return
-
 	if selected and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var mouse_pos = get_global_mouse_position()
 		var clicked_tile = grid_manager.tile_map.local_to_map(mouse_pos)
@@ -367,7 +361,7 @@ func select_unit():
 		print("❌ select_unit() blocked - can_be_selected is false for", name)
 		return
 
-	print("🟢 select_unit() started for", name)
+	print("select_unit() started for", name)
 	selected = true
 	currently_selected_unit = self
 	grid_manager.clear_highlight()
@@ -376,35 +370,21 @@ func select_unit():
 	print("🗺️ Unit tile:", unit_tile)
 	grid_manager.highlight_tiles(unit_tile, move_range)
 
-	print("✅ Movement range shown for", name)
+	print("Movement range shown for", name)
 
-func cancel_selection():
-	selected = false
-	is_attacking = false
-	currently_selected_unit = null
-	grid_manager.clear_highlight()
-	grid_manager.clear_attack_highlight()
-	print("❌ Selection canceled.")
-
-func cancel_attack_selection():
-	is_attacking = false
-	selected = false
-	currently_selected_unit = null
-	grid_manager.clear_attack_highlight()
-	print("❌ Attack selection canceled.")
 
 func move_to_tile(target_tile: Vector2i):
 	if not selected or is_moving:
 		return
 	for unit in get_tree().get_nodes_in_group("player_units"):
 		if unit != self and grid_manager.tile_map.local_to_map(unit.global_position) == target_tile:
-			print("❌ Tile occupied by another unit!")
+			print("Tile occupied by another unit!")
 			return
 
 	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
 	var path = pathfinder.find_path(unit_tile, target_tile)
 	if path.size() <= 1 or path.size() > move_range + 1:
-		print("❌ Invalid move target.")
+		print("Invalid move target.")
 		return
 	grid_manager.clear_highlight()
 	print("✅ Moving unit to", target_tile)
@@ -426,3 +406,49 @@ func follow_path(path: Array):
 	emit_signal("movement_finished")  # Signal movement is done
 	#grid_manager.highlight_attack_tiles(tile, attack_range)
 	#is_attacking = true
+	
+func get_enemies_in_attack_range(enemies: Array[Character]) -> Array[Character]:
+	var in_range: Array[Character] = []
+	if not grid_manager:
+		grid_manager = get_tree().get_first_node_in_group("grid_manager")
+	if not grid_manager:
+		push_error("No GridManager found.")
+		return in_range
+
+	var tile_map = grid_manager.tile_map
+	if not tile_map:
+		push_error("No TileMap in GridManager.")
+		return in_range
+
+	var current_tile = tile_map.local_to_map(global_position)
+	var attack_tiles = grid_manager.get_tiles_in_range(current_tile, attack_range)
+
+	for enemy in enemies:
+		var enemy_tile = tile_map.local_to_map(enemy.global_position)
+		if enemy_tile in attack_tiles:
+			in_range.append(enemy)
+
+	return in_range
+
+func move_towards_target(target_position: Vector2, max_tiles := -1) -> void:
+	if max_tiles == -1:
+		max_tiles = move_range
+
+	var my_tile = global_position / tile_size
+	var target_tile = target_position / tile_size
+	var direction = (target_tile - my_tile).normalized().round()
+
+	var steps = min(my_tile.distance_to(target_tile), max_tiles)
+	var step_vector = direction * steps * tile_size
+	var final_position = global_position + step_vector
+
+	is_moving = true
+	while global_position.distance_to(final_position) > 1.0:
+		var dir = (final_position - global_position).normalized()
+		velocity = dir * move_speed
+		move_and_slide()
+		await get_tree().process_frame
+
+	global_position = final_position
+	velocity = Vector2.ZERO
+	is_moving = false

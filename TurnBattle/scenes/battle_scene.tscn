@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=4 uid="uid://cc5hn5aulatdh"]
 
-[ext_resource type="Script" path="res://TurnBattle/scripts/battle_scene/battle_scene.gd" id="1_k7x86"]
+[ext_resource type="Script" uid="uid://b8ml67g66fxei" path="res://TurnBattle/scripts/battle_scene/battle_scene.gd" id="1_k7x86"]
 [ext_resource type="PackedScene" uid="uid://cm3x6yjwg0wql" path="res://TurnBattle/scenes/enemy_button.tscn" id="2_q2h2f"]
 [ext_resource type="Resource" uid="uid://nvgog6nm6iwk" path="res://TurnBattle/Resources/players/wizard.tres" id="3_1xfr0"]
 [ext_resource type="Resource" uid="uid://cekiqrspd7cac" path="res://TurnBattle/Resources/players/rogue.tres" id="4_74e8g"]
@@ -8,10 +8,10 @@
 [ext_resource type="Resource" uid="uid://7ih7gc3t84wx" path="res://TurnBattle/Resources/enemies/gorgon.tres" id="6_wea8f"]
 [ext_resource type="Resource" uid="uid://bvxs1xxvh8xti" path="res://TurnBattle/Resources/enemies/cyclops.tres" id="7_6ucfx"]
 [ext_resource type="Resource" uid="uid://04yeqcjf71k8" path="res://TurnBattle/Resources/players/knight.tres" id="7_c3ipe"]
-[ext_resource type="Script" path="res://Grid-Movement/Resources/GridManager.gd" id="7_tjiub"]
-[ext_resource type="Script" path="res://Grid-Movement/Resources/PathFinding.gd" id="8_nl3bw"]
+[ext_resource type="Script" uid="uid://0ca101ytw440" path="res://Grid-Movement/Resources/GridManager.gd" id="7_tjiub"]
+[ext_resource type="Script" uid="uid://bxjx0pdydv5qe" path="res://Grid-Movement/Resources/PathFinding.gd" id="8_nl3bw"]
 [ext_resource type="Resource" uid="uid://c4uy71mwhxin" path="res://TurnBattle/Resources/enemies/kraken.tres" id="8_qg17s"]
-[ext_resource type="Script" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="9_tjiub"]
+[ext_resource type="Script" uid="uid://xiaj8nfs36b" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="9_tjiub"]
 [ext_resource type="PackedScene" uid="uid://cguk7p8fnv2ra" path="res://TurnBattle/scenes/character.tscn" id="9_y7v6u"]
 [ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://TurnBattle/Resources/map_tileset.tres" id="12_hp3cp"]
 [ext_resource type="PackedScene" uid="uid://cmaes8al2b5cc" path="res://PauseMenu/PauseMenu_Battle.tscn" id="15_fb2m3"]
@@ -159,36 +159,51 @@ grid_manager = NodePath("../GridManager")
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Player1" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["player_units"] instance=ExtResource("9_y7v6u")]
-position = Vector2(1336, 264.387)
+position = Vector2(1340, 271.478)
 character_stats = ExtResource("7_c3ipe")
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../GridManager")
+move_range = 5
+attack_range = 5
 
 [node name="Player2" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["player_units"] instance=ExtResource("9_y7v6u")]
-position = Vector2(1260, 435.58)
+position = Vector2(1253, 435.58)
 character_stats = ExtResource("4_74e8g")
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../GridManager")
+move_range = 5
+attack_range = 5
 
 [node name="Player3" parent="Players" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["player_units"] instance=ExtResource("9_y7v6u")]
-position = Vector2(1323, 656.409)
+position = Vector2(1321, 671.603)
 character_stats = ExtResource("3_1xfr0")
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../GridManager")
+move_range = 5
+attack_range = 5
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Enemy" parent="Enemies" groups=["enemy_units"] instance=ExtResource("9_y7v6u")]
-position = Vector2(555, 422.411)
+[node name="Enemy" parent="Enemies" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["enemy_units"] instance=ExtResource("9_y7v6u")]
+position = Vector2(535, 423.424)
 character_stats = ExtResource("7_6ucfx")
+pathfinder = NodePath("../../PathFinding")
+grid_manager = NodePath("../../GridManager")
+attack_range = 5
 
-[node name="Enemy2" parent="Enemies" groups=["enemy_units"] instance=ExtResource("9_y7v6u")]
-position = Vector2(292, 337.321)
+[node name="Enemy2" parent="Enemies" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["enemy_units"] instance=ExtResource("9_y7v6u")]
+position = Vector2(281, 348.464)
 character_stats = ExtResource("6_wea8f")
+pathfinder = NodePath("../../PathFinding")
+grid_manager = NodePath("../../GridManager")
+attack_range = 5
 
-[node name="Enemy3" parent="Enemies" groups=["enemy_units"] instance=ExtResource("9_y7v6u")]
-position = Vector2(414, 585.5)
+[node name="Enemy3" parent="Enemies" node_paths=PackedStringArray("pathfinder", "grid_manager") groups=["enemy_units"] instance=ExtResource("9_y7v6u")]
+position = Vector2(363, 587.526)
 character_stats = ExtResource("8_qg17s")
+pathfinder = NodePath("../../PathFinding")
+grid_manager = NodePath("../../GridManager")
+attack_range = 5
 
 [node name="PauseMenu_Battle" parent="." instance=ExtResource("15_fb2m3")]
 visible = false

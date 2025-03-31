@@ -127,14 +127,19 @@ func show_enemy_selection():
 	clear_action_options()
 	selected_option_index = 0
 	
-	var enemies: Array[Character]	# reference to enemies array from battle scene
-	enemies = owner.get_enemies() # can do var enemies = owner.get_enemies()
-	
+	#var enemies: Array[Character]	# reference to enemies array from battle scene
+	#enemies = owner.get_enemies() # can do var enemies = owner.get_enemies()
+	var all_enemies: Array[Character] = owner.get_enemies()
+	var enemies: Array[Character] = owner.active_character.get_enemies_in_attack_range(all_enemies)
+
 	# todo: filter enemies using grid movement range
 		# can use enemies.filter(func = can_target_enemy())
 		# can_target_enemy(): if enemy outside range, return false
 		# then check if enemies is empty after filtering
-
+	if enemies.is_empty():
+		owner.update_action_log("❌ No enemies in range!")
+		show_actions("attacks")
+		return
 	for enemy in enemies:
 		add_button_to_list(
 			enemy.character_name,

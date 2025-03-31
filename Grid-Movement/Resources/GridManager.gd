@@ -111,3 +111,14 @@ func clear_attack_highlight():
 		if child is Sprite2D:
 			child.queue_free()
 	highlighted_attack_tiles.clear()
+	
+func get_tiles_in_range(origin_tile: Vector2i, range: int, shape: int = RangeShape.DIAMOND) -> Array[Vector2i]:
+	var tiles: Array[Vector2i] = []
+	for x in range(-range, range + 1):
+		for y in range(-range, range + 1):
+			if not _is_in_shape(x, y, range, shape):
+				continue
+			var check_tile = origin_tile + Vector2i(x, y)
+			if check_tile != origin_tile:
+				tiles.append(check_tile)
+	return tiles

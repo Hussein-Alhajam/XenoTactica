@@ -135,11 +135,46 @@ func give_player_turn():
 
 func give_enemy_turn():
 	# temp - enemy has already moved
-	turn_state = TurnState.MOVED
-	var target_player = players.pick_random() # temp randomly select a player to be attacked
+	#turn_state = TurnState.MOVED
+	#vai wasr target_player = players.pick_random() # temp randomly select a player to be attacked
 	# temp - enemy only uses normal attack
-	var damage = active_character.use_normal_attack()
-	deal_damage(damage, target_player)
+	#var damage = active_character.use_normal_attack()
+	#deal_damage(damage, target_player)
+	turn_state = TurnState.MOVED
+
+	var enemy_unit := active_character as Character  # character.gd
+	if enemy_unit == null:
+		end_turn()
+		return
+
+	var closest_player : Character = get_closest_player()
+	if closest_player == null:
+		end_turn()
+		return
+
+	# Move enemy toward closest player using move_range
+	if enemy_unit.has_method("move_towards_target"):
+		await enemy_unit.move_towards_target(closest_player.global_position, enemy_unit.move_range)
+
+	await get_tree().create_timer(0.3).timeout
+
+	# Check all players to see if any are in range
+	var attack_target: Character = null
+	for player in players:
+		if enemy_unit.global_position.distance_to(player.global_position) <= enemy_unit.attack_range * 80:
+			attack_target = player
+			break
+
+	if attack_target:
+		var choice = randi() % 4
+		match choice:
+			0: use_character_normal_attack(attack_target)
+			1: use_character_art(attack_target, 0)
+			2: use_character_art(attack_target, 1)
+			3: use_character_special(attack_target)
+	else:
+		print("❌ Enemy couldn’t reach anyone in range.")
+		end_turn()
 
 
 func check_active_character_status():
@@ -344,6 +379,17 @@ func use_character_special(target_enemy: Character):
 	#active_character.set_status(status_type)
 	#sort_and_display() # always call for change of speed
 
+func get_closest_player() -> Character:
+	var closest: Character = null
+	var shortest_dist := INF
+
+	for player in players:
+		var dist = active_character.global_position.distance_to(player.global_position)
+		if dist < shortest_dist:
+			shortest_dist = dist
+			closest = player
+
+	return closest
 
 func kill_character(character: Character):
 	if character in players:
@@ -361,6 +407,7 @@ func get_enemies():
 
 func get_players():
 	return players
+
 
 
 func get_character_arts():
