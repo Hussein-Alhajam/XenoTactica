@@ -22,6 +22,10 @@ var action_options = {
 		{"arts_selection": "Arts Selection"}, 
 		{"special": "Special"},
 		{"back_to_combat_actions": "Back"}],
+	"move_actions": [
+		{"confirm_move": "Confirm Move"},
+		{"back_to_combat_actions": "Back"}
+],
 }
 var selected_option_index: int = 0	# stores the selected option button, used for selecting option with keyboard
 var pending_attack_type: String = ""	# stores the selected attack to be used on enemy
@@ -284,8 +288,14 @@ func _on_action_selected(action: String):
 	match action:
 		"move":
 			#print("move action selected")
-			#show_actions("move_selected")
-			move_selected.emit()
+			show_actions("move_actions")
+			#move_selected.emit()
+		"confirm_move":
+			move_selected.emit() # Actually do the move
+			# Optionally re-show the main menu
+			# show_actions("combat_actions")
+		"back_to_combat_actions":
+			show_actions("combat_actions")
 		"attacks":
 			#print("attacks selected")
 			show_actions("attacks")

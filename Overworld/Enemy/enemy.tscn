@@ -45,22 +45,19 @@ initial_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_0koic")
 enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://bdnid4se5o5g6"
 
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_3cc1d")
 enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://dfsb0smqvyean"
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_anksf")
 enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://bpqgfpif05wjs"
 
 [node name="DetectionCooldownTimer" type="Timer" parent="."]
 process_mode = 3
-process_callback = 0
 wait_time = 5.0
 one_shot = true
-
-[connection signal="body_entered" from="battle_transition" to="StateMachine/Attack" method="_on_battle_transition_body_entered"]
-[connection signal="body_entered" from="detection_zone" to="StateMachine/Idle" method="_on_detection_zone_body_entered"]
-[connection signal="body_exited" from="detection_zone" to="StateMachine/Idle" method="_on_detection_zone_body_exited"]
-[connection signal="body_exited" from="detection_zone" to="StateMachine/Chase" method="_on_detection_zone_body_exited"]

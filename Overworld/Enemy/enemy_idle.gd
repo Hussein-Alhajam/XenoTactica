@@ -4,7 +4,7 @@ class_name Enemy_Idle
 @export var enemy: CharacterBody2D
 @export var move_speed := 55.0
 @onready var  tile_map = $"../Map"
-@onready var detection_zone: Area2D = $"../detection_zone"
+@onready var detection_zone: Area2D = $"../../detection_zone"
 @onready var cooldown_timer: Timer = $"../../DetectionCooldownTimer"
 
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
@@ -78,8 +78,7 @@ func enter():
 	
 	if cooldown_timer:
 		cooldown_timer.start()
-		if not cooldown_timer.is_connected("timeout", Callable(self, "_on_detection_reenable")):
-			cooldown_timer.connect("timeout", Callable(self, "_on_detection_reenable"), CONNECT_ONE_SHOT)
+		print("Cooldown timer connected:", cooldown_timer.is_connected("timeout", Callable(self, "_on_detection_reenable")))
 
 	randomize_wander()
 

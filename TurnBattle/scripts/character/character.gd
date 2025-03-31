@@ -214,6 +214,8 @@ func _set_health(value: int):
 
 
 func get_attacked(type = "", damage = 0):
+	if damage == null:
+		damage = 0
 	# add a 'hit' vfx on the character when attacked
 	add_vfx(type)
 	# reduce health 
@@ -430,25 +432,113 @@ func get_enemies_in_attack_range(enemies: Array[Character]) -> Array[Character]:
 
 	return in_range
 
-func move_towards_target(target_position: Vector2, max_tiles := -1) -> void:
-	if max_tiles == -1:
-		max_tiles = move_range
+func enemy_move_and_attack(player_units: Array) -> bool:
+	"""
+	Moves the enemy toward the closest player,
+	checks if any player is in range, and attacks if possible.
+	Returns true if an attack happened, false otherwise.
+	"""
 
-	var my_tile = global_position / tile_size
-	var target_tile = target_position / tile_size
-	var direction = (target_tile - my_tile).normalized().round()
+	# 1. Move toward nearest player
+	await move_toward_closest_player(player_units)
 
-	var steps = min(my_tile.distance_to(target_tile), max_tiles)
+	# 2. Attempt attack if in range
+	var attacked = try_attack_players_in_range(player_units)
+	return attacked
+
+func move_toward_closest_player(player_units: Array) -> void:
+	# 1. Identify the nearest player by path distance or direct distance
+	var closest_player: Character = null
+	var min_dist := INF
+
+	# We'll do a simple direct distance check (no pathfinding here).
+	# If you have pathfinding, call path code instead.
+	for p in player_units:
+		var dist = global_position.distance_to(p.global_position)
+		if dist < min_dist:
+			min_dist = dist
+			closest_player = p
+
+	if closest_player == null:
+		print("⚠️ No players found, can't move.")
+		return
+
+	# 2. If already in range, no need to move
+	var current_tile = global_position / tile_size
+	var player_tile = closest_player.global_position / tile_size
+	if current_tile.distance_to(player_tile) <= attack_range:
+		print("✅ Already in attack range, not moving.")
+		return
+
+	# 3. Move up to move_range tiles. (Simple direct approach)
+	var tile_dist = current_tile.distance_to(player_tile)
+	var steps = min(tile_dist, float(move_range))
+	var direction = (player_tile - current_tile).normalized().round()
 	var step_vector = direction * steps * tile_size
-	var final_position = global_position + step_vector
 
+	await slide_to_position(global_position + step_vector)
+
+func slide_to_position(target_pos: Vector2):
 	is_moving = true
-	while global_position.distance_to(final_position) > 1.0:
-		var dir = (final_position - global_position).normalized()
+	while global_position.distance_to(target_pos) > 1.0:
+		var dir = (target_pos - global_position).normalized()
 		velocity = dir * move_speed
 		move_and_slide()
 		await get_tree().process_frame
 
-	global_position = final_position
+	global_position = target_pos
 	velocity = Vector2.ZERO
 	is_moving = false
+
+func try_attack_players_in_range(player_units: Array) -> bool:
+	"""
+	Checks if any player is within attack_range tiles.
+	If found, picks a random attack type and does it.
+	Returns true if an attack happened, false otherwise.
+	"""
+
+	for player in player_units:
+		var my_tile = Vector2i(global_position / tile_size)
+		var p_tile = Vector2i(player.global_position / tile_size)
+
+		# ✅ Check tile distance
+		if my_tile.distance_to(p_tile) <= attack_range:
+			# Attack this player
+			var choice = randi() % 3  # 0=normal, 1=art, 2=special
+			match choice:
+				0:
+					var dmg = use_normal_attack()
+					player.get_attacked("Normal", dmg)
+					print("Enemy used NORMAL on", player.name, "for", dmg)
+
+				1:
+					var dmg = use_art(0)
+					if dmg == null or dmg <= 0:
+							# Fallback
+						var fallback = use_normal_attack()
+						player.get_attacked("Normal", fallback)
+						print("❌ Art not charged, used NORMAL instead:", fallback)
+					else:
+					# Art worked
+						player.get_attacked("Art", dmg)
+						print("✅ Enemy used ART on", player.name, "for", dmg)
+				2:
+					# We must handle null or zero from use_special()
+					var dmg = use_special()
+					if dmg == null:
+						dmg = 0  # fallback so we don't get an error comparing to 0
+
+					if dmg > 0:
+						player.get_attacked("Special", dmg)
+						print("Enemy used SPECIAL on", player.name, "for", dmg)
+					else:
+						var fallback = use_normal_attack()
+						player.get_attacked("Normal", fallback)
+						print("Special not ready, used NORMAL instead:", fallback)
+
+			# ✅ If we attacked someone, return true so we don't keep attacking more
+			return true
+
+	# If we reach this point, no players were in range
+	print("❌ No players in range to attack.")
+	return false

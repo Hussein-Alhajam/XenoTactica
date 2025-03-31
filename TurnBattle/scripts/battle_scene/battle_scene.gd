@@ -142,40 +142,24 @@ func give_enemy_turn():
 	#deal_damage(damage, target_player)
 	turn_state = TurnState.MOVED
 
-	var enemy_unit := active_character as Character  # character.gd
-	if enemy_unit == null:
+	var enemy_char = active_character as Character
+	if enemy_char == null:
+		print("Active character is not a Character.")
 		end_turn()
 		return
 
-	var closest_player : Character = get_closest_player()
-	if closest_player == null:
+	print("Enemy turn started for:", enemy_char.name)
+
+	# Ask the enemy to move & attack. If no attack happens, we end turn.
+	var did_attack = await enemy_char.enemy_move_and_attack(players)
+	if did_attack:
+		# The enemy completed an attack, so we end turn immediately
+		print("Enemy attacked. Ending turn now.")
 		end_turn()
 		return
-
-	# Move enemy toward closest player using move_range
-	if enemy_unit.has_method("move_towards_target"):
-		await enemy_unit.move_towards_target(closest_player.global_position, enemy_unit.move_range)
-
-	await get_tree().create_timer(0.3).timeout
-
-	# Check all players to see if any are in range
-	var attack_target: Character = null
-	for player in players:
-		if enemy_unit.global_position.distance_to(player.global_position) <= enemy_unit.attack_range * 80:
-			attack_target = player
-			break
-
-	if attack_target:
-		var choice = randi() % 4
-		match choice:
-			0: use_character_normal_attack(attack_target)
-			1: use_character_art(attack_target, 0)
-			2: use_character_art(attack_target, 1)
-			3: use_character_special(attack_target)
 	else:
-		print("❌ Enemy couldn’t reach anyone in range.")
+		print("Enemy didn’t attack anyone. Ending turn anyway.")
 		end_turn()
-
 
 func check_active_character_status():
 	# check for special combo status
