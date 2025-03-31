@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_oj4c1")
 art_name = "Power Swipe"
-power = 2.0
+power = 2.4
 num_hits = 1
 hit_ratio = Array[float]([])
 aoe = 1

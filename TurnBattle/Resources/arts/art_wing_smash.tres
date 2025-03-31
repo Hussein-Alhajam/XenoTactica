@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://dbna1s1xtbajs"]
 
-[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_gldu1"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_gldu1"]
 
 [resource]
 script = ExtResource("1_gldu1")
 art_name = "Wing Smash"
-power = 2.25
+power = 2.6
 num_hits = 1
 hit_ratio = Array[float]([])
 aoe = 1

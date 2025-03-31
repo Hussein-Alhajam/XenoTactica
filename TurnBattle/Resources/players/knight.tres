@@ -2,15 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://assets/sprites/extracted/knight.png" id="1_bwbme"]
 [ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_gmagr"]
-[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://TurnBattle/resources/arts/art_anchor_shot.tres" id="2_3rnu6"]
+[ext_resource type="Resource" uid="uid://pyjda7i7bfgy" path="res://TurnBattle/Resources/arts/art_anchor_shot.tres" id="2_3rnu6"]
 [ext_resource type="Script" path="res://TurnBattle/scripts/resources/character_stats.gd" id="2_14rfq"]
-[ext_resource type="Resource" uid="uid://r1slhvpjfjef" path="res://TurnBattle/resources/arts/art_double_spinning_edge.tres" id="3_k1n2b"]
+[ext_resource type="Resource" uid="uid://r1slhvpjfjef" path="res://TurnBattle/Resources/arts/art_double_spinning_edge.tres" id="3_k1n2b"]
 [ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="4_ang46"]
-[ext_resource type="Resource" uid="uid://dsksdhjhbvv6e" path="res://TurnBattle/resources/arts/art_sword_bash.tres" id="4_kmck4"]
-[ext_resource type="Resource" uid="uid://bp7k2lwkff3ix" path="res://TurnBattle/resources/specials/special1_water_moon.tres" id="8_i00lh"]
-[ext_resource type="Resource" uid="uid://bfcidkfvvgxjv" path="res://TurnBattle/resources/specials/special2_breaking_wave.tres" id="9_5htpm"]
-[ext_resource type="Resource" uid="uid://dk0n5jghgm11v" path="res://TurnBattle/resources/specials/special3_midnight_mist.tres" id="10_y5cqp"]
-[ext_resource type="Resource" uid="uid://dibxaak12gx3h" path="res://TurnBattle/resources/specials/special4_tidal_wave.tres" id="11_27mj6"]
+[ext_resource type="Resource" uid="uid://dsksdhjhbvv6e" path="res://TurnBattle/Resources/arts/art_sword_bash.tres" id="4_kmck4"]
+[ext_resource type="Resource" uid="uid://bp7k2lwkff3ix" path="res://TurnBattle/Resources/specials/special1_water_moon.tres" id="8_i00lh"]
+[ext_resource type="Resource" uid="uid://bfcidkfvvgxjv" path="res://TurnBattle/Resources/specials/special2_breaking_wave.tres" id="9_5htpm"]
+[ext_resource type="Resource" uid="uid://dk0n5jghgm11v" path="res://TurnBattle/Resources/specials/special3_midnight_mist.tres" id="10_y5cqp"]
+[ext_resource type="Resource" uid="uid://dibxaak12gx3h" path="res://TurnBattle/Resources/specials/special4_tidal_wave.tres" id="11_27mj6"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_jrof2"]
 
 [resource]
@@ -20,10 +20,10 @@ icon = ExtResource("1_bwbme")
 texture = ExtResource("1_bwbme")
 vfx_node = ExtResource("12_jrof2")
 health = 500
-strength = 30
+strength = 40
 ether = 5
-defense = 30
-resistance = 15
+defense = 20
+resistance = 10
 agility = 14
 element = "water"
 arts_list = Array[ExtResource("1_gmagr")]([ExtResource("2_3rnu6"), ExtResource("3_k1n2b"), ExtResource("4_kmck4")])

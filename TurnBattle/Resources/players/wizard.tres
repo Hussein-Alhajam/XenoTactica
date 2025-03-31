@@ -2,15 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://wcu7d45wawc7" path="res://assets/sprites/extracted/wizard.png" id="1_2bg7t"]
 [ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_f3e04"]
-[ext_resource type="Resource" uid="uid://l2tec7svu05v" path="res://TurnBattle/resources/arts/art_healing_halo.tres" id="2_1aoh7"]
+[ext_resource type="Resource" uid="uid://l2tec7svu05v" path="res://TurnBattle/Resources/arts/art_healing_halo.tres" id="2_1aoh7"]
 [ext_resource type="Script" path="res://TurnBattle/scripts/resources/character_stats.gd" id="2_2svqr"]
-[ext_resource type="Resource" uid="uid://cty7ei13pso56" path="res://TurnBattle/resources/arts/art_light_heal.tres" id="3_8ltxp"]
-[ext_resource type="Resource" uid="uid://d3bo6wkaq5u8y" path="res://TurnBattle/resources/arts/art_aerial_slash.tres" id="4_b11a6"]
+[ext_resource type="Resource" uid="uid://cty7ei13pso56" path="res://TurnBattle/Resources/arts/art_light_heal.tres" id="3_8ltxp"]
+[ext_resource type="Resource" uid="uid://d3bo6wkaq5u8y" path="res://TurnBattle/Resources/arts/art_aerial_slash.tres" id="4_b11a6"]
 [ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_35w2o"]
-[ext_resource type="Resource" uid="uid://vkqwia7bsu1p" path="res://TurnBattle/resources/specials/special1_flame_nova.tres" id="8_1rcds"]
-[ext_resource type="Resource" uid="uid://6v4setyxwb17" path="res://TurnBattle/resources/specials/special2_prominence_revolt.tres" id="9_831rn"]
-[ext_resource type="Resource" uid="uid://bp6xgl7pce4ki" path="res://TurnBattle/resources/specials/special3_blazing_end.tres" id="10_5ftln"]
-[ext_resource type="Resource" uid="uid://tyyvnh4a33f3" path="res://TurnBattle/resources/specials/special4_burning_sword.tres" id="11_p137b"]
+[ext_resource type="Resource" uid="uid://vkqwia7bsu1p" path="res://TurnBattle/Resources/specials/special1_flame_nova.tres" id="8_1rcds"]
+[ext_resource type="Resource" uid="uid://6v4setyxwb17" path="res://TurnBattle/Resources/specials/special2_prominence_revolt.tres" id="9_831rn"]
+[ext_resource type="Resource" uid="uid://bp6xgl7pce4ki" path="res://TurnBattle/Resources/specials/special3_blazing_end.tres" id="10_5ftln"]
+[ext_resource type="Resource" uid="uid://tyyvnh4a33f3" path="res://TurnBattle/Resources/specials/special4_burning_sword.tres" id="11_p137b"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_rn1jk"]
 
 [resource]
@@ -20,11 +20,11 @@ icon = ExtResource("1_2bg7t")
 texture = ExtResource("1_2bg7t")
 vfx_node = ExtResource("12_rn1jk")
 health = 450
-strength = 10
-ether = 30
-defense = 10
-resistance = 30
-agility = 23
+strength = 20
+ether = 35
+defense = 5
+resistance = 20
+agility = 19
 element = "fire"
 arts_list = Array[ExtResource("1_f3e04")]([ExtResource("2_1aoh7"), ExtResource("3_8ltxp"), ExtResource("4_b11a6")])
 specials_list = Array[ExtResource("7_35w2o")]([ExtResource("8_1rcds"), ExtResource("9_831rn"), ExtResource("10_5ftln"), ExtResource("11_p137b")])

@@ -142,11 +142,11 @@ func reset_status():
 	special_combo.clear()
 
 
-func add_status(status_type: String, num_turns: int):
+func add_effect(effect_type: String, num_turns: int):
 	#add_vfx(status_type)
 	# if the status is "Haste" or "Slow", set status value accordingly
-	print("adding status: " + status_type)
-	match status_type:
+	print("adding effect: " + effect_type)
+	match effect_type:
 		"Break":
 			if reaction_state == ReactionState.NORMAL:
 				reaction_state = ReactionState.BREAK
@@ -166,7 +166,7 @@ func add_status(status_type: String, num_turns: int):
 			if reaction_state == ReactionState.LAUNCH:
 				print("smash used on launch")
 				reset_reaction_status()
-				return true
+				return "Smash"
 				# if true, then adding status was effective; if smash, then apply smash dmg
 
 		"haste":
@@ -207,6 +207,9 @@ func get_attacked(type = "", damage = 0):
 	# add a 'hit' vfx on the character when attacked
 	add_vfx(type)
 	# reduce health 
+	if damage > 0:
+		damage = max(0, damage - defense)
+		print(str(damage) + " damage taken after defenses")
 	_set_health(-damage)
 
 
@@ -250,7 +253,7 @@ func attack(tree):
 
 func use_normal_attack():
 	# mechanic updates (damage, charge arts, accuracy, etc.)
-	charge_arts(1)
+	charge_arts(10)
 	var damage = strength
 	return damage
 

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_v70q4")
 art_name = "Anchor Shot"
-power = 1.25
+power = 1.6
 num_hits = 2
 hit_ratio = Array[float]([0.2, 0.8])
 aoe = 1

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_07a8k")
 art_name = "Double Spinning Edge"
-power = 1.75
+power = 2.2
 num_hits = 2
 hit_ratio = Array[float]([0.5, 0.5])
 aoe = 1

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_we0ly")
 art_name = "Healing Halo"
-power = 1.6
+power = 1.8
 num_hits = 1
 hit_ratio = Array[float]([])
 aoe = 20

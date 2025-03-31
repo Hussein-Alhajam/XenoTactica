@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_bp65u")
 art_name = "Speedy Sword"
-power = 1.5
+power = 2.0
 num_hits = 3
 hit_ratio = Array[float]([0.3, 0.3, 0.4])
 aoe = 1

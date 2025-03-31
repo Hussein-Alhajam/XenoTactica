@@ -250,7 +250,7 @@ func deal_damage(damage: int, target_enemy: Character):
 		turn_state = TurnState.ENDED
 	
 	# log: check correct damage
-	print(str(damage) + "damage dealt") 
+	print(str(damage) + " raw damage from attack") 
 	# perform attack and apply statuses
 	target_enemy.get_attacked("", damage)
 
@@ -260,9 +260,12 @@ func deal_damage(damage: int, target_enemy: Character):
 		end_turn()
 
 
-func apply_status_effect(effect: String, target_enemy: Character):
+func apply_status_effect(effect: String, target_enemy: Character, damage: int = 0):
 	print("applying effect: " + effect)
-	target_enemy.add_status(effect, 1)
+	var status = target_enemy.add_effect(effect, 1)
+	if status == "Smash":
+		# if smash attack succeeds, apply damage of attack * 2 as Smash dmg
+		target_enemy.get_attacked("", damage * 2)
 		#---
 		# when using art (use_character_art), return daamge and should also 
 		# return effects from that art. Could alternatively create different method 
@@ -289,7 +292,7 @@ func use_character_art(target_enemy: Character, art_num: int):
 		if damage:
 			# apply status effects (if any) to target
 			for effect in effects:
-				apply_status_effect(effect, target_enemy)
+				apply_status_effect(effect, target_enemy, damage)
 			deal_damage(damage, target_enemy)
 		else:
 			update_action_log("Art is not charged")

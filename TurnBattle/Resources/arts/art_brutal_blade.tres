@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://dr0hcd0gt1aup"]
 
-[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_8kbhh"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_8kbhh"]
 
 [resource]
 script = ExtResource("1_8kbhh")
 art_name = "Brutal Blade"
-power = 2.0
+power = 2.4
 num_hits = 2
 hit_ratio = Array[float]([0.5, 0.5])
 aoe = 1

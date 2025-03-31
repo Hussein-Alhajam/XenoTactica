@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CombatArt" load_steps=2 format=3 uid="uid://p4x7id2bcyf8"]
 
-[ext_resource type="Script" uid="uid://cf7dh8giw1oj" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_88jel"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_88jel"]
 
 [resource]
 script = ExtResource("1_88jel")
 art_name = "Air Slash"
-power = 2.6
+power = 2.4
 num_hits = 4
 hit_ratio = Array[float]([0.3, 0.1, 0.1, 0.5])
 aoe = 1

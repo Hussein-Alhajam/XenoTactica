@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_6v3hc")
 art_name = "Sword Bash"
-power = 1.5
+power = 2.2
 num_hits = 1
 hit_ratio = Array[float]([])
 aoe = 1
