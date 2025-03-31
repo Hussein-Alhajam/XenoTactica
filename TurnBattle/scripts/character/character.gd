@@ -47,7 +47,7 @@ var specials_list: Array[CombatSpecial]
 var special_charge: int = 0
 var reaction_turn_timer: int = 0
 var reaction_state = ReactionState.NORMAL
-var special_combo: Array[Dictionary] # stores { <element>: <turn timer> } e.g., { "fire": 1 }
+var special_combo: Array # stores [ <element>, <turn timer> ] e.g., [ "fire", 1 ]
 var speed: float 
 var speed_bonus:float = 1.0 # changes the speed of the character
 var queue: Array[float] # used to store this char's successive speed calculated from agility, should continually increase 
@@ -137,7 +137,7 @@ func reset_reaction_status():
 	reaction_turn_timer = 0
 
 
-func reset_status():
+func reset_all_status():
 	reset_reaction_status()
 	special_combo.clear()
 
@@ -145,29 +145,28 @@ func reset_status():
 func add_effect(effect_type: String, num_turns: int):
 	#add_vfx(status_type)
 	# if the status is "Haste" or "Slow", set status value accordingly
-	print("adding effect: " + effect_type)
+	#print("adding effect: " + effect_type)
 	match effect_type:
 		"Break":
 			if reaction_state == ReactionState.NORMAL:
 				reaction_state = ReactionState.BREAK
 				reaction_turn_timer = num_turns
-				print("added break for " + str(num_turns))
+				print("added break for " + str(num_turns) + " turns")
 		"Topple":
 			if reaction_state == ReactionState.BREAK:
 				reaction_state = ReactionState.TOPPLE
 				reaction_turn_timer = num_turns
-				print("added topple for " + str(num_turns))
+				print("added topple for " + str(num_turns) + " turns")
 		"Launch":
 			if reaction_state == ReactionState.TOPPLE:
 				reaction_state = ReactionState.LAUNCH
 				reaction_turn_timer = num_turns
-				print("added launch for " + str(num_turns))
+				print("added launch for " + str(num_turns) + " turns")
 		"Smash":
 			if reaction_state == ReactionState.LAUNCH:
 				print("smash used on launch")
 				reset_reaction_status()
-				return "Smash"
-				# if true, then adding status was effective; if smash, then apply smash dmg
+				return "Smash" # adding status was effective; apply smash dmg
 
 		"haste":
 			speed_bonus = 0.5
@@ -183,6 +182,16 @@ func add_effect(effect_type: String, num_turns: int):
 				#queue.append(queue[-1] + speed * status)
 			#print(queue)
 			#print("character.set_status called")
+
+
+func add_special_combo(element: String):
+	# if current special combo stage is none, or 1, add to it
+	if special_combo.size() < 2:
+		special_combo.append([element, 2])
+	# if the current special stage is at 2, next will be stage 3 (the final stage) which ends the combo 
+	elif special_combo.size() >= 2:
+		special_combo.clear()
+		return "Combo Finisher" #  combo is finished; deal combo finisher dmg
 
 
 func _set_health(value: int):
@@ -209,18 +218,9 @@ func get_attacked(type = "", damage = 0):
 	# reduce health 
 	if damage > 0:
 		damage = max(0, damage - defense)
-		print(str(damage) + " damage taken after defenses")
+		#print(str(damage) + " damage taken after defenses")
 	_set_health(-damage)
 
-
-func add_special_combo(element: String):
-	# if current special combo stage is none, or 1, add to it
-	if special_combo.size() < 2:
-		special_combo.append( {element: 2})
-	# if the current special stage is at 2, next will be stage 3 (the final stage) which ends the combo 
-	if special_combo.size() >= 2:
-		special_combo.clear()
-		return true # if true, then combo is finished; deal combo finisher dmg
 
 
 func kill_character():
@@ -229,13 +229,9 @@ func kill_character():
 	queue_free()
 
 
-# simply use this function to 'deal' dmg, animate char, 
-# and have oppenent 'react' to dmg ? this allows every other 'attack' 
-# action to just call this to apply the dmg (reduce duplicate code)
-func attack(tree):
-	# change name to play_attack_animation? maybe add 
-		# parameter to function to accept animation
-
+# simply use this function to animate char,
+# this allows every other 'attack' action to just call this
+func play_attack_animation(animation, tree):
 	# simple 'animation' for attacking
 	var shift = Vector2(100, 0)
 	# reverse the direction character moves if on left side
@@ -253,7 +249,7 @@ func attack(tree):
 
 func use_normal_attack():
 	# mechanic updates (damage, charge arts, accuracy, etc.)
-	charge_arts(10)
+	charge_arts(1)
 	var damage = strength
 	return damage
 

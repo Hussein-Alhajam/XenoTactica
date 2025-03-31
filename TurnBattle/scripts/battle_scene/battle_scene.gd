@@ -143,6 +143,24 @@ func give_enemy_turn():
 
 
 func check_active_character_status():
+	# check for special combo status
+	# if there is a special combo active on current character
+	if active_character.special_combo.size() > 0:
+		# check the combo duration; if the duration is < 1, end the combo
+		if active_character.special_combo[-1][1] < 1:
+			#print("combo timed out")
+			active_character.special_combo.clear()
+		else:
+			# else, simply do some 'dot' dmg based on stage of combo
+			# and reduce the turn timer for combo
+			#print("combo duraction (turns):")
+			#print(active_character.special_combo[-1][1])
+			active_character.special_combo[-1][1] = active_character.special_combo[-1][1] - 1
+			active_character.get_attacked("", 20 * active_character.special_combo.size())
+
+	# check for other statuses (none for now...)
+	# e.g., if character has a dot status, get dot status dmg, active_character.get_attacked("", damage)
+	
 	# check for reaction status on active character
 	# if reaction timer is less than 1 (status effect is over), then reset reaction status on character 
 	if active_character.reaction_turn_timer < 1:
@@ -154,11 +172,6 @@ func check_active_character_status():
 	elif active_character.reaction_state == active_character.ReactionState.TOPPLE or active_character.reaction_state == active_character.ReactionState.LAUNCH:
 		active_character.reaction_turn_timer = active_character.reaction_turn_timer - 1
 		return "skip"
-
-	# check for special combo status
-
-	# check for other statuses (none for now...)
-	# e.g., if character has a dot status, get dot status dmg, active_character.get_attacked("", damage)
 
 
 func next_turn():
@@ -250,18 +263,18 @@ func deal_damage(damage: int, target_enemy: Character):
 		turn_state = TurnState.ENDED
 	
 	# log: check correct damage
-	print(str(damage) + " raw damage from attack") 
+	#print(str(damage) + " raw damage from attack") 
 	# perform attack and apply statuses
 	target_enemy.get_attacked("", damage)
 
-	await active_character.attack(get_tree())
+	await active_character.play_attack_animation("", get_tree())
 	
 	if turn_state == TurnState.ENDED: # bandaid fix...
 		end_turn()
 
 
 func apply_status_effect(effect: String, target_enemy: Character, damage: int = 0):
-	print("applying effect: " + effect)
+	#print("applying effect: " + effect)
 	var status = target_enemy.add_effect(effect, 1)
 	if status == "Smash":
 		# if smash attack succeeds, apply damage of attack * 2 as Smash dmg
@@ -303,8 +316,20 @@ func use_character_special(target_enemy: Character):
 	# use: calls the use_special() function for the
 		# first (current turn) character in the queue 
 	if can_attack():
+		var special_charge = active_character.special_charge
 		var damage = active_character.use_special()
 		if damage:
+
+			# check if special used is of higher level than current stage of special combo on target
+			if special_charge > target_enemy.special_combo.size():
+				# if so, advance combo
+				var combo_result = target_enemy.add_special_combo(active_character.element)
+				# check if last stage (stage 3) of combo was reached, if so, combo finished
+				if combo_result == "Combo Finisher":
+					print('Stage 3 combo reached')
+					# deal a 'combo finisher' dmg
+					target_enemy.get_attacked("", 100)
+
 			deal_damage(damage, target_enemy)
 		else:
 			update_action_log("Special has no charge")
