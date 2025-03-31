@@ -201,9 +201,14 @@ func next_turn():
 	# check if either player or enemy array is empty (end battle if so)
 	if players.is_empty():
 		print("all players defeated")
+		lost_battle()
 		return
 	if enemies.is_empty():
 		print("all enemies defeated")
+		mark_overworld_enemy_defeated()
+
+		end_battle()
+		
 		return
 	
 	# check for statuses on character
@@ -221,6 +226,18 @@ func next_turn():
 	else:
 		give_enemy_turn()
 
+func mark_overworld_enemy_defeated():
+	# If we store who started the battle in `GameState.current_enemy_id`, do:
+	if GameState.current_enemy_id != "":
+		# Add that to a list of defeated IDs
+		GameState.defeated_enemies.append(GameState.current_enemy_id)
+		print("✅ Marked", GameState.current_enemy_id, "as defeated!")
+
+func end_battle():
+	get_tree().change_scene_to_file("res://Overworld/over_world.tscn")
+
+func lost_battle():
+	get_tree().change_scene_to_file("res://Overworld/over_world.tscn")
 
 func end_turn():
 	$UI/ActionSelectionContainer.hide()

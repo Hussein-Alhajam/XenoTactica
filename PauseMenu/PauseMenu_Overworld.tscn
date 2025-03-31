@@ -42,7 +42,8 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_bh1g4")
 theme_override_font_sizes/font_size = 100
 toggle_mode = true
-text = "Settings"
+text = "Settings
+(Not Implemented)"
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2

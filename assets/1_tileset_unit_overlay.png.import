@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpis7jqetn6vx"
-path="res://.godot/imported/0_tileset_unit_overlay.png-e26705fc287fe54264ba95d570afb545.ctex"
+uid="uid://c43gds2gsxyb2"
+path="res://.godot/imported/1_tileset_unit_overlay.png-555ba7e2bde2b42ae046b428e7abf0d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Grid-Movement/Assets/0_tileset_unit_overlay.png"
-dest_files=["res://.godot/imported/0_tileset_unit_overlay.png-e26705fc287fe54264ba95d570afb545.ctex"]
+source_file="res://assets/1_tileset_unit_overlay.png"
+dest_files=["res://.godot/imported/1_tileset_unit_overlay.png-555ba7e2bde2b42ae046b428e7abf0d7.ctex"]
 
 [params]
 

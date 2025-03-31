@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
 class_name Character # name this CharacterStats?
+const RangeShape = preload("res://Grid-Movement/Resources/RangeShape.gd").RangeShape
 
 # signals
 signal movement_finished
 # enums
 enum ReactionState { NORMAL, BREAK, TOPPLE, LAUNCH }
+@export_enum("DIAMOND", "SQUARE", "CROSS", "TRIANGLE") var movement_shape: int = RangeShape.DIAMOND
+@export_enum("DIAMOND", "SQUARE", "CROSS", "TRIANGLE") var attack_shape: int = RangeShape.DIAMOND
 # constants
 # static variables
 static var currently_selected_unit: Character = null
@@ -18,6 +21,8 @@ static var currently_selected_unit: Character = null
 @export var move_range: int = 3
 @export var move_speed: float = 300.0
 @export var attack_range: int = 2
+@export var enemy_id: String = ""
+
 # other regular variables 
 var tile_size = 80
 var selected = false

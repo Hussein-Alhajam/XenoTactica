@@ -1,0 +1,114 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8qm6lwjaq3rm"]
+
+[ext_resource type="PackedScene" uid="uid://bufo3fo4lgsaf" path="res://TurnBattle/scenes/action_selection_container.tscn" id="1_k3u67"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sryic"]
+bg_color = Color(0, 0, 0, 0.513726)
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="TurnOrderPanel" type="PanelContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -258.0
+offset_right = 258.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="TurnOrderContainer" type="VBoxContainer" parent="TurnOrderPanel"]
+layout_mode = 2
+
+[node name="Timeline" type="HBoxContainer" parent="TurnOrderPanel/TurnOrderContainer"]
+layout_mode = 2
+
+[node name="TimelineSlot" type="Panel" parent="TurnOrderPanel/TurnOrderContainer/Timeline"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TurnOrderPanel/TurnOrderContainer/Timeline/TimelineSlot"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TimelineSlot2" type="Panel" parent="TurnOrderPanel/TurnOrderContainer/Timeline"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TurnOrderPanel/TurnOrderContainer/Timeline/TimelineSlot2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TimelineSlot3" type="Panel" parent="TurnOrderPanel/TurnOrderContainer/Timeline"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TurnOrderPanel/TurnOrderContainer/Timeline/TimelineSlot3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TimelineSlot4" type="Panel" parent="TurnOrderPanel/TurnOrderContainer/Timeline"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TurnOrderPanel/TurnOrderContainer/Timeline/TimelineSlot4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TimelineSlot5" type="Panel" parent="TurnOrderPanel/TurnOrderContainer/Timeline"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TurnOrderPanel/TurnOrderContainer/Timeline/TimelineSlot5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TurnOrderLabel" type="Label" parent="TurnOrderPanel/TurnOrderContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Turn Order"
+
+[node name="ActionLog" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+offset_left = 528.0
+offset_top = 730.0
+offset_right = 728.0
+offset_bottom = 753.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_sryic")
+text = "log"
+autowrap_mode = 3
+
+[node name="ActionSelectionContainer" parent="." instance=ExtResource("1_k3u67")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -79.0
+offset_right = -31.0
+offset_bottom = -39.0
+grow_horizontal = 0
+grow_vertical = 0

@@ -1,24 +1,228 @@
-[gd_scene load_steps=20 format=4 uid="uid://dyso1d2sl5dn6"]
+[gd_scene load_steps=20 format=4 uid="uid://dyxnmolar6lgo"]
 
 [ext_resource type="Script" uid="uid://0ca101ytw440" path="res://Grid-Movement/Resources/GridManager.gd" id="1_m1wtr"]
 [ext_resource type="Script" uid="uid://xiaj8nfs36b" path="res://Grid-Movement/Resources/TileMapLayer.gd" id="3_6ylrr"]
 [ext_resource type="Script" uid="uid://bxjx0pdydv5qe" path="res://Grid-Movement/Resources/PathFinding.gd" id="4_tdhi0"]
-[ext_resource type="Script" uid="uid://cwpeev6tiyddp" path="res://Grid-Movement/Control/PlayerUnit.gd" id="5_nsv4m"]
 [ext_resource type="Texture2D" uid="uid://ckk7o8iut87if" path="res://assets/sprites/extracted/knight.png" id="6_4qc5x"]
 [ext_resource type="TileSet" uid="uid://epicx2i3owex" path="res://TurnBattle/Resources/map_tileset.tres" id="7_146pi"]
 [ext_resource type="Texture2D" uid="uid://wcu7d45wawc7" path="res://assets/sprites/extracted/wizard.png" id="7_imcac"]
 [ext_resource type="Texture2D" uid="uid://dp136ntapoxt3" path="res://assets/sprites/extracted/rogue.png" id="8_ye0gv"]
-[ext_resource type="Script" uid="uid://c7nmy4onkwh2o" path="res://Grid-Movement/Control/EnemyUnit.gd" id="9_4qc5x"]
 [ext_resource type="Texture2D" uid="uid://cxdb38y3wn5uu" path="res://assets/sprites/gorgon_sprite.png" id="9_tdhi0"]
 [ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://assets/sprites/cyclops_sprite.png" id="10_nsv4m"]
 [ext_resource type="Texture2D" uid="uid://dni018trtcdv5" path="res://assets/sprites/kraken_sprite.png" id="11_4qc5x"]
-[ext_resource type="Script" uid="uid://cx4ld0prlcfdj" path="res://Grid-Movement/Transitions/BattleTransition.gd" id="12_nsv4m"]
+
+[sub_resource type="GDScript" id="GDScript_6ylrr"]
+script/source = "#extends \"res://demo_turn_based_combat_/scripts/character_sprite.gd\"
+extends CharacterBody2D
+class_name PlayerUnit
+
+const RangeShape = preload(\"res://Grid-Movement/Resources/RangeShape.gd\").RangeShape
+
+@export_enum(\"DIAMOND\", \"SQUARE\", \"CROSS\", \"TRIANGLE\") var movement_shape: int = RangeShape.DIAMOND
+@export_enum(\"DIAMOND\", \"SQUARE\", \"CROSS\", \"TRIANGLE\") var attack_shape: int = RangeShape.DIAMOND
+
+@export var character_data: Character
+@export var pathfinder: PathFinding
+@export var grid_manager: GridManager
+@export var move_range: int = 3
+@export var move_speed: float = 100.0
+@export var attack_range: int = 1
+
+var selected = false
+var is_moving = false
+var is_attacking = false
+static var currently_selected_unit: PlayerUnit = null  # Keeps track of selected unit
+
+func _ready():
+	if grid_manager == null:
+		grid_manager = get_tree().get_first_node_in_group(\"grid_manager\")
+	if pathfinder == null:
+		pathfinder = get_tree().get_first_node_in_group(\"pathfinder\")
+
+	if $Area2D:
+		$Area2D.connect(\"input_event\", Callable(self, \"_on_area2d_input_event\"))
+
+	print(\"✅ PlayerUnit ready.\")
+	if character_data:
+		$Sprite2D.texture = character_data.texture
+
+func _input(event):
+	# Don't use normal click detection for selection anymore since Area2D handles it
+	if is_moving or grid_manager == null or pathfinder == null:
+		return
+
+	# For canceling selection or attack
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		if is_attacking:
+			cancel_attack_selection()
+		elif selected:
+			cancel_selection()
+		return
+
+	# For movement input
+	if selected and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		var mouse_pos = get_global_mouse_position()
+		var clicked_tile = grid_manager.tile_map.local_to_map(mouse_pos)
+		move_to_tile(clicked_tile)
+
+func _on_area2d_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if not is_moving and not is_attacking:
+			select_unit()
+
+func select_unit():
+	if currently_selected_unit != null and currently_selected_unit != self:
+		return  # Another unit selected
+	selected = true
+	currently_selected_unit = self
+	grid_manager.clear_highlight()
+	var occupied_tiles = []
+	for unit in get_tree().get_nodes_in_group(\"player_units\"):
+		if unit != self:
+			var pos = grid_manager.tile_map.local_to_map(unit.global_position)
+			occupied_tiles.append(pos)
+	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
+	grid_manager.highlight_tiles(unit_tile, move_range, movement_shape)
+	print(\"✅ Unit selected. Showing movement range.\")
+
+func cancel_selection():
+	selected = false
+	is_attacking = false
+	currently_selected_unit = null
+	grid_manager.clear_highlight()
+	grid_manager.clear_attack_highlight()
+	print(\"❌ Selection canceled.\")
+
+func cancel_attack_selection():
+	is_attacking = false
+	selected = false
+	currently_selected_unit = null
+	grid_manager.clear_attack_highlight()
+	print(\"❌ Attack selection canceled.\")
+
+func move_to_tile(target_tile: Vector2i):
+	if not selected or is_moving:
+		return
+	var occupied_tiles = []
+	for unit in get_tree().get_nodes_in_group(\"player_units\"):
+		if unit != self:
+			var unit_pos = grid_manager.tile_map.local_to_map(unit.global_position)
+			if unit_pos == target_tile:
+				print(\"❌ Tile occupied by another unit! Cannot move there.\")
+				return
+			occupied_tiles.append(unit_pos)
+	for enemy in get_tree().get_nodes_in_group(\"enemy_units\"):
+		var enemy_pos = grid_manager.tile_map.local_to_map(enemy.global_position)
+		if enemy_pos == target_tile:
+			print(\"❌ Tile occupied by ENEMY! Cannot move there.\")
+			return
+		occupied_tiles.append(enemy_pos)
+	# Mark these tiles as obstacles in pathfinder
+	pathfinder.update_obstacles(occupied_tiles)
+	
+	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
+	var path = pathfinder.find_path(unit_tile, target_tile)
+	if path.size() <= 1 or path.size() > move_range + 1:
+		print(\"❌ Invalid move target.\")
+		return
+	print(\"✅ Moving unit to\", target_tile)
+	grid_manager.clear_highlight()
+	follow_path(path)
+
+func follow_path(path: Array):
+	is_moving = true
+	for tile in path:
+		var world_pos = grid_manager.tile_map.map_to_local(tile)
+		while global_position.distance_to(world_pos) > 1.0:
+			var direction = (world_pos - global_position).normalized()
+			velocity = direction * move_speed
+			move_and_slide()
+			await get_tree().process_frame
+	velocity = Vector2.ZERO
+	is_moving = false
+	selected = false
+	print(\"✅ Reached:\", path[-1])
+	
+	var occupied_tiles = []
+	for unit in get_tree().get_nodes_in_group(\"player_units\"):
+		var unit_pos = grid_manager.tile_map.local_to_map(unit.global_position)
+		occupied_tiles.append(unit_pos)
+	pathfinder.update_obstacles(occupied_tiles)
+	
+	# After move, show attack range
+	var unit_tile = grid_manager.tile_map.local_to_map(global_position)
+	grid_manager.highlight_attack_tiles(unit_tile, attack_range, attack_shape)
+	is_attacking = true
+"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xu7ay"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ke5d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_53fq6"]
+
+[sub_resource type="GDScript" id="GDScript_tdhi0"]
+script/source = "extends CharacterBody2D
+class_name EnemyUnit
+
+@export var pathfinder: PathFinding
+@export var grid_manager: GridManager
+@export var move_range: int = 3
+@export var move_speed: float = 100.0
+@export var attack_range: int = 1
+
+var is_moving = false
+
+func _ready():
+	if grid_manager == null:
+		grid_manager = get_tree().get_first_node_in_group(\"grid_manager\")
+	if pathfinder == null:
+		pathfinder = get_tree().get_first_node_in_group(\"pathfinder\")
+	print(\"✅ EnemyUnit ready.\")
+
+func _process(_delta):
+	if !is_moving:
+		act()
+
+func act():
+	var my_tile = grid_manager.tile_map.local_to_map(global_position)
+	var closest_player = null
+	var shortest_path = []
+	var min_distance = INF
+
+	# Find the closest player based on actual path length
+	for player in get_tree().get_nodes_in_group(\"player_units\"):
+		var player_tile = grid_manager.tile_map.local_to_map(player.global_position)
+		var path = pathfinder.find_path(my_tile, player_tile)
+		if path.size() > 1 and path.size() < min_distance:
+			closest_player = player
+			shortest_path = path
+			min_distance = path.size()
+
+	# Stop if already adjacent (in attack range)
+	if shortest_path.size() <= attack_range + 1:
+		print(\"🛑 Enemy is in range, can attack.\")
+		return
+
+	if shortest_path.size() > 1:
+		var move_path = shortest_path.slice(1, min(shortest_path.size(), move_range + 1))
+		follow_path(move_path)
+
+func follow_path(path: Array):
+	is_moving = true
+	for tile in path:
+		var world_pos = grid_manager.tile_map.map_to_local(tile)
+		while global_position.distance_to(world_pos) > 1.0:
+			var direction = (world_pos - global_position).normalized()
+			velocity = direction * move_speed
+			move_and_slide()
+			await get_tree().process_frame
+		global_position = world_pos
+	velocity = Vector2.ZERO
+	await get_tree().create_timer(1.0).timeout
+	is_moving = false
+	print(\"✅ Enemy moved to:\", path[-1])
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4qc5x"]
 size = Vector2(60, 62.5)
@@ -28,6 +232,16 @@ size = Vector2(62.5, 59.1667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye0gv"]
 size = Vector2(58.3333, 54.1667)
+
+[sub_resource type="GDScript" id="GDScript_nsv4m"]
+script/source = "extends Node2D
+
+func _physics_process(delta):
+	if Input.is_action_pressed(\"ui_home\"):
+		get_tree().change_scene_to_file(\"res://Overworld/over_world.tscn\")
+	if Input.is_action_pressed(\"ui_page_down\"):
+		get_tree().change_scene_to_file(\"res://demo_turn_based_combat_/scenes/battle_scene.tscn\")
+"
 
 [node name="GridMovement" type="Node2D"]
 
@@ -56,7 +270,7 @@ position = Vector2(252, 22.2855)
 visibility_layer = 4
 position = Vector2(1070, 428.715)
 scale = Vector2(2, 2)
-script = ExtResource("5_nsv4m")
+script = SubResource("GDScript_6ylrr")
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../GridManager")
 move_range = 5
@@ -82,7 +296,7 @@ shape = SubResource("CapsuleShape2D_xu7ay")
 visibility_layer = 4
 position = Vector2(829, 343.715)
 scale = Vector2(2, 2)
-script = ExtResource("5_nsv4m")
+script = SubResource("GDScript_6ylrr")
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../GridManager")
 metadata/_edit_group_ = true
@@ -106,7 +320,7 @@ shape = SubResource("CapsuleShape2D_1ke5d")
 visibility_layer = 4
 position = Vector2(909, 584.714)
 scale = Vector2(2, 2)
-script = ExtResource("5_nsv4m")
+script = SubResource("GDScript_6ylrr")
 pathfinder = NodePath("../../PathFinding")
 grid_manager = NodePath("../../GridManager")
 
@@ -135,7 +349,7 @@ position = Vector2(-165, -78)
 [node name="Enemy" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
 position = Vector2(368, 361)
 scale = Vector2(1.2, 1.2)
-script = ExtResource("9_4qc5x")
+script = SubResource("GDScript_tdhi0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy"]
 texture = ExtResource("10_nsv4m")
@@ -148,7 +362,7 @@ shape = SubResource("RectangleShape2D_4qc5x")
 [node name="Enemy2" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
 position = Vector2(767, 512.567)
 scale = Vector2(1.2, 1.2)
-script = ExtResource("9_4qc5x")
+script = SubResource("GDScript_tdhi0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy2"]
 texture = ExtResource("9_tdhi0")
@@ -160,7 +374,7 @@ shape = SubResource("RectangleShape2D_imcac")
 [node name="Enemy3" type="CharacterBody2D" parent="Enemies" groups=["enemy_units"]]
 position = Vector2(608, 203)
 scale = Vector2(1.2, 1.2)
-script = ExtResource("9_4qc5x")
+script = SubResource("GDScript_tdhi0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemies/Enemy3"]
 texture = ExtResource("11_4qc5x")
@@ -170,7 +384,7 @@ position = Vector2(-1.66666, 1.25)
 shape = SubResource("RectangleShape2D_ye0gv")
 
 [node name="BattleTransition" type="Node2D" parent="."]
-script = ExtResource("12_nsv4m")
+script = SubResource("GDScript_nsv4m")
 
 [connection signal="input_event" from="Players/Player/Area2D" to="Players/Player" method="_on_area_2d_input_event"]
 [connection signal="input_event" from="Players/Player2/Area2D" to="Players/Player2" method="_on_area_2d_input_event"]

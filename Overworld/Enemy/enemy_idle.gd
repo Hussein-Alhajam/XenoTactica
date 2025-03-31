@@ -70,29 +70,25 @@ func enter():
 		return
 	else:
 		print("Enemy in IDLE. Wandering until player is detected.")
-	
+
 	if detection_zone:
-		print("Starting Timer")
 		detection_zone.monitoring = false
 		detection_zone.set_deferred("monitorable", false)
-	
+
+	# ⏱ Start timer to re-enable it
 	if cooldown_timer:
 		cooldown_timer.start()
-		print("Cooldown timer connected:", cooldown_timer.is_connected("timeout", Callable(self, "_on_detection_reenable")))
+		cooldown_timer.connect("timeout", Callable(self, "_on_detection_reenable"), CONNECT_ONE_SHOT)
 
 	randomize_wander()
 
 func _on_detection_reenable():
-	print("🔔 Timer finished — re-enabling detection zone")
-
 	if detection_zone:
 		detection_zone.monitoring = true
 		detection_zone.set_deferred("monitorable", true)
 		print("Detection zone re-enabled.")
 
 func exit():
-	if cooldown_timer and cooldown_timer.is_connected("timeout", Callable(self, "_on_detection_reenable")):
-		cooldown_timer.disconnect("timeout", Callable(self, "_on_detection_reenable"))
 	print("Exiting IDLE state")
 
 func Update(delta: float):
@@ -111,7 +107,6 @@ func Physics_Update(delta: float):
 	if enemy.is_on_ceiling() or enemy.is_on_floor() or enemy.is_on_wall():
 		randomize_wander()
 		enemy.move_and_slide()
-
 func _on_detection_zone_body_entered(body):
 	if body.is_in_group("player"):
 		print("Player detected! Switching to CHASE state.")

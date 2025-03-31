@@ -68,7 +68,7 @@ func highlight_tiles(unit_tile: Vector2i, move_range: int, shape: int = RangeSha
 		if tile == unit_tile:
 			continue
 		var highlight_sprite = Sprite2D.new()
-		highlight_sprite.texture = preload("res://Grid-Movement/Assets/0_tileset_unit_overlay.png")
+		highlight_sprite.texture = preload("res://Assets/0_tileset_unit_overlay.png")
 		highlight_sprite.global_position = tile_map.map_to_local(tile)
 		highlight_sprite.visible = true
 		highlight_sprite.z_index = 10
@@ -99,7 +99,7 @@ func highlight_attack_tiles(unit_tile: Vector2i, attack_range: int, shape: int =
 				continue
 
 			var attack_sprite = Sprite2D.new()
-			attack_sprite.texture = preload("res://Grid-Movement/Assets/1_tileset_unit_overlay.png")
+			attack_sprite.texture = preload("res://Assets/1_tileset_unit_overlay.png")
 			attack_sprite.global_position = tile_map.map_to_local(check_tile)
 			attack_sprite.z_index = 10
 			attack_sprite.modulate = Color(1, 1, 1, 0.8)

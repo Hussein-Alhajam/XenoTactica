@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbe6ybprf7461"]
+[gd_scene load_steps=10 format=3 uid="uid://dbe6ybprf7461"]
 
 [ext_resource type="Script" uid="uid://ce4rp23jh71d" path="res://Overworld/Enemy/enemy.gd" id="1_kq251"]
 [ext_resource type="PackedScene" uid="uid://contxrld56mlo" path="res://Overworld/Enemy/battle_transition.tscn" id="3_6qser"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bdnid4se5o5g6" path="res://Overworld/Enemy/enemy_idle.gd" id="5_0koic"]
 [ext_resource type="Script" uid="uid://dfsb0smqvyean" path="res://Overworld/Enemy/enemy_chase.gd" id="5_3cc1d"]
 [ext_resource type="Script" uid="uid://bpqgfpif05wjs" path="res://Overworld/Enemy/enemy_attack.gd" id="5_anksf"]
+[ext_resource type="Script" uid="uid://bceay58qhk3eg" path="res://Overworld/Enemy/enemy_disabled.gd" id="8_6qser"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dh6km"]
 size = Vector2(40, 40)
@@ -38,9 +39,14 @@ position = Vector2(4, -1)
 target_position = Vector2(44, 0)
 metadata/_edit_group_ = true
 
+[node name="DetectionCooldownTimer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 1.5
+one_shot = true
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_aqlo4")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Disabled")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_0koic")
@@ -50,14 +56,16 @@ metadata/_custom_type_script = "uid://bdnid4se5o5g6"
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_3cc1d")
 enemy = NodePath("../..")
+move_speed = 100.0
 metadata/_custom_type_script = "uid://dfsb0smqvyean"
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_anksf")
 enemy = NodePath("../..")
+attack_speed = 300.0
 metadata/_custom_type_script = "uid://bpqgfpif05wjs"
 
-[node name="DetectionCooldownTimer" type="Timer" parent="."]
-process_mode = 3
-wait_time = 5.0
-one_shot = true
+[node name="Disabled" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_6qser")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://bceay58qhk3eg"
