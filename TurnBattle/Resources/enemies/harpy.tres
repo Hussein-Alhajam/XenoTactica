@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://cjmagi3o3bdyd"]
+
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_fa7dc"]
+[ext_resource type="Resource" uid="uid://dcso4aaxs3ncp" path="res://TurnBattle/Resources/arts/art_windmill.tres" id="2_01l1l"]
+[ext_resource type="Resource" uid="uid://dbna1s1xtbajs" path="res://TurnBattle/Resources/arts/art_wing_smash.tres" id="3_4o3vo"]
+[ext_resource type="Resource" uid="uid://d3bo6wkaq5u8y" path="res://TurnBattle/Resources/arts/art_aerial_slash.tres" id="4_5v4qc"]
+[ext_resource type="Texture2D" uid="uid://dbm437pqc4pvc" path="res://assets/sprites/harpy_sprite.png" id="5_db750"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/character_stats.gd" id="6_tnlkt"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_lmfna"]
+[ext_resource type="Resource" uid="uid://dksi2usi01f2u" path="res://TurnBattle/Resources/specials/special1_death_wing.tres" id="8_06xab"]
+[ext_resource type="Resource" uid="uid://dga4f57rfj0qi" path="res://TurnBattle/Resources/specials/special2_twister.tres" id="9_324gc"]
+[ext_resource type="Resource" uid="uid://dpdy1bgjx3hls" path="res://TurnBattle/Resources/specials/special3_feather_typhoon.tres" id="10_bukh7"]
+[ext_resource type="Resource" uid="uid://dsybg08jhne6w" path="res://TurnBattle/Resources/specials/special4_crimson_storm.tres" id="11_vfvkc"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_d7vlp"]
+
+[resource]
+script = ExtResource("6_tnlkt")
+character_name = "Harpy"
+icon = ExtResource("5_db750")
+texture = ExtResource("5_db750")
+vfx_node = ExtResource("12_d7vlp")
+health = 500
+strength = 40
+ether = 40
+defense = 10
+resistance = 10
+agility = 35
+element = "wind"
+arts_list = Array[ExtResource("1_fa7dc")]([ExtResource("2_01l1l"), ExtResource("3_4o3vo"), ExtResource("4_5v4qc")])
+specials_list = Array[ExtResource("7_lmfna")]([ExtResource("8_06xab"), ExtResource("9_324gc"), ExtResource("10_bukh7"), ExtResource("11_vfvkc")])

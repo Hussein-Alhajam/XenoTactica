@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://87eg7saehqao"]
+
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_yuf7k"]
+[ext_resource type="Resource" uid="uid://d3bo6wkaq5u8y" path="res://TurnBattle/Resources/arts/art_aerial_slash.tres" id="2_k1yd2"]
+[ext_resource type="Resource" uid="uid://p4x7id2bcyf8" path="res://TurnBattle/Resources/arts/art_air_slash.tres" id="3_lib33"]
+[ext_resource type="Resource" uid="uid://dctoyqs5q56jg" path="res://TurnBattle/Resources/arts/art_heat_rush.tres" id="4_5qvte"]
+[ext_resource type="Texture2D" uid="uid://buq1jlwhlvu6n" path="res://assets/sprites/fireelemental_sprite.png" id="5_tpv5e"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/character_stats.gd" id="6_jvxx2"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_37b4c"]
+[ext_resource type="Resource" uid="uid://vkqwia7bsu1p" path="res://TurnBattle/Resources/specials/special1_flame_nova.tres" id="8_e51x7"]
+[ext_resource type="Resource" uid="uid://6v4setyxwb17" path="res://TurnBattle/Resources/specials/special2_prominence_revolt.tres" id="9_feyig"]
+[ext_resource type="Resource" uid="uid://bp6xgl7pce4ki" path="res://TurnBattle/Resources/specials/special3_blazing_end.tres" id="10_ooiej"]
+[ext_resource type="Resource" uid="uid://tyyvnh4a33f3" path="res://TurnBattle/Resources/specials/special4_burning_sword.tres" id="11_2oaw8"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_ic8vv"]
+
+[resource]
+script = ExtResource("6_jvxx2")
+character_name = "Fire Elemental"
+icon = ExtResource("5_tpv5e")
+texture = ExtResource("5_tpv5e")
+vfx_node = ExtResource("12_ic8vv")
+health = 150
+strength = 25
+ether = 25
+defense = 5
+resistance = 5
+agility = 15
+element = "fire"
+arts_list = Array[ExtResource("1_yuf7k")]([ExtResource("2_k1yd2"), ExtResource("3_lib33"), ExtResource("4_5qvte")])
+specials_list = Array[ExtResource("7_37b4c")]([ExtResource("8_e51x7"), ExtResource("9_feyig"), ExtResource("10_ooiej"), ExtResource("11_2oaw8")])

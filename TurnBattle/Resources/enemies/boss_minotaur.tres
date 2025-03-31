@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://v0cpej535gym"]
+
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_qxg58"]
+[ext_resource type="Resource" uid="uid://p4x7id2bcyf8" path="res://TurnBattle/Resources/arts/art_air_slash.tres" id="2_ijcqk"]
+[ext_resource type="Resource" uid="uid://dr0hcd0gt1aup" path="res://TurnBattle/Resources/arts/art_brutal_blade.tres" id="3_gub7w"]
+[ext_resource type="Resource" uid="uid://cwvbhyfl1jnlj" path="res://TurnBattle/Resources/arts/art_upper_edge.tres" id="4_oj42w"]
+[ext_resource type="Texture2D" uid="uid://5ooaetqtmfo0" path="res://assets/sprites/minotaur_sprite.png" id="5_n8tri"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/character_stats.gd" id="6_3hh0d"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_3fjt6"]
+[ext_resource type="Resource" uid="uid://bngv2y4m3gqxe" path="res://TurnBattle/Resources/specials/special1_sliding_slinger.tres" id="8_xxuf2"]
+[ext_resource type="Resource" uid="uid://x5wlvf8iw1q" path="res://TurnBattle/Resources/specials/special2_hundred_shells.tres" id="9_ifke8"]
+[ext_resource type="Resource" uid="uid://f4d2emkwp5qp" path="res://TurnBattle/Resources/specials/special3_violent_streak.tres" id="10_yaaeu"]
+[ext_resource type="Resource" uid="uid://bm7tsgmg4t0bx" path="res://TurnBattle/Resources/specials/special4_fmj.tres" id="11_5qe4c"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_uhjdu"]
+
+[resource]
+script = ExtResource("6_3hh0d")
+character_name = "Minotaur"
+icon = ExtResource("5_n8tri")
+texture = ExtResource("5_n8tri")
+vfx_node = ExtResource("12_uhjdu")
+health = 800
+strength = 50
+ether = 30
+defense = 20
+resistance = 20
+agility = 18
+element = "dark"
+arts_list = Array[ExtResource("1_qxg58")]([ExtResource("2_ijcqk"), ExtResource("3_gub7w"), ExtResource("4_oj42w")])
+specials_list = Array[ExtResource("7_3fjt6")]([ExtResource("8_xxuf2"), ExtResource("9_ifke8"), ExtResource("10_yaaeu"), ExtResource("11_5qe4c")])

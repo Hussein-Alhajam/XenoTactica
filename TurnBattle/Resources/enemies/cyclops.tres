@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterStats" load_steps=10 format=3 uid="uid://bvxs1xxvh8xti"]
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://bvxs1xxvh8xti"]
 
 [ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_geesb"]
 [ext_resource type="Texture2D" uid="uid://kjhsx4b2l2by" path="res://assets/sprites/cyclops_sprite.png" id="1_jwj1v"]
@@ -7,8 +7,11 @@
 [ext_resource type="Resource" uid="uid://dr0hcd0gt1aup" path="res://TurnBattle/Resources/arts/art_brutal_blade.tres" id="3_xp7ba"]
 [ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="4_ud74x"]
 [ext_resource type="Resource" uid="uid://bturaj7dagjn7" path="res://TurnBattle/Resources/arts/art_bullet_punch.tres" id="4_wo2sn"]
-[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://TurnBattle/Resources/specials/special1_chroma_dust.tres" id="6_s80l2"]
 [ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="7_j8cum"]
+[ext_resource type="Resource" uid="uid://cqsy7ttb1n02p" path="res://TurnBattle/Resources/specials/special1_brutal_lance.tres" id="8_7x8nt"]
+[ext_resource type="Resource" uid="uid://c3o5xehvaecjx" path="res://TurnBattle/Resources/specials/special2_termination_blast.tres" id="9_jyg81"]
+[ext_resource type="Resource" uid="uid://dfxaxr63dpp6" path="res://TurnBattle/Resources/specials/special3_hellbound.tres" id="10_jmx83"]
+[ext_resource type="Resource" uid="uid://dmr2gxy3l4grp" path="res://TurnBattle/Resources/specials/special4_apocalypse.tres" id="11_rgksv"]
 
 [resource]
 script = ExtResource("2_5qyr8")
@@ -24,4 +27,4 @@ resistance = 10
 agility = 11
 element = "earth"
 arts_list = Array[ExtResource("1_geesb")]([ExtResource("2_1ytsc"), ExtResource("3_xp7ba"), ExtResource("4_wo2sn")])
-specials_list = Array[ExtResource("4_ud74x")]([ExtResource("6_s80l2"), ExtResource("6_s80l2"), ExtResource("6_s80l2"), ExtResource("6_s80l2")])
+specials_list = Array[ExtResource("4_ud74x")]([ExtResource("8_7x8nt"), ExtResource("9_jyg81"), ExtResource("10_jmx83"), ExtResource("11_rgksv")])

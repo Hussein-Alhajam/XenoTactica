@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://cjjit6s2igbds"]
+
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_gpn0m"]
+[ext_resource type="Resource" uid="uid://cinqnyvh2wrcl" path="res://TurnBattle/Resources/arts/art_big_impact.tres" id="2_u3kcu"]
+[ext_resource type="Resource" uid="uid://cwvbhyfl1jnlj" path="res://TurnBattle/Resources/arts/art_upper_edge.tres" id="3_mlow3"]
+[ext_resource type="Resource" uid="uid://chsoms14t6uo5" path="res://TurnBattle/Resources/arts/art_takedown.tres" id="4_y6f5d"]
+[ext_resource type="Texture2D" uid="uid://bs31ea8aeerlx" path="res://assets/sprites/golem_sprite.png" id="5_s73al"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/character_stats.gd" id="6_82cbo"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_42mw6"]
+[ext_resource type="Resource" uid="uid://cqsy7ttb1n02p" path="res://TurnBattle/Resources/specials/special1_brutal_lance.tres" id="8_nc18e"]
+[ext_resource type="Resource" uid="uid://c3o5xehvaecjx" path="res://TurnBattle/Resources/specials/special2_termination_blast.tres" id="9_w5q5v"]
+[ext_resource type="Resource" uid="uid://dfxaxr63dpp6" path="res://TurnBattle/Resources/specials/special3_hellbound.tres" id="10_qjy43"]
+[ext_resource type="Resource" uid="uid://dmr2gxy3l4grp" path="res://TurnBattle/Resources/specials/special4_apocalypse.tres" id="11_h7row"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_10kdg"]
+
+[resource]
+script = ExtResource("6_82cbo")
+character_name = "Golem"
+icon = ExtResource("5_s73al")
+texture = ExtResource("5_s73al")
+vfx_node = ExtResource("12_10kdg")
+health = 800
+strength = 30
+ether = 5
+defense = 20
+resistance = 15
+agility = 6
+element = "earth"
+arts_list = Array[ExtResource("1_gpn0m")]([ExtResource("2_u3kcu"), ExtResource("3_mlow3"), ExtResource("4_y6f5d")])
+specials_list = Array[ExtResource("7_42mw6")]([ExtResource("8_nc18e"), ExtResource("9_w5q5v"), ExtResource("10_qjy43"), ExtResource("11_h7row")])

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://c8oc8jenfwhiy"]
+
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_6cw3p"]
+[ext_resource type="Resource" uid="uid://dcso4aaxs3ncp" path="res://TurnBattle/Resources/arts/art_windmill.tres" id="2_mwe2x"]
+[ext_resource type="Resource" uid="uid://cinqnyvh2wrcl" path="res://TurnBattle/Resources/arts/art_big_impact.tres" id="3_5pmds"]
+[ext_resource type="Resource" uid="uid://dohlchbe4hm2q" path="res://TurnBattle/Resources/arts/art_dual_slash.tres" id="4_iw5ru"]
+[ext_resource type="Texture2D" uid="uid://dyhpd1okhaogl" path="res://assets/sprites/waterelemental_sprite.png" id="5_ql3bg"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/character_stats.gd" id="6_chym6"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_m1r0s"]
+[ext_resource type="Resource" uid="uid://bp7k2lwkff3ix" path="res://TurnBattle/Resources/specials/special1_water_moon.tres" id="8_d51v6"]
+[ext_resource type="Resource" uid="uid://bfcidkfvvgxjv" path="res://TurnBattle/Resources/specials/special2_breaking_wave.tres" id="9_fmf5m"]
+[ext_resource type="Resource" uid="uid://dk0n5jghgm11v" path="res://TurnBattle/Resources/specials/special3_midnight_mist.tres" id="10_dvity"]
+[ext_resource type="Resource" uid="uid://dibxaak12gx3h" path="res://TurnBattle/Resources/specials/special4_tidal_wave.tres" id="11_l42mr"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_lpapt"]
+
+[resource]
+script = ExtResource("6_chym6")
+character_name = "Water Elemental"
+icon = ExtResource("5_ql3bg")
+texture = ExtResource("5_ql3bg")
+vfx_node = ExtResource("12_lpapt")
+health = 250
+strength = 10
+ether = 10
+defense = 0
+resistance = 0
+agility = 15
+element = "water"
+arts_list = Array[ExtResource("1_6cw3p")]([ExtResource("2_mwe2x"), ExtResource("3_5pmds"), ExtResource("4_iw5ru")])
+specials_list = Array[ExtResource("7_m1r0s")]([ExtResource("8_d51v6"), ExtResource("9_fmf5m"), ExtResource("10_dvity"), ExtResource("11_l42mr")])

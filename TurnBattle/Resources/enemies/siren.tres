@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=13 format=3 uid="uid://cwlfei5gqog8d"]
+
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_art.gd" id="1_t8o7b"]
+[ext_resource type="Resource" uid="uid://co1vlw2iaxr4v" path="res://TurnBattle/Resources/arts/art_fogcutter.tres" id="2_1ubki"]
+[ext_resource type="Resource" uid="uid://dctoyqs5q56jg" path="res://TurnBattle/Resources/arts/art_heat_rush.tres" id="3_j0o26"]
+[ext_resource type="Resource" uid="uid://ch1fi2qcioljs" path="res://TurnBattle/Resources/arts/art_screw_edge.tres" id="4_go85c"]
+[ext_resource type="Texture2D" uid="uid://burwe2qdyvd2r" path="res://assets/sprites/siren_sprite.png" id="5_v3chw"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/character_stats.gd" id="6_m4uyg"]
+[ext_resource type="Script" path="res://TurnBattle/scripts/resources/combat_special.gd" id="7_usgfb"]
+[ext_resource type="Resource" uid="uid://eppyg1f4iu7w" path="res://TurnBattle/Resources/specials/special1_chroma_dust.tres" id="8_obiml"]
+[ext_resource type="Resource" uid="uid://cio5r7hrf00u8" path="res://TurnBattle/Resources/specials/special2_photon_edge.tres" id="9_5awio"]
+[ext_resource type="Resource" uid="uid://brfo106f3jjja" path="res://TurnBattle/Resources/specials/special3_lightning_buster.tres" id="10_3xqcx"]
+[ext_resource type="Resource" uid="uid://bdjn5uhfxapf2" path="res://TurnBattle/Resources/specials/special4_sacred_arrow.tres" id="11_xg4gj"]
+[ext_resource type="PackedScene" uid="uid://bnwnyrknhus1p" path="res://TurnBattle/scenes/vfx.tscn" id="12_e8gbb"]
+
+[resource]
+script = ExtResource("6_m4uyg")
+character_name = "Siren"
+icon = ExtResource("5_v3chw")
+texture = ExtResource("5_v3chw")
+vfx_node = ExtResource("12_e8gbb")
+health = 500
+strength = 40
+ether = 50
+defense = 15
+resistance = 15
+agility = 25
+element = "light"
+arts_list = Array[ExtResource("1_t8o7b")]([ExtResource("2_1ubki"), ExtResource("3_j0o26"), ExtResource("4_go85c")])
+specials_list = Array[ExtResource("7_usgfb")]([ExtResource("8_obiml"), ExtResource("9_5awio"), ExtResource("10_3xqcx"), ExtResource("11_xg4gj")])
