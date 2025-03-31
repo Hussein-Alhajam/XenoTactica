@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlel4enfi61n0"]
+[gd_scene load_steps=7 format=3 uid="uid://dlel4enfi61n0"]
 
-[ext_resource type="Script" uid="uid://rvfdm32bl3s1" path="res://StartScreen/Menu.gd" id="1_w847x"]
+[ext_resource type="Script" path="res://StartScreen/Menu.gd" id="1_w847x"]
 [ext_resource type="Texture2D" uid="uid://bpfl8815m1cya" path="res://StartScreen/Assets/24.png" id="1_xejcj"]
 [ext_resource type="FontFile" uid="uid://dvnph6jytvkss" path="res://StartScreen/Assets/pokemonemerald.ttf" id="2_w847x"]
 [ext_resource type="Texture2D" uid="uid://ccppngpqntvqe" path="res://StartScreen/Assets/Button_52x14.png" id="3_x4r01"]
 [ext_resource type="Texture2D" uid="uid://gsbegj3isy4j" path="res://StartScreen/Assets/Sprites/UI_Flat_Banner03a.png" id="4_xejcj"]
+[ext_resource type="AudioStream" uid="uid://mtlrttqla6cg" path="res://assets/music/Where It All Began_XC2.ogg" id="6_ai7pd"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -109,3 +110,7 @@ text = "XenoTactica"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ai7pd")
+autoplay = true
